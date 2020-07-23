@@ -7,11 +7,11 @@ import removableIcon from '../../../assets/icons/removeIcon.svg'
 
 import {Badge} from "../../Badge/Badge";
 
-export const List = ({items, onClick, isRemovable, onRemoveList }) => {
+export const List = ({items, onClick, isRemovable, onRemoveList}) => {
 
-	const onRemove =(item) =>{
-		if(window.confirm('Вы действительно хотите удалить список?'))
-		onRemoveList(item)
+	const onRemove = (item) => {
+		if (window.confirm('Вы действительно хотите удалить список?'))
+			onRemoveList(item)
 	}
 
 	return (
@@ -22,12 +22,12 @@ export const List = ({items, onClick, isRemovable, onRemoveList }) => {
 							className={classNames(i.className, {active: i.active})}
 							onClick={onClick}>
 						<i>
-							{i.icon ? i.icon : <Badge color={i.color}/>}
+							{i.icon ? i.icon : <Badge color={i.color.name}/>}
 						</i>
 						<span>{i.name}</span>
 						{isRemovable && <img src={removableIcon}
 																 className='list-navbar__btn-remove'
-																 onClick={()=> onRemove(i)}
+																 onClick={() => onRemove(i)}
 																 alt="remove"/>}
 					</li>
 				)

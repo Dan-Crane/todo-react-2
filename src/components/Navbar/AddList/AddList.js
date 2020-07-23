@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios'
 
 import './AddList.scss'
 
@@ -6,40 +7,55 @@ import closeSvg from '../../../assets/icons/closeSVG.svg'
 
 import {List} from "../List/Navbar";
 import {Badge} from "../../Badge/Badge";
+import {api} from "../../../api/api";
 
 const AddList = ({colors, addList}) => {
 	const [visible, setVisible] = useState(false)
-	const [selectColor, selectedColor] = useState(colors[0].id)
+	const [selectColor, selectedColor] = useState(null)
 	const [input, setInput] = useState('')
 
-	const id = 10
+	useEffect(() => {
+		if (Array.isArray(colors)) {
+			selectedColor(colors[0].id)
+		}
+	}, [colors])
 
 	const onInputChange = (e) => {
 		setInput(e.target.value)
 	}
 
 	const createList = () => {
-
 		return {
-			color: colors.filter(i=>i.id===selectColor)[0].name,
-			colorId: 5,
-			id: id+1,
+			color: colors.filter(i => i.id === selectColor)[0].name,
+			colorId: selectColor,
 			name: input,
 		}
 	}
 
-	const onAddList = (e)=>{
-	e.preventDefault()
+	const onAddList = (e) => {
+		debugger
+		e.preventDefault()
 		if (!input) {
 			alert('Введите название списка')
 			return
 		}
-		const newTask = createList()
-		addList(newTask)
-		onClose()
+
+		axios
+			.post('http://localhost:3001/lists', {
+				name: input,
+				colorId: selectColor
+			})
+			.then(({ data }) => {
+				console.log(data)
+			})
+
+		// const newTask = createList()
+		// api.addList(newTask).then(res => console.log(res))
+		// addList(newTask)
+		// onClose()
 	}
 
-	const onClose = () =>{
+	const onClose = () => {
 		setVisible(false)
 		setInput('')
 		selectedColor(colors[0].id)
@@ -57,8 +73,10 @@ const AddList = ({colors, addList}) => {
 					,
 					name: 'Добавить список',
 				},]}
-						onClick={() => {setVisible(true)}}/>
-			{visible && <form className='add-list-btn__popup' onSubmit={onAddList}>
+						onClick={() => {
+							setVisible(true)
+						}}/>
+			{visible && <div className='add-list-btn__popup'>
 
 				<img src={closeSvg}
 						 alt="close"
@@ -77,9 +95,10 @@ const AddList = ({colors, addList}) => {
 													className={selectColor === i.id && 'active'}/>
 					})}
 				</div>
-				<button
-					className='main-btn add-list-btn__btn'>Добавить</button>
-			</form>}
+				<button onClick={onAddList}
+								className='main-btn add-list-btn__btn'>Добавить
+				</button>
+			</div>}
 		</div>
 	);
 };

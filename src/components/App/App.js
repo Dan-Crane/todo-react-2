@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import DB from '../../assets/db.json'
 
@@ -6,15 +6,29 @@ import './App.scss'
 
 import {Navbar} from "../Navbar/Navbar";
 import {Body} from "../Body/Body";
+import {api} from "../../api/api";
 
 const App = () => {
 
-	const [lists, setLists] = useState(DB.lists.map(i => {
-		const colorItem = DB.colors.filter(colorName => {
-			return i.colorId === colorName.id
-		})[0].name
-		return {...i, color: colorItem}
-	}))
+	const [lists, setLists] = useState(null)
+	const [colors, setColors] = useState(null)
+
+	// DB.lists.map(i => {
+	// 	const colorItem = DB.colors.filter(colorName => {
+	// 		return i.colorId === colorName.id
+	// 	})[0].name
+	// 	return {...i, color: colorItem}
+	// })
+
+	useEffect(() => {
+		api.getLists()
+			.then(res => setLists(res))
+		api.getColors()
+			.then(res=> setColors(res))
+	}, [])
+
+
+	window.lists = lists
 
 	const addList = (body) => {
 		const newlist = [...lists, body]
@@ -32,7 +46,7 @@ const App = () => {
 			<Navbar lists={lists}
 							addList={addList}
 							onRemoveList={onRemoveList}
-							colors={DB.colors}/>
+							colors={colors}/>
 			<Body/>
 		</div>
 	);

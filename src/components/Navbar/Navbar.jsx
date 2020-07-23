@@ -19,11 +19,19 @@ export const Navbar = ({colors, lists, addList, onRemoveList}) => {
 					active: true,
 				}
 			]}/>
-			<List items={lists}
-						onRemoveList={onRemoveList}
-						isRemovable/>
-			<AddList colors={colors}
-							 addList={addList}/>
+			{lists
+				? <List items={lists}
+								onRemoveList={onRemoveList}
+								isRemovable/>
+				: <div>Загрузка списка...</div>
+			}
+			{
+				colors
+					? <AddList colors={colors}
+										 addList={addList}/>
+					: <div>Загрузка цветов...</div>
+			}
+
 		</nav>
 	)
 }
