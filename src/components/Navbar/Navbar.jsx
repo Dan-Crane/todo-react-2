@@ -2,7 +2,7 @@ import React from "react";
 
 import './Navbar.scss'
 
-import {List} from "./List/Navbar";
+import { List } from "./List/Navbar";
 import AddList from "./AddList/AddList";
 
 export const Navbar = ({colors, lists, addList, onRemoveList}) => {

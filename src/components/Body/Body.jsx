@@ -5,11 +5,11 @@ import './Body.scss'
 import {TitleBody} from "./TitileBody/TitileBody";
 import {ItemBody} from "./ItemBody/ItemBody";
 
-export const Body = () => {
+export const Body = ({ lists }) => {
 	return (
 		<section className='body'>
-			<TitleBody/>
-			<ItemBody/>
+			<TitleBody title={lists.name}/>
+			<ItemBody tasks={lists.tasks}/>
 		</section>
 	)
 }

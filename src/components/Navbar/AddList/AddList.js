@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios'
 
 import './AddList.scss'
 
@@ -13,12 +12,14 @@ const AddList = ({colors, addList}) => {
 	const [visible, setVisible] = useState(false)
 	const [selectColor, selectedColor] = useState(null)
 	const [input, setInput] = useState('')
+	const [disableBtn, setDisableBtn] = useState(false)
 
 	useEffect(() => {
 		if (Array.isArray(colors)) {
 			selectedColor(colors[0].id)
 		}
-	}, [colors])
+	}, [])
+
 
 	const onInputChange = (e) => {
 		setInput(e.target.value)
@@ -32,27 +33,24 @@ const AddList = ({colors, addList}) => {
 		}
 	}
 
+
 	const onAddList = (e) => {
-		debugger
 		e.preventDefault()
 		if (!input) {
-			alert('Введите название списка')
-			return
+			return alert('Введите название списка')
 		}
-
-		axios
-			.post('http://localhost:3001/lists', {
-				name: input,
-				colorId: selectColor
+		setDisableBtn(true)
+		const newTask = createList()
+		api.addList(newTask)
+			.then(res => {
+				const color = colors.find(c => c.id === selectColor).name
+				const listObj = {...res, color: {name: color}}
+				addList(listObj)
+				onClose()
 			})
-			.then(({ data }) => {
-				console.log(data)
+			.finally(() => {
+				setDisableBtn(false)
 			})
-
-		// const newTask = createList()
-		// api.addList(newTask).then(res => console.log(res))
-		// addList(newTask)
-		// onClose()
 	}
 
 	const onClose = () => {
@@ -76,7 +74,8 @@ const AddList = ({colors, addList}) => {
 						onClick={() => {
 							setVisible(true)
 						}}/>
-			{visible && <div className='add-list-btn__popup'>
+			{visible && <form onSubmit={onAddList}
+												className='add-list-btn__popup'>
 
 				<img src={closeSvg}
 						 alt="close"
@@ -95,10 +94,12 @@ const AddList = ({colors, addList}) => {
 													className={selectColor === i.id && 'active'}/>
 					})}
 				</div>
-				<button onClick={onAddList}
-								className='main-btn add-list-btn__btn'>Добавить
+				<button type='submit'
+								disabled={disableBtn}
+								style={disableBtn ? {backgroundColor: 'green'} : {backgroundColor: ''}}
+								className='main-btn add-list-btn__btn'>{disableBtn ? 'Добавление...' : 'Добавить'}
 				</button>
-			</div>}
+			</form>}
 		</div>
 	);
 };

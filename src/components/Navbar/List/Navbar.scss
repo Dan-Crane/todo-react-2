@@ -38,6 +38,10 @@
 
 		span {
 			flex: 1;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			width: 160px;
+			white-space: nowrap;
 		}
 
 		&:hover {
@@ -66,6 +70,9 @@
 		}
 	}
 
+	&__count{
+		margin-right: 8px;
+	}
 	.add-btn {
 
 		opacity: .6;

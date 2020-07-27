@@ -22,7 +22,7 @@ export const api = {
 	},
 
 	deleteList(id) {
-		return instanceApi.delete('lists' + id)
+		return instanceApi.delete('lists/' + id)
 			.then(res => res.data)
 	}
 }

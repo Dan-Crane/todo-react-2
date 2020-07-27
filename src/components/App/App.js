@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import axios from 'axios'
 
 import DB from '../../assets/db.json'
 
@@ -13,12 +14,12 @@ const App = () => {
 	const [lists, setLists] = useState(null)
 	const [colors, setColors] = useState(null)
 
-	// DB.lists.map(i => {
-	// 	const colorItem = DB.colors.filter(colorName => {
-	// 		return i.colorId === colorName.id
-	// 	})[0].name
-	// 	return {...i, color: colorItem}
-	// })
+	DB.lists.map(i => {
+		const colorItem = DB.colors.filter(colorName => {
+			return i.colorId === colorName.id
+		})[0].name
+		return {...i, color: colorItem}
+	})
 
 	useEffect(() => {
 		api.getLists()
@@ -26,9 +27,6 @@ const App = () => {
 		api.getColors()
 			.then(res=> setColors(res))
 	}, [])
-
-
-	window.lists = lists
 
 	const addList = (body) => {
 		const newlist = [...lists, body]
@@ -47,7 +45,7 @@ const App = () => {
 							addList={addList}
 							onRemoveList={onRemoveList}
 							colors={colors}/>
-			<Body/>
+			{lists && <Body lists={lists[1]}/>}
 		</div>
 	);
 }

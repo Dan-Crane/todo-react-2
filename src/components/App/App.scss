@@ -44,4 +44,8 @@ body {
 	&:active{
 		background-color: darken(#4DD599,10%);
 	}
+	&:focus{
+		border: 2px solid #26664a;
+		padding: 10px 8px;
+	}
 }
