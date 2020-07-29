@@ -4,7 +4,7 @@ import './AddList.scss'
 
 import closeSvg from '../../../assets/icons/closeSVG.svg'
 
-import {List} from "../List/Navbar";
+import {List} from "../List/List";
 import {Badge} from "../../Badge/Badge";
 import {api} from "../../../api/api";
 

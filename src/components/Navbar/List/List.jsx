@@ -1,14 +1,14 @@
 import React from "react";
 import classNames from 'classnames'
 
-import './Navbar.scss'
+import './List.scss'
 
 import removableIcon from '../../../assets/icons/removeIcon.svg'
 
 import {Badge} from "../../Badge/Badge";
 import {api} from "../../../api/api";
 
-export const List = ({items, onClick, isRemovable, onRemoveList}) => {
+export const List = ({items, isRemovable, onRemoveList, onActiveList, activeList, onClick}) => {
 
 	const onRemove = (item) => {
 		if (window.confirm('Вы действительно хотите удалить список?')) {
@@ -19,12 +19,14 @@ export const List = ({items, onClick, isRemovable, onRemoveList}) => {
 
 
 	return (
-		<ul className='navbar__list list-navbar'>
+		<ul className='navbar__list list-navbar'
+				onClick={onClick}>
 			{items.map((i, index) => {
 				return (
 					<li key={index}
-							className={classNames(i.className, {active: i.active})}
-							onClick={onClick}>
+							className={classNames(i.className, {active: activeList && activeList.id === i.id})}
+							onClick={onActiveList ? () => onActiveList(i) : null}
+					>
 						<i>
 							{i.icon ? i.icon : <Badge color={i.color.name}/>}
 						</i>

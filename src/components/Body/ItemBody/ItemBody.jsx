@@ -1,16 +1,35 @@
 import React, {useState} from "react";
 
 import './ItemBody.scss'
+import {AddTaskItem} from "./AddTaskItem/AddTaskItem";
 
-export const ItemBody = ({tasks}) => {
-	const [editMode, setEditMode] = useState(false)
+export const ItemBody = ({ tasks, idList, onAddTask }) => {
+	const [editMode, setEditMode] = useState(null)
+	const [valueItem, setValueItem] = useState('')
 
-	const toggleEditMode = () => {
-		setEditMode((s)=> !s)
+	const onEditItem = (item) => {
+		setEditMode(item)
+		setValueItem(item.text)
+	}
+
+	const itemChangeValue = (e) => {
+		setValueItem(e.target.value)
+	}
+
+	const onSubmitForm = e => {
+		e.preventDefault()
+
+		console.log('hi')
+	}
+
+	const onFocusChange = (e) => {
+		setEditMode(null)
+		onSubmitForm(e)
 	}
 
 	return (
 		<div className='body__item-tasks item-task'>
+			{!tasks.length && <h2 className='item-task__isnt-task'>Задачи отсутствуют</h2>}
 			{tasks.map(t => {
 				return (
 					<div key={t.id} className='item-task__row'>
@@ -23,16 +42,28 @@ export const ItemBody = ({tasks}) => {
 								</svg>
 							</label>
 						</div>
-						{editMode
-							? <input value={t.text}/>
-							: <span onClick={toggleEditMode}
-											className='item-task__input'>{t.text}</span>
+						{editMode && editMode.id === t.id
+							? <form className='item-task__form'
+											onSubmit={onSubmitForm}>
+								<input className='item-task__input'
+											 value={valueItem}
+											 onChange={e => itemChangeValue(e)}
+											 autoFocus={true}
+											 onBlur={onFocusChange}
+								/>
+								<button> ok</button>
+							</form>
+							: <span onClick={() => {
+								onEditItem(t)
+							}}
+											className='item-task__text'>{t.text}</span>
 						}
 
 					</div>
 				)
 			})}
-
+			<AddTaskItem onAddTask={onAddTask}
+									 idList={idList}/>
 		</div>
 	)
 }

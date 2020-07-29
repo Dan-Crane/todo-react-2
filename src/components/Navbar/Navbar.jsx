@@ -2,10 +2,10 @@ import React from "react";
 
 import './Navbar.scss'
 
-import { List } from "./List/Navbar";
+import {List} from "./List/List";
 import AddList from "./AddList/AddList";
 
-export const Navbar = ({colors, lists, addList, onRemoveList}) => {
+export const Navbar = ({colors, lists, addList, onRemoveList, onActiveList, activeList}) => {
 	return (
 		<nav className='navbar'>
 			<List items={[
@@ -22,6 +22,8 @@ export const Navbar = ({colors, lists, addList, onRemoveList}) => {
 			{lists
 				? <List items={lists}
 								onRemoveList={onRemoveList}
+								onActiveList={onActiveList}
+								activeList={activeList}
 								isRemovable/>
 				: <div>Загрузка списка...</div>
 			}

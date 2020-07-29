@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import axios from 'axios'
 
 import DB from '../../assets/db.json'
@@ -13,19 +13,13 @@ const App = () => {
 
 	const [lists, setLists] = useState(null)
 	const [colors, setColors] = useState(null)
-
-	DB.lists.map(i => {
-		const colorItem = DB.colors.filter(colorName => {
-			return i.colorId === colorName.id
-		})[0].name
-		return {...i, color: colorItem}
-	})
+	const [activeList, setActiveList] = useState(null)
 
 	useEffect(() => {
 		api.getLists()
 			.then(res => setLists(res))
 		api.getColors()
-			.then(res=> setColors(res))
+			.then(res => setColors(res))
 	}, [])
 
 	const addList = (body) => {
@@ -39,13 +33,37 @@ const App = () => {
 		setLists(newList)
 	}
 
+	const onActiveList = item => {
+		setActiveList(item)
+	}
+
+	const onEditTitle = (title, id) => {
+		const newList = lists.map(l => l.id === id ? {...l, name: title} : l)
+		setLists(newList)
+	}
+	window.lists = lists
+	const onAddTask = (id, task) => {
+		// const newList = lists.map(l => l.id === id ? {...l, tasks: [...l.tasks, task]} : l)
+		const test = lists.map(l => {
+			if (l.id === id) {
+				l.tasks = [...l.tasks, task]
+			}
+			return l
+		})
+		setLists(test)
+	}
+
 	return (
 		<div className="todo">
 			<Navbar lists={lists}
 							addList={addList}
 							onRemoveList={onRemoveList}
+							onActiveList={onActiveList}
+							activeList={activeList}
 							colors={colors}/>
-			{lists && <Body lists={lists[1]}/>}
+			{lists && activeList && <Body lists={activeList}
+																		onAddTask={onAddTask}
+																		onEditTitle={onEditTitle}/>}
 		</div>
 	);
 }
