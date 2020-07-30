@@ -5,7 +5,7 @@ import './TitileBody.scss'
 import changeSvg from '../../../assets/icons/changeSvg.svg'
 import {api} from "../../../api/api";
 
-export const TitleBody = ({title, id, onEditTitle}) => {
+export const TitleBody = ({title, id, onEditTitle, colorTitle}) => {
 
 	const editTitle = () => {
 		const newTitle = window.prompt('Введите название заголовка', title)
@@ -18,7 +18,7 @@ export const TitleBody = ({title, id, onEditTitle}) => {
 
 	return (
 		<div className='body__title title-wrap'>
-			<h2 className='title-wrap__title'>
+			<h2 style={{color: colorTitle}} className='title-wrap__title'>
 				{title}
 			</h2>
 			<img className='title-wrap__icon'

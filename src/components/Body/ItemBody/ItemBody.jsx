@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import './ItemBody.scss'
 import {AddTaskItem} from "./AddTaskItem/AddTaskItem";
 
-export const ItemBody = ({ tasks, idList, onAddTask }) => {
+export const ItemBody = ({ tasks, idList, onAddTask, withoutEmpty }) => {
 	const [editMode, setEditMode] = useState(null)
 	const [valueItem, setValueItem] = useState('')
 
@@ -29,7 +29,7 @@ export const ItemBody = ({ tasks, idList, onAddTask }) => {
 
 	return (
 		<div className='body__item-tasks item-task'>
-			{!tasks.length && <h2 className='item-task__isnt-task'>Задачи отсутствуют</h2>}
+			{!withoutEmpty && !tasks.length && <h2 className='item-task__isnt-task'>Задачи отсутствуют</h2>}
 			{tasks.map(t => {
 				return (
 					<div key={t.id} className='item-task__row'>

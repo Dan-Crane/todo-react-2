@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import axios from 'axios'
+import {Switch, Route, useHistory, useParams} from "react-router-dom";
 
 import DB from '../../assets/db.json'
 
@@ -14,6 +14,9 @@ const App = () => {
 	const [lists, setLists] = useState(null)
 	const [colors, setColors] = useState(null)
 	const [activeList, setActiveList] = useState(null)
+	let history = useHistory();
+	let arr  = useParams();
+	console.log(arr)
 
 	useEffect(() => {
 		api.getLists()
@@ -34,7 +37,12 @@ const App = () => {
 	}
 
 	const onActiveList = item => {
-		setActiveList(item)
+		history.push(`/lists/${item.id}`)
+		// console.log(a)
+		// setActiveList(item)
+	}
+	const onAllActiveList = () => {
+		history.push(`/`)
 	}
 
 	const onEditTitle = (title, id) => {
@@ -59,11 +67,26 @@ const App = () => {
 							addList={addList}
 							onRemoveList={onRemoveList}
 							onActiveList={onActiveList}
+							onAllActiveList={onAllActiveList}
 							activeList={activeList}
 							colors={colors}/>
-			{lists && activeList && <Body lists={activeList}
-																		onAddTask={onAddTask}
-																		onEditTitle={onEditTitle}/>}
+			<div className='todo__body'>
+				<Route exact path='/'>
+					{lists && lists.map(item => <Body lists={item}
+																						key={item.id}
+																						onAddTask={onAddTask}
+																						onEditTitle={onEditTitle}
+																						colorTitle={item.color.hex}
+																						withoutEmpty/>)}
+					{lists && console.log()}
+				</Route>
+				<Route path='/lists/:id'>
+					{lists && activeList && <Body lists={activeList}
+																				onAddTask={onAddTask}
+																				onEditTitle={onEditTitle}/>}
+				</Route>
+			</div>
+
 		</div>
 	);
 }

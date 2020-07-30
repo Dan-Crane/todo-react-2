@@ -5,7 +5,7 @@ import './Navbar.scss'
 import {List} from "./List/List";
 import AddList from "./AddList/AddList";
 
-export const Navbar = ({colors, lists, addList, onRemoveList, onActiveList, activeList}) => {
+export const Navbar = ({colors, lists, addList, onRemoveList, onActiveList, activeList, onAllActiveList}) => {
 	return (
 		<nav className='navbar'>
 			<List items={[
@@ -18,7 +18,7 @@ export const Navbar = ({colors, lists, addList, onRemoveList, onActiveList, acti
 					name: 'Все задачи',
 					active: true,
 				}
-			]}/>
+			]} onActiveList={onAllActiveList}/>
 			{lists
 				? <List items={lists}
 								onRemoveList={onRemoveList}
