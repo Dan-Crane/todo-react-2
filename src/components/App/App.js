@@ -66,6 +66,22 @@ const App = () => {
 		setLists(newList)
 	}
 
+	const onRemoveTask = (idList, idTask) => {
+		if (window.confirm('Вы действительно хотете удалить задачу?')) {
+			api.removeTask(idTask)
+				.then(() => {
+					const newList = lists.map(l => {
+						if (l.id === idList) {
+							l.tasks = l.tasks.filter(i => i.id !== idTask)
+						}
+						return l
+					})
+					setLists(newList)
+				})
+				.catch(() => alert('Не удалось удалить задачу'))
+		}
+	}
+
 	return (
 		<div className="todo">
 			<Navbar lists={lists}
@@ -82,12 +98,14 @@ const App = () => {
 																						onAddTask={onAddTask}
 																						onEditTitle={onEditTitle}
 																						colorTitle={item.color.hex}
+																						onRemoveTask={onRemoveTask}
 																						withoutEmpty/>)}
 					{lists && console.log()}
 				</Route>
 				<Route path='/lists/:id'>
 					{lists && activeList && <Body lists={activeList}
 																				onAddTask={onAddTask}
+																				onRemoveTask={onRemoveTask}
 																				onEditTitle={onEditTitle}/>}
 				</Route>
 			</div>

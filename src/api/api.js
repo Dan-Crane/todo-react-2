@@ -32,5 +32,9 @@ export const api = {
 
 	addTask(id, task){
 		return instanceApi.post(`tasks/`, task)
+	},
+
+	removeTask(id){
+		return instanceApi.delete('tasks/' + id)
 	}
 }
