@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {Switch, Route, useHistory, useParams} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {Route, useHistory, useLocation} from "react-router-dom";
 
 import DB from '../../assets/db.json'
 
@@ -15,8 +15,7 @@ const App = () => {
 	const [colors, setColors] = useState(null)
 	const [activeList, setActiveList] = useState(null)
 	let history = useHistory();
-	let arr  = useParams();
-	console.log(arr)
+	let location = useLocation();
 
 	useEffect(() => {
 		api.getLists()
@@ -24,6 +23,14 @@ const App = () => {
 		api.getColors()
 			.then(res => setColors(res))
 	}, [])
+
+	useEffect(() => {
+		const listId = location.pathname.split('lists/')[1]
+		if (lists) {
+			const list = lists.find(l => l.id === Number(listId))
+			setActiveList(list)
+		}
+	}, [lists, location.pathname])
 
 	const addList = (body) => {
 		const newlist = [...lists, body]
@@ -38,8 +45,6 @@ const App = () => {
 
 	const onActiveList = item => {
 		history.push(`/lists/${item.id}`)
-		// console.log(a)
-		// setActiveList(item)
 	}
 	const onAllActiveList = () => {
 		history.push(`/`)
@@ -49,16 +54,16 @@ const App = () => {
 		const newList = lists.map(l => l.id === id ? {...l, name: title} : l)
 		setLists(newList)
 	}
-	window.lists = lists
+
 	const onAddTask = (id, task) => {
-		// const newList = lists.map(l => l.id === id ? {...l, tasks: [...l.tasks, task]} : l)
-		const test = lists.map(l => {
-			if (l.id === id) {
-				l.tasks = [...l.tasks, task]
-			}
-			return l
-		})
-		setLists(test)
+		const newList = lists.map(l => l.id === id ? {...l, tasks: [...l.tasks, task]} : l)
+		// const test = lists.map(l => {
+		// 	if (l.id === id) {
+		// 		l.tasks = [...l.tasks, task]
+		// 	}
+		// 	return l
+		// })
+		setLists(newList)
 	}
 
 	return (
