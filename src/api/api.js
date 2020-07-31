@@ -18,7 +18,7 @@ export const api = {
 
 	addList(list) {
 		return instanceApi.post('lists', list)
-			.then(res=>res.data)
+			.then(res => res.data)
 	},
 
 	deleteList(id) {
@@ -26,15 +26,19 @@ export const api = {
 			.then(res => res.data)
 	},
 
-	changeTitle(id, title){
+	changeTitle(id, title) {
 		return instanceApi.patch('lists/' + id, {name: title})
 	},
 
-	addTask(id, task){
+	addTask(id, task) {
 		return instanceApi.post(`tasks/`, task)
 	},
 
-	removeTask(id){
+	removeTask(id) {
 		return instanceApi.delete('tasks/' + id)
+	},
+
+	editTask(obj) {
+		return instanceApi.patch('tasks/' + obj.id, {text: obj.text})
 	}
 }

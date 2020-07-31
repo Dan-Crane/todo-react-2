@@ -82,6 +82,30 @@ const App = () => {
 		}
 	}
 
+	const onEditTask = (idList, taskObj) => {
+		console.log(idList, taskObj)
+		api.editTask(taskObj)
+			.then(() => {
+				const newLists = lists.map(l => {
+					if (l.id === idList) {
+						const newTasks = [...l.tasks]
+						newTasks.map(task => {
+							if (task.id === taskObj.id) {
+								task.text = taskObj.text
+							}
+							return task
+						})
+
+					}
+					return l
+				})
+				setLists(newLists)
+			})
+			.catch(() => {
+				alert('Ошибка при изменении')
+			})
+	}
+
 	return (
 		<div className="todo">
 			<Navbar lists={lists}
@@ -90,7 +114,8 @@ const App = () => {
 							onActiveList={onActiveList}
 							onAllActiveList={onAllActiveList}
 							activeList={activeList}
-							colors={colors}/>
+							colors={colors}
+							activeLocation={location.pathname}/>
 			<div className='todo__body'>
 				<Route exact path='/'>
 					{lists && lists.map(item => <Body lists={item}
@@ -99,6 +124,7 @@ const App = () => {
 																						onEditTitle={onEditTitle}
 																						colorTitle={item.color.hex}
 																						onRemoveTask={onRemoveTask}
+																						onEditTask={onEditTask}
 																						withoutEmpty/>)}
 					{lists && console.log()}
 				</Route>
@@ -106,7 +132,8 @@ const App = () => {
 					{lists && activeList && <Body lists={activeList}
 																				onAddTask={onAddTask}
 																				onRemoveTask={onRemoveTask}
-																				onEditTitle={onEditTitle}/>}
+																				onEditTitle={onEditTitle}
+																				onEditTask={onEditTask}/>}
 				</Route>
 			</div>
 

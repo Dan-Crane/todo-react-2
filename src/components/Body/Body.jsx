@@ -5,8 +5,8 @@ import './Body.scss'
 import {TitleBody} from "./TitileBody/TitileBody";
 import {ItemBody} from "./ItemBody/ItemBody";
 
-export const Body = ({lists, onEditTitle, onAddTask, withoutEmpty, colorTitle, onRemoveTask}) => {
-
+export const Body = ({lists, onEditTitle, onAddTask, withoutEmpty, colorTitle, onRemoveTask, onEditTask}) => {
+	console.log(lists)
 	return (
 		<section className='body'>
 			<TitleBody title={lists.name}
@@ -14,10 +14,12 @@ export const Body = ({lists, onEditTitle, onAddTask, withoutEmpty, colorTitle, o
 								 id={lists.id}
 								 onEditTitle={onEditTitle}/>
 			<ItemBody idList={lists.id}
+								lists={lists}
 								onAddTask={onAddTask}
 								tasks={lists.tasks}
 								withoutEmpty={withoutEmpty}
-								onRemoveTask={onRemoveTask}/>
+								onRemoveTask={onRemoveTask}
+								onEditTask={onEditTask}/>
 		</section>
 	)
 }

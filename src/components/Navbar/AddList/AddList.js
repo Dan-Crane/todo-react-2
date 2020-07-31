@@ -44,7 +44,7 @@ const AddList = ({colors, addList}) => {
 		api.addList(newTask)
 			.then(res => {
 				const color = colors.find(c => c.id === selectColor).name
-				const listObj = {...res, color: {name: color}}
+				const listObj = {...res, color: {name: color, hex: color}}
 				addList(listObj)
 				onClose()
 			})

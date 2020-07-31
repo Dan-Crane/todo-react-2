@@ -24,7 +24,7 @@ export const List = ({items, isRemovable, onRemoveList, onActiveList, activeList
 			{items.map((i, index) => {
 				return (
 					<li key={index}
-							className={classNames(i.className, {active: activeList && activeList.id === i.id})}
+							className={classNames(i.className, {active: i.active ? i.active : activeList && activeList.id === i.id})}
 							onClick={onActiveList ? () => onActiveList(i) : null}
 					>
 						<i>
