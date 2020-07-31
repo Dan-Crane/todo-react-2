@@ -5,22 +5,18 @@ import './TaskItem.scss'
 export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask}) => {
 	const [editMode, setEditMode] = useState(false)
 	const [valueItem, setValueItem] = useState(text)
-
 	const itemChangeValue = (e) => {
 		setValueItem(e.target.value)
 	}
-
 	const onSubmitForm = e => {
 		e.preventDefault()
 
 		console.log('hi')
 	}
-
 	const cancelEditMode = () => {
 		setValueItem(text)
 		setEditMode(false)
 	}
-
 	const doneEdit = () =>{
 		onEditTask(idList, {id, text: valueItem})
 		setEditMode(false)

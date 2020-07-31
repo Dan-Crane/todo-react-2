@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {Route, useHistory, useLocation} from "react-router-dom";
 
 import DB from '../../assets/db.json'
@@ -17,12 +17,20 @@ const App = () => {
 	let history = useHistory();
 	let location = useLocation();
 
-	useEffect(() => {
+	const getList = useCallback(() => {
 		api.getLists()
 			.then(res => setLists(res))
+	}, [])
+
+	const getColors = useCallback(() => {
 		api.getColors()
 			.then(res => setColors(res))
 	}, [])
+
+	useEffect(() => {
+		getList()
+		getColors()
+	}, [getList, getColors])
 
 	useEffect(() => {
 		const listId = location.pathname.split('lists/')[1]
@@ -46,6 +54,7 @@ const App = () => {
 	const onActiveList = item => {
 		history.push(`/lists/${item.id}`)
 	}
+
 	const onAllActiveList = () => {
 		history.push(`/`)
 	}
@@ -106,6 +115,7 @@ const App = () => {
 			})
 	}
 
+
 	return (
 		<div className="todo">
 			<Navbar lists={lists}
@@ -126,10 +136,10 @@ const App = () => {
 																						onRemoveTask={onRemoveTask}
 																						onEditTask={onEditTask}
 																						withoutEmpty/>)}
-					{lists && console.log()}
 				</Route>
 				<Route path='/lists/:id'>
 					{lists && activeList && <Body lists={activeList}
+																				colorTitle={activeList.color.hex}
 																				onAddTask={onAddTask}
 																				onRemoveTask={onRemoveTask}
 																				onEditTitle={onEditTitle}

@@ -6,7 +6,6 @@ import {TitleBody} from "./TitileBody/TitileBody";
 import {ItemBody} from "./ItemBody/ItemBody";
 
 export const Body = ({lists, onEditTitle, onAddTask, withoutEmpty, colorTitle, onRemoveTask, onEditTask}) => {
-	console.log(lists)
 	return (
 		<section className='body'>
 			<TitleBody title={lists.name}
