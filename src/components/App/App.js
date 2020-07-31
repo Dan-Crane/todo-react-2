@@ -42,6 +42,7 @@ const App = () => {
 
 	const addList = (body) => {
 		const newlist = [...lists, body]
+		// getList()
 		setLists(newlist)
 	}
 
