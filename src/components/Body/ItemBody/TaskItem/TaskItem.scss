@@ -1,5 +1,5 @@
 .item-task {
-  transition: all 0.15s ease-in-out;
+
   &__row {
     display: flex;
     align-items: center;
@@ -7,9 +7,10 @@
 
 
     &:hover .item-task__block-btn {
-      opacity: .6;
+      opacity: .4;
 
     }
+
     &:not(:last-child) {
       margin-bottom: 5px;
     }
@@ -132,21 +133,21 @@
     margin-left: 10px;
     opacity: 0;
     transition: all 0.15s ease-in-out;
-
-
   }
 
   &__edit {
     cursor: pointer;
+
+    path {
+      stroke: #31bb7e;
+    }
   }
 
   &__done {
     cursor: pointer;
-
   }
 
   &__close {
     cursor: pointer;
-
   }
 }
