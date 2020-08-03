@@ -43,7 +43,6 @@ const AddList = ({colors, addList}) => {
 		const newTask = createList()
 		api.addList(newTask)
 			.then(res => {
-				console.log(res)
 				const color = colors.find(c => c.id === selectColor)
 				const listObj = {...res, color, tasks: []}
 				addList(listObj)

@@ -4,6 +4,7 @@ import './TitileBody.scss'
 
 import changeSvg from '../../../assets/icons/changeSvg.svg'
 import {api} from "../../../api/api";
+import {NavLink} from "react-router-dom";
 
 export const TitleBody = ({title, id, onEditTitle, colorTitle}) => {
 
@@ -18,13 +19,15 @@ export const TitleBody = ({title, id, onEditTitle, colorTitle}) => {
 
 	return (
 		<div className='body__title title-wrap'>
-			<h2 style={{color: colorTitle}} className='title-wrap__title'>
-				{title}
-			</h2>
-			<img className='title-wrap__icon'
-					 src={changeSvg}
-					 alt="change list"
-					 onClick={editTitle}/>
+			<NavLink to={`/lists/${id}`}>
+				<h2 style={{color: colorTitle}} className='title-wrap__title'>
+					{title}
+				</h2>
+			</NavLink>
+				<img className='title-wrap__icon'
+						 src={changeSvg}
+						 alt="change list"
+						 onClick={editTitle}/>
 		</div>
 
 	)

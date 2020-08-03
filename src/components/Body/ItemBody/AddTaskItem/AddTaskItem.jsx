@@ -28,7 +28,6 @@ export const AddTaskItem = ({idList, onAddTask}) => {
 		setIsSending(true)
 		api.addTask(idList, obj)
 			.then(({data}) => {
-				console.log(data)
 				onAddTask(idList, data)
 				toggleVisible()
 			})
