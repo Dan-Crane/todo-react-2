@@ -1,36 +1,38 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import './TaskItem.scss'
 
-export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask}) => {
+export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask, completed, onChangeChecked}) => {
 	const [editMode, setEditMode] = useState(false)
 	const [valueItem, setValueItem] = useState(text)
-	const [checked, setChecked] = useState(null)
 
 	const itemChangeValue = (e) => {
 		setValueItem(e.target.value)
 	}
 	const onSubmitForm = e => {
 		e.preventDefault()
-
-		console.log('hi')
 	}
 	const cancelEditMode = () => {
 		setValueItem(text)
 		setEditMode(false)
 	}
-	const doneEdit = () =>{
+
+	const doneEdit = () => {
 		onEditTask(idList, {id, text: valueItem})
 		setEditMode(false)
 	}
-const onChecked = (e) =>{
 
-}
+	const onChecked = (e) => {
+		onChangeChecked(id, idList,e.target.checked);
+	}
+
 
 	return (
 		<div className='item-task__row'>
 			<div className='item-task__checkbox'>
 				<input id={`check-${id}`}
+							 onChange={onChecked}
+							 checked={completed}
 							 type='checkbox'/>
 				<label htmlFor={`check-${id}`}>
 					<svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -40,5 +40,8 @@ export const api = {
 
 	editTask(obj) {
 		return instanceApi.patch('tasks/' + obj.id, {text: obj.text})
+	},
+	editCompleted(id, completed){
+		return instanceApi.patch('tasks/'+ id, {completed})
 	}
 }

@@ -116,6 +116,18 @@ const App = () => {
 			})
 	}
 
+	const onChangeChecked = (idTask, idList, checked) => {
+		api.editCompleted(idTask, checked)
+			.then(res=>{
+				const newLists = lists.map(list=> list.id === idList
+				? {...list, tasks: [...list.tasks.map(task => task.id === idTask ? {...task, completed: checked} : task)]}
+				: list)
+				setLists(newLists)
+			})
+			.catch(()=>{
+				alert('Ошибка при изменении состояния')
+			})
+	}
 
 	return (
 		<div className="todo">
@@ -136,6 +148,7 @@ const App = () => {
 																						colorTitle={item.color.hex}
 																						onRemoveTask={onRemoveTask}
 																						onEditTask={onEditTask}
+																						onChangeChecked={onChangeChecked}
 																						withoutEmpty/>)}
 				</Route>
 				<Route path='/lists/:id'>
@@ -144,7 +157,8 @@ const App = () => {
 																				onAddTask={onAddTask}
 																				onRemoveTask={onRemoveTask}
 																				onEditTitle={onEditTitle}
-																				onEditTask={onEditTask}/>}
+																				onEditTask={onEditTask}
+																				onChangeChecked={onChangeChecked}/>}
 				</Route>
 			</div>
 

@@ -4,8 +4,9 @@ import './Body.scss'
 
 import {TitleBody} from "./TitileBody/TitileBody";
 import {ItemBody} from "./ItemBody/ItemBody";
+import {Navbar} from "../Navbar/Navbar";
 
-export const Body = ({lists, onEditTitle, onAddTask, withoutEmpty, colorTitle, onRemoveTask, onEditTask}) => {
+export const Body = ({lists, onEditTitle, onAddTask, withoutEmpty, colorTitle, onRemoveTask, onEditTask, onChangeChecked}) => {
 	return (
 		<section className='body'>
 			<TitleBody title={lists.name}
@@ -18,7 +19,8 @@ export const Body = ({lists, onEditTitle, onAddTask, withoutEmpty, colorTitle, o
 								tasks={lists.tasks}
 								withoutEmpty={withoutEmpty}
 								onRemoveTask={onRemoveTask}
-								onEditTask={onEditTask}/>
+								onEditTask={onEditTask}
+								onChangeChecked={onChangeChecked}/>
 		</section>
 	)
 }
