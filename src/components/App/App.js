@@ -14,7 +14,7 @@ const App = () => {
 	const [lists, setLists] = useState(null)
 	const [colors, setColors] = useState(null)
 	const [activeList, setActiveList] = useState(null)
-	const [sendState, setSendState] = useState(2)
+	const [sendState, setSendState] = useState(null)
 	let history = useHistory();
 	let location = useLocation();
 
@@ -50,6 +50,7 @@ const App = () => {
 		const idx = lists.findIndex(i => i === item)
 		const newList = [...lists.slice(0, idx), ...lists.slice(idx + 1)]
 		setLists(newList)
+		onAllActiveList()
 	}
 
 	const onActiveList = item => {
