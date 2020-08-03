@@ -6,7 +6,7 @@ import {TitleBody} from "./TitileBody/TitileBody";
 import {ItemBody} from "./ItemBody/ItemBody";
 import {Navbar} from "../Navbar/Navbar";
 
-export const Body = ({lists, onEditTitle, onAddTask, withoutEmpty, colorTitle, onRemoveTask, onEditTask, onChangeChecked}) => {
+export const Body = ({lists, onEditTitle, onAddTask, withoutEmpty, colorTitle, onRemoveTask, onEditTask, onChangeChecked,sendState}) => {
 	return (
 		<section className='body'>
 			<TitleBody title={lists.name}
@@ -20,7 +20,8 @@ export const Body = ({lists, onEditTitle, onAddTask, withoutEmpty, colorTitle, o
 								withoutEmpty={withoutEmpty}
 								onRemoveTask={onRemoveTask}
 								onEditTask={onEditTask}
-								onChangeChecked={onChangeChecked}/>
+								onChangeChecked={onChangeChecked}
+								sendState={sendState}/>
 		</section>
 	)
 }

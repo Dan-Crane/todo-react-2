@@ -1,0 +1,48 @@
+@keyframes animate-circle {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.loader-wrap{
+  position: relative;
+  width: 20px;
+}
+
+.loader {
+  --size: 40px;
+
+  position: absolute;
+
+  height: var(--size);
+  width: var(--size);
+  top: 0;
+  left: 10px;
+  transform: translateX(-50%) translateY(-50%);
+
+  .circle {
+    --duration: 2s;
+
+    position: absolute;
+    height: inherit;
+    width: inherit;
+    background: #4DD599;
+    border-radius: 50%;
+    animation: animate-circle var(--duration) cubic-bezier(.9,.24,.62,.79) infinite;
+
+    &:nth-of-type(1) {
+      animation-delay: 0s;
+    }
+    &:nth-of-type(2) {
+      animation-delay: calc(var(--duration) / -3);
+    }
+    &:nth-of-type(3) {
+      animation-delay: calc(var(--duration) / -6);
+    }
+  }
+}

@@ -5,7 +5,7 @@ import './ItemBody.scss'
 import {AddTaskItem} from "./AddTaskItem/AddTaskItem";
 import {TaskItem} from "./TaskItem/TaskItem";
 
-export const ItemBody = ({tasks, idList, onAddTask, withoutEmpty, onRemoveTask, onEditTask, onChangeChecked}) => {
+export const ItemBody = ({tasks, idList, onAddTask, withoutEmpty, onRemoveTask, onEditTask, onChangeChecked, sendState}) => {
 
 	return (
 		<div className='body__item-tasks item-task'>
@@ -16,7 +16,8 @@ export const ItemBody = ({tasks, idList, onAddTask, withoutEmpty, onRemoveTask, 
 																				 onRemoveTask={onRemoveTask}
 																				 onEditTask={onEditTask}
 																				 completed={t.completed}
-																				 onChangeChecked={onChangeChecked}/>)}
+																				 onChangeChecked={onChangeChecked}
+																				 sendState={sendState}/>)}
 
 			<AddTaskItem key={idList} onAddTask={onAddTask}
 									 idList={idList}/>

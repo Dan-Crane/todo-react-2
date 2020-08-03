@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 
 import './TaskItem.scss'
+import {PreloaderCircle} from "../../../PreloaderCircle/PreloaderCrcle";
 
-export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask, completed, onChangeChecked}) => {
+export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask, completed, onChangeChecked, sendState}) => {
 	const [editMode, setEditMode] = useState(false)
 	const [valueItem, setValueItem] = useState(text)
 
@@ -23,23 +24,26 @@ export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask, completed,
 	}
 
 	const onChecked = (e) => {
-		onChangeChecked(id, idList,e.target.checked);
+		onChangeChecked(id, idList, e.target.checked);
 	}
 
 
 	return (
 		<div className='item-task__row'>
 			<div className='item-task__checkbox'>
-				<input id={`check-${id}`}
-							 onChange={onChecked}
-							 checked={completed}
-							 type='checkbox'/>
-				<label htmlFor={`check-${id}`}>
-					<svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" stroke="white" strokeWidth="1.5"
-									strokeLinecap="round" strokeLinejoin="round"/>
-					</svg>
-				</label>
+				{sendState === id
+					? <PreloaderCircle/>
+					: <> <input id={`check-${id}`}
+											onChange={onChecked}
+											checked={completed}
+											type='checkbox'/>
+						<label htmlFor={`check-${id}`}>
+							<svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" stroke="white" strokeWidth="1.5"
+											strokeLinecap="round" strokeLinejoin="round"/>
+							</svg>
+						</label></>}
+
 			</div>
 			<form className='item-task__form'
 						onSubmit={onSubmitForm}>

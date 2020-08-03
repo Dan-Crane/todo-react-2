@@ -14,6 +14,7 @@ const App = () => {
 	const [lists, setLists] = useState(null)
 	const [colors, setColors] = useState(null)
 	const [activeList, setActiveList] = useState(null)
+	const [sendState, setSendState] = useState(2)
 	let history = useHistory();
 	let location = useLocation();
 
@@ -42,7 +43,6 @@ const App = () => {
 
 	const addList = (body) => {
 		const newlist = [...lists, body]
-		getList()
 		setLists(newlist)
 	}
 
@@ -93,7 +93,6 @@ const App = () => {
 	}
 
 	const onEditTask = (idList, taskObj) => {
-		console.log(idList, taskObj)
 		api.editTask(taskObj)
 			.then(() => {
 				const newLists = lists.map(l => {
@@ -117,6 +116,7 @@ const App = () => {
 	}
 
 	const onChangeChecked = (idTask, idList, checked) => {
+		setSendState(idTask)
 		api.editCompleted(idTask, checked)
 			.then(res=>{
 				const newLists = lists.map(list=> list.id === idList
@@ -126,6 +126,9 @@ const App = () => {
 			})
 			.catch(()=>{
 				alert('Ошибка при изменении состояния')
+			})
+			.finally(()=>{
+				setSendState(null)
 			})
 	}
 
@@ -149,7 +152,8 @@ const App = () => {
 																						onRemoveTask={onRemoveTask}
 																						onEditTask={onEditTask}
 																						onChangeChecked={onChangeChecked}
-																						withoutEmpty/>)}
+																						withoutEmpty={sendState}
+																						sendState={sendState}/>)}
 				</Route>
 				<Route path='/lists/:id'>
 					{lists && activeList && <Body lists={activeList}
@@ -158,7 +162,8 @@ const App = () => {
 																				onRemoveTask={onRemoveTask}
 																				onEditTitle={onEditTitle}
 																				onEditTask={onEditTask}
-																				onChangeChecked={onChangeChecked}/>}
+																				onChangeChecked={onChangeChecked}
+																				sendState={sendState}/>}
 				</Route>
 			</div>
 

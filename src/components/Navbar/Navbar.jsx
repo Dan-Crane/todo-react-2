@@ -4,6 +4,8 @@ import './Navbar.scss'
 
 import {List} from "./List/List";
 import AddList from "./AddList/AddList";
+import {Preloader} from "../Preloader/Preloader";
+import {PreloaderCircle} from "../PreloaderCircle/PreloaderCrcle";
 
 export const Navbar = ({activeLocation, colors, lists, addList, onRemoveList, onActiveList, activeList, onAllActiveList}) => {
 	return (
@@ -25,15 +27,12 @@ export const Navbar = ({activeLocation, colors, lists, addList, onRemoveList, on
 								onActiveList={onActiveList}
 								activeList={activeList}
 								isRemovable/>
-				: <div>Загрузка списка...</div>
+				: <Preloader/>
 			}
 			{
-				colors
-					? <AddList colors={colors}
-										 addList={addList}/>
-					: <div>Загрузка цветов...</div>
+				colors && <AddList colors={colors}
+													 addList={addList}/>
 			}
-
 		</nav>
 	)
 }
