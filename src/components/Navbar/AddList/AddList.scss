@@ -4,6 +4,7 @@
 	&__popup {
 		width: 240px;
 		position: absolute;
+		z-index: 1;
 		top: 58px;
 		left: 20px;
 		background-color: #e1e8f0;
