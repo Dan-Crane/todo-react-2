@@ -1,86 +1,162 @@
 .list-navbar {
-	$self: &;
+  $self: &;
 
-	font-size: 14px;
-	margin-bottom: 30px;
+  font-size: 14px;
+  margin-bottom: 30px;
 
-	-webkit-touch-callout: none; /* iOS Safari */
-	-webkit-user-select: none; /* Chrome/Safari/Opera */
-	-khtml-user-select: none; /* Konqueror */
-	-moz-user-select: none; /* Firefox */
-	-ms-user-select: none; /* Internet Explorer/Edge */
-	user-select: none;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
 
-	.badge {
-		position: relative;
-		left: 4px;
-	}
+  @media all and (max-width: 768px) {
+    margin-bottom: 15px;
+  }
 
-	i {
-		display: inline-flex;
-		margin-right: 10px;
+  .badge {
+    position: relative;
+    left: 4px;
+    @media all and (max-width: 768px){
+      left: 0;
+    }
+  }
 
-		svg {
-			path {
-				fill: #7C7C7C;
+  i {
+    display: inline-flex;
+    margin-right: 10px;
+    transition: all 0.15s ease-in-out;
 
-			}
-		}
-	}
+    @media all and (max-width: 768px) {
+      margin-right: 0;
+    }
 
-	li {
-		display: flex;
-		align-items: center;
-		cursor: pointer;
-		padding: 10px 12px;
-		transition: background-color 0.15s ease-in-out;
-		margin-bottom: 4px;
+    &.active-visible {
+      margin-right: 10px;
+    }
 
-		span {
-			flex: 1;
-			text-overflow: ellipsis;
-			overflow: hidden;
-			width: 160px;
-			white-space: nowrap;
-		}
+    svg {
+      path {
+        fill: #7C7C7C;
 
-		&:hover {
-			background-color: #dce8f6;
-		}
+      }
+    }
+  }
 
-		&.active {
-			background: #FFFFFF;
-			box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-			border-radius: 4px;
-		}
+  li {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 12px;
+    transition: all 0.15s ease-in-out;
+    margin-bottom: 4px;
 
-		&:hover #{$self}__btn-remove {
-			opacity: .2;
-		}
+    @media all and (max-width: 768px) {
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &.active-visible{
+        justify-content: flex-start;
+      }
+    }
 
-		#{$self}__btn-remove {
-			transition: all 0.15s ease-in-out;
-			padding: 3px;
-			opacity: 0;
+    span {
+      flex: 1;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 160px;
+      white-space: nowrap;
+      transition: all 0.15s ease-in-out;
+      @media all and (max-width: 768px) {
+        opacity: 0;
+        visibility: hidden;
+        width: 0px;
+        flex: 0;
+      }
 
-			&:hover {
-				opacity: .8;
-			}
+      &.active-visible {
+        flex: 1;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
 
-		}
-	}
+    &:hover {
+      background-color: #dce8f6;
+    }
 
-	&__count{
-		margin-right: 8px;
-	}
-	.add-btn {
+    &.active {
+      background: #FFFFFF;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+    }
 
-		opacity: .6;
+    &:hover #{$self}__btn-remove {
+      opacity: .2;
+    }
 
-		&:hover {
-			opacity: 1;
-		}
-	}
+    #{$self}__btn-remove {
+      transition: all 0.15s ease-in-out;
+      padding: 3px;
+      opacity: 0;
+
+      &:active{
+        background-color: #4DD599;
+      };
+
+      @media all and (min-width: 769px) {
+        &:hover {
+          opacity: .8;
+        }
+      }
+      @media all and (max-width: 768px) {
+        opacity: 0;
+        visibility: hidden;
+        width: 0;
+        padding: 0;
+        &.active-visible {
+          opacity: .8;
+          visibility: visible;
+          min-width: 16px;
+          padding: 3px;
+        }
+      }
+
+
+    }
+  }
+
+  &__count {
+    display: inline-block;
+    margin-right: 8px;
+    opacity: 1;
+    transition: all 0.15s ease-in-out;
+
+    @media all and (max-width: 768px) {
+      opacity: 0;
+      visibility: hidden;
+      margin-right: 0;
+      width: 0;
+    }
+
+    &.active-visible {
+      opacity: 1;
+      visibility: visible;
+      margin-right: 8px;
+      min-width: 17px;
+    }
+  }
+
+  .add-btn {
+
+    opacity: .6;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 
 
 }

@@ -1,7 +1,24 @@
-.navbar{
-	padding: 60px 30px;
-	border-right: 1px solid #e3e3e3;
-	background-color: #eff6ff;
-	width: 240px;
-	height: 100vh;
+.navbar {
+  padding: 60px 30px;
+  border-right: 1px solid #e3e3e3;
+  background-color: #eff6ff;
+  width: 240px;
+  height: 100vh;
+  transition: all 0.15s ease-in-out;
+
+  @media all and (max-width: 768px) {
+    width: 40px;
+    padding: 30px 4px;
+  }
+
+  &.show {
+    width: 240px;
+    padding: 30px 4px;
+  }
+  &__tog-show{
+    font-size: 28px;
+    line-height: 28px;
+    text-align: center;
+    transition: all 5s ease-in-out;
+  }
 }

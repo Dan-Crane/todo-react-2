@@ -8,7 +8,7 @@ import {List} from "../List/List";
 import {Badge} from "../../Badge/Badge";
 import {api} from "../../../api/api";
 
-const AddList = ({colors, addList}) => {
+const AddList = ({colors, addList, addVisible}) => {
 	const [visible, setVisible] = useState(false)
 	const [selectColor, selectedColor] = useState(null)
 	const [input, setInput] = useState('')
@@ -18,7 +18,7 @@ const AddList = ({colors, addList}) => {
 		if (Array.isArray(colors)) {
 			selectedColor(colors[0].id)
 		}
-	}, [])
+	}, [colors])
 
 
 	const onInputChange = (e) => {
@@ -71,6 +71,7 @@ const AddList = ({colors, addList}) => {
 					,
 					name: 'Добавить список',
 				},]}
+						visible={addVisible}
 						onClick={() => {
 							setVisible(true)
 						}}/>

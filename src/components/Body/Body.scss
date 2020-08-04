@@ -1,5 +1,7 @@
 .body{
 	padding: 60px;
 	flex: 1;
-
+@media all and (max-width: 768px){
+	padding: 30px 4px 10px 10px;
+}
 }

@@ -1,16 +1,35 @@
-import React from "react";
+import React, {useState} from "react";
 
 import './Navbar.scss'
 
 import {List} from "./List/List";
 import AddList from "./AddList/AddList";
 import {Preloader} from "../Preloader/Preloader";
-import {PreloaderCircle} from "../PreloaderCircle/PreloaderCrcle";
 
-export const Navbar = ({activeLocation, colors, lists, addList, onRemoveList, onActiveList, activeList, onAllActiveList}) => {
+export const Navbar = ({
+												 activeLocation, colors, lists,
+												 addList, onRemoveList, onActiveList,
+												 activeList, onAllActiveList
+											 }) => {
+
+	const [visible, setVisible] = useState(false)
+
+	let navbarStyle = 'navbar'
+	if (visible) navbarStyle += ' show'
+
 	return (
-		<nav className='navbar'>
-			<List items={[
+		<nav className={navbarStyle}>
+			{!visible ? <div className={`navbar__tog-show `}
+											data-icon="a"
+											onClick={() => setVisible((v) => !v)}>
+			</div>
+			: <div className='navbar__tog-show '
+						 data-icon="b"
+						 onClick={() => setVisible((v) => !v)}>
+				</div>}
+
+
+			{lists && lists.length === 0 ? <></> : <><List items={[
 				{
 					active: activeLocation === '/',
 					icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,18 +39,21 @@ export const Navbar = ({activeLocation, colors, lists, addList, onRemoveList, on
 					</svg>,
 					name: 'Все задачи',
 				}
-			]} onActiveList={onAllActiveList}/>
-			{lists
-				? <List items={lists}
-								onRemoveList={onRemoveList}
-								onActiveList={onActiveList}
-								activeList={activeList}
-								isRemovable/>
-				: <Preloader/>
-			}
+			]} onActiveList={onAllActiveList}
+																										 visible={visible}/>
+				{lists
+					? <List items={lists}
+									onRemoveList={onRemoveList}
+									onActiveList={onActiveList}
+									activeList={activeList}
+									visible={visible}
+									isRemovable/>
+					: <Preloader/>
+				}</>}
 			{
 				colors && <AddList colors={colors}
-													 addList={addList}/>
+													 addList={addList}
+													 addVisible={visible}/>
 			}
 		</nav>
 	)

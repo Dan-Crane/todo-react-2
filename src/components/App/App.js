@@ -1,9 +1,8 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Route, useHistory, useLocation} from "react-router-dom";
 
-import DB from '../../assets/db.json'
-
 import './App.scss'
+import '../../assets/style/styles.css'
 
 import {Navbar} from "../Navbar/Navbar";
 import {Body} from "../Body/Body";
@@ -119,16 +118,16 @@ const App = () => {
 	const onChangeChecked = (idTask, idList, checked) => {
 		setSendState(idTask)
 		api.editCompleted(idTask, checked)
-			.then(res=>{
-				const newLists = lists.map(list=> list.id === idList
-				? {...list, tasks: [...list.tasks.map(task => task.id === idTask ? {...task, completed: checked} : task)]}
-				: list)
+			.then(res => {
+				const newLists = lists.map(list => list.id === idList
+					? {...list, tasks: [...list.tasks.map(task => task.id === idTask ? {...task, completed: checked} : task)]}
+					: list)
 				setLists(newLists)
 			})
-			.catch(()=>{
+			.catch(() => {
 				alert('Ошибка при изменении состояния')
 			})
-			.finally(()=>{
+			.finally(() => {
 				setSendState(null)
 			})
 	}
@@ -145,16 +144,18 @@ const App = () => {
 							activeLocation={location.pathname}/>
 			<div className='todo__body'>
 				<Route exact path='/'>
-					{lists && lists.map(item => <Body lists={item}
-																						key={item.id}
-																						onAddTask={onAddTask}
-																						onEditTitle={onEditTitle}
-																						colorTitle={item.color.hex}
-																						onRemoveTask={onRemoveTask}
-																						onEditTask={onEditTask}
-																						onChangeChecked={onChangeChecked}
-																						withoutEmpty={sendState}
-																						sendState={sendState}/>)}
+					{lists && lists.length === 0
+						? <h2 className='todo__isnt-task'>Задачи отсутствуют</h2>
+						: lists && lists.map(item => <Body lists={item}
+																			key={item.id}
+																			onAddTask={onAddTask}
+																			onEditTitle={onEditTitle}
+																			colorTitle={item.color.hex}
+																			onRemoveTask={onRemoveTask}
+																			onEditTask={onEditTask}
+																			onChangeChecked={onChangeChecked}
+																			withoutEmpty={true}
+																			sendState={sendState}/>)}
 				</Route>
 				<Route path='/lists/:id'>
 					{lists && activeList && <Body lists={activeList}

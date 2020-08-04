@@ -4,7 +4,6 @@ import './Body.scss'
 
 import {TitleBody} from "./TitileBody/TitileBody";
 import {ItemBody} from "./ItemBody/ItemBody";
-import {Navbar} from "../Navbar/Navbar";
 
 export const Body = ({lists, onEditTitle, onAddTask, withoutEmpty, colorTitle, onRemoveTask, onEditTask, onChangeChecked,sendState}) => {
 	return (

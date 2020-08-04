@@ -13,9 +13,19 @@
   display: flex;
 
   &__body{
-    overflow: auto;
+    overflow-y: auto;
     height: 100vh ;
     width: 100%;
+  }
+  &__isnt-task {
+    padding-top: 60px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 39px;
+    color: #C9D1D3;
+    text-align: center;
   }
 }
 
