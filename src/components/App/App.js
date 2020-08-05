@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Route, useHistory, useLocation} from "react-router-dom";
+import {Redirect, Route, Switch, useHistory, useLocation} from "react-router-dom";
 
 import './App.scss'
 import '../../assets/style/styles.css'
@@ -33,7 +33,7 @@ const App = () => {
 	}, [getList, getColors])
 
 	useEffect(() => {
-		const listId = location.pathname.split('lists/')[1]
+		const listId = location.pathname.split('/list/')[1]
 		if (lists) {
 			const list = lists.find(l => l.id === Number(listId))
 			setActiveList(list)
@@ -53,7 +53,7 @@ const App = () => {
 	}
 
 	const onActiveList = item => {
-		history.push(`/lists/${item.id}`)
+		history.push(`/list/${item.id}`)
 	}
 
 	const onAllActiveList = () => {
@@ -143,30 +143,35 @@ const App = () => {
 							colors={colors}
 							activeLocation={location.pathname}/>
 			<div className='todo__body'>
-				<Route exact path='/'>
-					{lists && lists.length === 0
-						? <h2 className='todo__isnt-task'>Задачи отсутствуют</h2>
-						: lists && lists.map(item => <Body lists={item}
-																			key={item.id}
-																			onAddTask={onAddTask}
-																			onEditTitle={onEditTitle}
-																			colorTitle={item.color.hex}
-																			onRemoveTask={onRemoveTask}
-																			onEditTask={onEditTask}
-																			onChangeChecked={onChangeChecked}
-																			withoutEmpty={true}
-																			sendState={sendState}/>)}
-				</Route>
-				<Route path='/lists/:id'>
-					{lists && activeList && <Body lists={activeList}
-																				colorTitle={activeList.color.hex}
-																				onAddTask={onAddTask}
-																				onRemoveTask={onRemoveTask}
-																				onEditTitle={onEditTitle}
-																				onEditTask={onEditTask}
-																				onChangeChecked={onChangeChecked}
-																				sendState={sendState}/>}
-				</Route>
+				<Switch>
+					<Route exact path='/'>
+						{lists && lists.length === 0
+							? <h2 className='todo__isnt-task'>Задачи отсутствуют</h2>
+							: lists && lists.map(item => <Body lists={item}
+																								 key={item.id}
+																								 onAddTask={onAddTask}
+																								 onEditTitle={onEditTitle}
+																								 colorTitle={item.color.hex}
+																								 onRemoveTask={onRemoveTask}
+																								 onEditTask={onEditTask}
+																								 onChangeChecked={onChangeChecked}
+																								 withoutEmpty={true}
+																								 sendState={sendState}/>)}
+					</Route>
+					<Route exact path='/list/:id?'>
+						{lists && activeList && <Body lists={activeList}
+																					colorTitle={activeList.color.hex}
+																					onAddTask={onAddTask}
+																					onRemoveTask={onRemoveTask}
+																					onEditTitle={onEditTitle}
+																					onEditTask={onEditTask}
+																					onChangeChecked={onChangeChecked}
+																					sendState={sendState}/>}
+					</Route>
+					{/*<Route render={ () => <h1> 404 notfound </h1>} />*/}
+					<Redirect to="/" />
+
+				</Switch>
 			</div>
 
 		</div>

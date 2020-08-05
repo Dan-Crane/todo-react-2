@@ -1,0 +1,77 @@
+.control-btn {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  //gap: 10px;
+  margin-left: 10px;
+  opacity: 0;
+  transition: all 0.15s ease-in-out;
+  @media all and (max-width: 768px) {
+    margin-left: 0;
+    opacity: 0;
+    animation: showContBtn .2s;
+  }
+
+  &.active {
+    @media all and (max-width: 768px) {
+      opacity: .8;
+    }
+
+  }
+
+  &__edit {
+    cursor: pointer;
+    width: 15px;
+    @media all and (min-width: 768px) {
+      &:hover {
+        opacity: 1 !important;
+      }
+    }
+
+    path {
+      stroke: #31bb7e;
+    }
+  }
+
+  &__done {
+    cursor: pointer;
+
+    @media all and (min-width: 768px) {
+      &:hover {
+        opacity: 1 !important;
+      }
+    }
+  }
+
+  &__close {
+    cursor: pointer;
+
+    @media all and (min-width: 768px) {
+      &:hover {
+        opacity: 1 !important;
+      }
+    }
+  }
+}
+
+@keyframes showContBtn {
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+
+  100% {
+    opacity: 0.4;
+    max-height: 35px;
+  }
+}
+
+@keyframes toggleBtn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}

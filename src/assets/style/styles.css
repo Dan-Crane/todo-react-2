@@ -44,6 +44,24 @@
 .icon-angle-double-left:before {
   content: "\62";
 }
+.icon-angle-down:before {
+  content: "\64";
+}
+.icon-removeicon:before {
+  content: "\65";
+}
+.icon-entypo-list:before {
+  content: "\66";
+}
+.icon-closesvg:before {
+  content: "\67";
+}
+.icon-changesvg:before {
+  content: "\69";
+}
 .icon-ellipsis-v:before {
-  content: "\63";
+  content: "\6b";
+}
+.icon-ellipsis-h:before {
+  content: "\6c";
 }
