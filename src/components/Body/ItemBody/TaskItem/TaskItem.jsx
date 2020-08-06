@@ -3,11 +3,13 @@ import React, {useState} from "react";
 import './TaskItem.scss'
 import {PreloaderCircle} from "../../../PreloaderCircle/PreloaderCrcle";
 import {ControlButtons} from "./ControlButtons/ControlButtons";
+import {useOutsideAlerter} from "../../../../hooks/OutsideAlerter";
 
 export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask, completed, onChangeChecked, sendState}) => {
 	const [editMode, setEditMode] = useState(false)
 	const [valueItem, setValueItem] = useState(text)
-	const [visible, setVisible] = useState(false)
+	// const [visible, setVisible] = useState(false)
+	const {visible, setVisible, ref} = useOutsideAlerter(false)
 
 	let btnShowStyle = ''
 	if (visible) btnShowStyle += ' active'
@@ -25,9 +27,7 @@ export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask, completed,
 		setVisible(false)
 	}
 
-	const doneEdit = (e) => {
-		console.log(e.target.className.animVal === 'control-btn__edit control-btn active')
-
+	const doneEdit = () => {
 		onEditTask(idList, {id, text: valueItem})
 		setEditMode(false)
 		setVisible(false)
@@ -94,7 +94,7 @@ export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask, completed,
 					<div data-icon="k"
 							 className={`control-btn-wrap__tog-show-btn ${btnShowStyle}`}
 							 onClick={() => setVisible(s => !s)}></div>
-					<div className={`control-btn-wrap__popup ${btnShowStyle}`}>
+					<div ref={ref} className={`control-btn-wrap__popup ${btnShowStyle}`}>
 						<ControlButtons editMode={editMode}
 														doneEdit={doneEdit}
 														cancelEditMode={cancelEditMode}

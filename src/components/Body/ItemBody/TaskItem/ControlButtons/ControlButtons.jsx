@@ -11,7 +11,7 @@ export const ControlButtons = ({editMode, doneEdit, cancelEditMode, onRemoveTask
 			{editMode
 				? <svg width="18" height="15" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg"
 							 className={`control-btn__edit ${btnShowStyle}`}
-							 onClick={(e)=>doneEdit(e)}>
+							 onClick={doneEdit}>
 					<path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" stroke="black" strokeWidth="1.5"
 								strokeLinecap="round" strokeLinejoin="round"/>
 				</svg>

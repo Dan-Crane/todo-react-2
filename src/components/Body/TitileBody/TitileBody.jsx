@@ -19,7 +19,7 @@ export const TitleBody = ({title, id, onEditTitle, colorTitle}) => {
 
 	return (
 		<div className='body__title title-wrap'>
-			<NavLink to={`/lists/${id}`}>
+			<NavLink to={`/list/${id}`}>
 				<h2 style={{color: colorTitle}} className='title-wrap__title'>
 					{title}
 				</h2>
