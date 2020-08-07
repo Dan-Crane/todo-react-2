@@ -30,7 +30,8 @@ const App = () => {
 	}, [])
 
 	useEffect(() => {
-		apiFirebase('lists')
+		apiFirebase('lists').then(res=>console.log(res))
+		apiFirebase('tasks').then(res=>console.log(res))
 	}, [])
 
 	useEffect(() => {
@@ -179,7 +180,6 @@ const App = () => {
 
 				</Switch>
 			</div>
-
 		</div>
 	);
 }
