@@ -6,11 +6,13 @@ import '../../assets/style/styles.css'
 
 import {Navbar} from "../Navbar/Navbar";
 import {Body} from "../Body/Body";
+
 import {api} from "../../api/api";
+import {apiFirebase} from "../../api/apiFirebase";
 
 const App = () => {
 
-	const [lists, setLists] = useState(null)
+	const [lists, setLists] = useState([])
 	const [colors, setColors] = useState(null)
 	const [activeList, setActiveList] = useState(null)
 	const [sendState, setSendState] = useState(null)
@@ -25,6 +27,10 @@ const App = () => {
 	const getColors = useCallback(() => {
 		api.getColors()
 			.then(res => setColors(res))
+	}, [])
+
+	useEffect(() => {
+		apiFirebase('lists')
 	}, [])
 
 	useEffect(() => {
@@ -169,7 +175,7 @@ const App = () => {
 																					sendState={sendState}/>}
 					</Route>
 					{/*<Route render={ () => <h1> 404 notfound </h1>} />*/}
-					<Redirect to="/" />
+					<Redirect to="/"/>
 
 				</Switch>
 			</div>
