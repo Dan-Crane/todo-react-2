@@ -24,6 +24,8 @@ const App = () => {
 			.then(res => setLists(res))
 	}, [])
 
+	console.log('test')
+
 	const getColors = useCallback(() => {
 		api.getColors()
 			.then(res => setColors(res))
