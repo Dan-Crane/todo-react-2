@@ -10,6 +10,10 @@ import {Body} from "../Body/Body";
 import {api} from "../../api/api";
 import {apiFirebase} from "../../api/apiFirebase";
 
+import {db} from '../../firebase'
+
+import {DBContext} from '../../context/db'
+
 const App = () => {
 
 	const [lists, setLists] = useState([])
@@ -24,16 +28,9 @@ const App = () => {
 			.then(res => setLists(res))
 	}, [])
 
-	console.log('test')
-
 	const getColors = useCallback(() => {
 		api.getColors()
 			.then(res => setColors(res))
-	}, [])
-
-	useEffect(() => {
-		apiFirebase('lists').then(res=>console.log(res))
-		apiFirebase('tasks').then(res=>console.log(res))
 	}, [])
 
 	useEffect(() => {
@@ -141,48 +138,53 @@ const App = () => {
 			})
 	}
 
-	return (
-		<div className="todo">
-			<Navbar lists={lists}
-							addList={addList}
-							onRemoveList={onRemoveList}
-							onActiveList={onActiveList}
-							onAllActiveList={onAllActiveList}
-							activeList={activeList}
-							colors={colors}
-							activeLocation={location.pathname}/>
-			<div className='todo__body'>
-				<Switch>
-					<Route exact path='/'>
-						{lists && lists.length === 0
-							? <h2 className='todo__isnt-task'>Задачи отсутствуют</h2>
-							: lists && lists.map(item => <Body lists={item}
-																								 key={item.id}
-																								 onAddTask={onAddTask}
-																								 onEditTitle={onEditTitle}
-																								 colorTitle={item.color.hex}
-																								 onRemoveTask={onRemoveTask}
-																								 onEditTask={onEditTask}
-																								 onChangeChecked={onChangeChecked}
-																								 withoutEmpty={true}
-																								 sendState={sendState}/>)}
-					</Route>
-					<Route exact path='/list/:id?'>
-						{lists && activeList && <Body lists={activeList}
-																					colorTitle={activeList.color.hex}
-																					onAddTask={onAddTask}
-																					onRemoveTask={onRemoveTask}
-																					onEditTitle={onEditTitle}
-																					onEditTask={onEditTask}
-																					onChangeChecked={onChangeChecked}
-																					sendState={sendState}/>}
-					</Route>
-					{/*<Route render={ () => <h1> 404 notfound </h1>} />*/}
-					<Redirect to="/"/>
+	const [listsTest, setListsTest] = useState([])
 
-				</Switch>
+	useEffect(() => {
+		apiFirebase('lists')().then(setListsTest)
+
+	}, [])
+
+	return (
+		<DBContext.Provider value={{listsTest, apiFirebase}}>
+			<div className="todo">
+				<Navbar lists={lists}
+								addList={addList}
+								onRemoveList={onRemoveList}
+								onActiveList={onActiveList}
+								onAllActiveList={onAllActiveList}
+								activeList={activeList}
+								colors={colors}
+								activeLocation={location.pathname}/>
+				<div className='todo__body'>
+					<Switch>
+						{/*<Route exact path='/'>*/}
+						{/*	{lists && lists.length === 0*/}
+						{/*		? <h2 className='todo__isnt-task'>Задачи отсутствуют</h2>*/}
+						{/*		: lists && lists.map(item => <Body lists={item}*/}
+						{/*																			 key={item.id}*/}
+						{/*																			 onAddTask={onAddTask}*/}
+						{/*																			 onEditTitle={onEditTitle}*/}
+						{/*																			 colorTitle={item.color.hex}*/}
+						{/*																			 onRemoveTask={onRemoveTask}*/}
+						{/*																			 onEditTask={onEditTask}*/}
+						{/*																			 onChangeChecked={onChangeChecked}*/}
+						{/*																			 withoutEmpty={true}*/}
+						{/*																			 sendState={sendState}/>)}*/}
+						{/*</Route>*/}
+						<Route exact
+									 path='/list/:listId?'
+									 component={Body}
+									 // render={()=> <Body/>}
+									/>
+						{/*<Route render={ () => <h1> 404 notfound </h1>} />*/}
+						<Redirect to="/"/>
+
+					</Switch>
+				</div>
 			</div>
-		</div>
+		</DBContext.Provider>
+
 	);
 }
 

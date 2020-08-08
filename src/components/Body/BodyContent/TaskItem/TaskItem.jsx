@@ -42,8 +42,8 @@ export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask, completed,
 	}
 
 	return (
-		<div className='item-task__row'>
-			<div className='item-task__checkbox'>
+		<div className='body-content__row'>
+			<div className='body-content__checkbox'>
 				{sendState === id
 					? <PreloaderCircle/>
 					: <> <input id={`check-${id}`}
@@ -58,17 +58,17 @@ export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask, completed,
 						</label></>}
 
 			</div>
-			<form className='item-task__form'
+			<form className='body-content__form'
 						onSubmit={onSubmitForm}>
 				{!editMode
-					? <span className='item-task__text'>{text}</span>
-					: <input className='item-task__input'
+					? <span className='body-content__text'>{text}</span>
+					: <input className='body-content__input'
 									 value={valueItem}
 									 onChange={e => itemChangeValue(e)}
 									 autoFocus={true}/>
 				}
 
-				<div className='item-task__control-btn-wrap control-btn-wrap'>
+				<div className='body-content__control-btn-wrap control-btn-wrap'>
 					<div data-icon="k"
 							 className={`control-btn-wrap__tog-show-btn ${btnShowStyle}`}
 							 onClick={handleClick}></div>
@@ -87,7 +87,7 @@ export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask, completed,
 
 
 			</form>
-			<div className='item-task__wrap'>
+			<div className='body-content__wrap'>
 				<ControlButtons editMode={editMode}
 												doneEdit={doneEdit}
 												cancelEditMode={cancelEditMode}
