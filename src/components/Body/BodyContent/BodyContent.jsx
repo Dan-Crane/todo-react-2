@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import { useRouteMatch } from "react-router-dom";
+import {useRouteMatch} from "react-router-dom";
 
 import './BodyContent.scss'
 
@@ -8,17 +8,7 @@ import {TaskItem} from "./TaskItem/TaskItem";
 import {DBContext} from "../../../context/db";
 import {apiFirebase} from "../../../api/apiFirebase";
 
-export const BodyContent = () => {
-	const [tasksTest, setTasksTest] = useState([])
-	let match = useRouteMatch('/list/:listId?');
-	const db = useContext(DBContext)
-
-	useEffect(() => {
-		apiFirebase('tasks')(collection =>
-			collection.where('listId', '==', match.params.listId))
-			.then(setTasksTest)
-	}, [db, match.params.listId])
-
+export const BodyContent = ({tasksTest}) => {
 	return (
 		<div className='body__item-tasks body-content'>
 			{/*{!withoutEmpty && tasks && !tasks.length && <h2 className='item-task__isnt-task'>Задачи отсутствуют</h2>}*/}

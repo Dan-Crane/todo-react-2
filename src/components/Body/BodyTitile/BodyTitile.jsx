@@ -8,20 +8,7 @@ import {api} from "../../../api/api";
 import {NavLink, useRouteMatch} from "react-router-dom";
 import {PreloaderCircle} from "../../PreloaderCircle/PreloaderCrcle";
 
-export const TitleBody = ({title, id, onEditTitle, colorTitle}) => {
-	const db = useContext(DBContext)
-	let match = useRouteMatch('/list/:listId?');
-
-	const list = db.listsTest.find(i=>i.id === match.params.listId)
-
-	const editTitle = () => {
-		const newTitle = window.prompt('Введите название заголовка', title)
-		if (newTitle) {
-			api.changeTitle(id, newTitle)
-				.then(res => onEditTitle(newTitle, id))
-				.catch(() => alert('Не удалось обновить название списка'))
-		}
-	}
+export const TitleBody = ({list, colorTitle}) => {
 
 if (!list) return <PreloaderCircle/>
 
