@@ -10,8 +10,6 @@ import {PreloaderCircle} from "../../PreloaderCircle/PreloaderCrcle";
 
 export const TitleBody = ({list, colorTitle}) => {
 
-if (!list) return <PreloaderCircle/>
-
 	return (
 		<div className='body__title title-wrap'>
 			<NavLink to={`/list/${list.id}`}>

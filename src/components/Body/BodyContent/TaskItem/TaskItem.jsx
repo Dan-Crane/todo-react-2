@@ -6,7 +6,11 @@ import {PreloaderCircle} from "../../../PreloaderCircle/PreloaderCrcle";
 import {ControlButtons} from "./ControlButtons/ControlButtons";
 import {useOutsideAlerter} from "../../../../hooks/OutsideAlerter";
 
-export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask, completed, onChangeChecked, sendState}) => {
+export const TaskItem = ({
+													 onRemoveTask, idList, onEditTask, onChangeChecked, sendState,
+
+													 id, text, completed, onDelete,
+												 }) => {
 	const [editMode, setEditMode] = useState(false)
 	const [valueItem, setValueItem] = useState(text)
 	const {visible, setVisible, ref} = useOutsideAlerter(false)
@@ -44,18 +48,29 @@ export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask, completed,
 	return (
 		<div className='body-content__row'>
 			<div className='body-content__checkbox'>
-				{sendState === id
-					? <PreloaderCircle/>
-					: <> <input id={`check-${id}`}
-											onChange={onChecked}
-											checked={completed}
-											type='checkbox'/>
-						<label htmlFor={`check-${id}`}>
-							<svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" stroke="white" strokeWidth="1.5"
-											strokeLinecap="round" strokeLinejoin="round"/>
-							</svg>
-						</label></>}
+				{/*//условие на загрузку*/}
+				{/*{sendState === id*/}
+				{/*	? <PreloaderCircle/>*/}
+				{/*	: <> <input id={`check-${id}`}*/}
+				{/*							onChange={onChecked}*/}
+				{/*							checked={completed}*/}
+				{/*							type='checkbox'/>*/}
+				{/*		<label htmlFor={`check-${id}`}>*/}
+				{/*			<svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
+				{/*				<path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" stroke="white" strokeWidth="1.5"*/}
+				{/*							strokeLinecap="round" strokeLinejoin="round"/>*/}
+				{/*			</svg>*/}
+				{/*		</label></>}*/}
+				<> <input id={`check-${id}`}
+									onChange={onChecked}
+									checked={completed}
+									type='checkbox'/>
+					<label htmlFor={`check-${id}`}>
+						<svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" stroke="white" strokeWidth="1.5"
+										strokeLinecap="round" strokeLinejoin="round"/>
+						</svg>
+					</label></>
 
 			</div>
 			<form className='body-content__form'
@@ -74,28 +89,34 @@ export const TaskItem = ({id, text, onRemoveTask, idList, onEditTask, completed,
 							 onClick={handleClick}></div>
 
 					{visible && <div ref={ref} className={`control-btn-wrap__popup ${btnShowStyle}`}>
-						<ControlButtons editMode={editMode}
-														doneEdit={doneEdit}
-														cancelEditMode={cancelEditMode}
-														onRemoveTask={onRemoveTask}
-														idList={idList}
-														id={id}
-														setEditMode={setEditMode}
-														visible/>
+						<ControlButtons
+							onDelete={onDelete}
+							id={id}
+
+							editMode={editMode}
+							doneEdit={doneEdit}
+							cancelEditMode={cancelEditMode}
+							onRemoveTask={onRemoveTask}
+							idList={idList}
+							setEditMode={setEditMode}
+							visible/>
 					</div>}
 				</div>
 
 
 			</form>
 			<div className='body-content__wrap'>
-				<ControlButtons editMode={editMode}
-												doneEdit={doneEdit}
-												cancelEditMode={cancelEditMode}
-												onRemoveTask={onRemoveTask}
-												idList={idList}
-												id={id}
-												setEditMode={setEditMode}
-												visible/>
+				<ControlButtons
+					onDelete={onDelete}
+					id={id}
+
+					editMode={editMode}
+					doneEdit={doneEdit}
+					cancelEditMode={cancelEditMode}
+					onRemoveTask={onRemoveTask}
+					idList={idList}
+					setEditMode={setEditMode}
+					visible/>
 			</div>
 
 		</div>

@@ -4,7 +4,7 @@ import './AddTaskItem.scss'
 
 import addSvg from '../../../../assets/icons/add.svg'
 
-export const AddTaskItem = ({idList, onAddTask}) => {
+export const AddTaskItem = ({idList, onAddTask, onSubmit}) => {
 	const [visible, setVisible] = useState(false)
 	const [inputValue, setInputValue] = useState('')
 	const [isSending, setIsSending] = useState(false)
@@ -16,10 +16,14 @@ export const AddTaskItem = ({idList, onAddTask}) => {
 
 	// const addTask = (e) => {
 	// 	e.preventDefault()
-	{/*	if(!inputValue){*/}
-	{/*		return alert('Введите задачу')*/}
-	{/*	}*/}
-	{/*	const obj = {*/}
+	{/*	if(!inputValue){*/
+	}
+	{/*		return alert('Введите задачу')*/
+	}
+	{/*	}*/
+	}
+	{/*	const obj = {*/
+	}
 	// 		listId: idList,
 	// 		text: inputValue,
 	// 		completed: false
@@ -29,7 +33,8 @@ export const AddTaskItem = ({idList, onAddTask}) => {
 	// 		.then(({data}) => {
 	// 			onAddTask(idList, data)
 	// 			toggleVisible()
-	{/*		})*/}
+	{/*		})*/
+	}
 	// 		.catch(() => {
 	// 			alert('Ошибка при добавлении задачи')
 	// 		})
@@ -37,9 +42,14 @@ export const AddTaskItem = ({idList, onAddTask}) => {
 	// 			setIsSending(false)
 	// 		})
 	// }
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		onSubmit(inputValue)
+		setInputValue('')
+	}
 
 	return (
-		<form onSubmit={()=>console.log('addTask')} className='add-task-item'>
+		<form onSubmit={handleSubmit} className='add-task-item'>
 			{visible
 				? <div className='add-task-item__form'>
 					<input className='main-input add-task-item__input'

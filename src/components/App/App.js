@@ -8,7 +8,7 @@ import {Navbar} from "../Navbar/Navbar";
 import {Body} from "../Body/Body";
 
 import {api} from "../../api/api";
-import {apiFirebase} from "../../api/apiFirebase";
+import * as apiFirebase from "../../api/apiFirebase";
 
 import {db} from '../../firebase'
 
@@ -141,12 +141,12 @@ const App = () => {
 	const [listsTest, setListsTest] = useState([])
 
 	useEffect(() => {
-		apiFirebase('lists')().then(setListsTest)
+		apiFirebase.getLists().then(setListsTest)
 
 	}, [])
 
 	return (
-		<DBContext.Provider value={{listsTest, apiFirebase}}>
+		<DBContext.Provider value={{listsTest, ...apiFirebase}}>
 			<div className="todo">
 				<Navbar lists={lists}
 								addList={addList}
@@ -175,8 +175,8 @@ const App = () => {
 						<Route exact
 									 path='/list/:listId?'
 									 component={Body}
-									 // render={()=> <Body/>}
-									/>
+							// render={()=> <Body/>}
+						/>
 						{/*<Route render={ () => <h1> 404 notfound </h1>} />*/}
 						<Redirect to="/"/>
 
