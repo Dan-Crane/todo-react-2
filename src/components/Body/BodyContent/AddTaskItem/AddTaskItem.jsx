@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import './AddTaskItem.scss'
 
 import addSvg from '../../../../assets/icons/add.svg'
-import {api} from "../../../../api/api";
 
 export const AddTaskItem = ({idList, onAddTask}) => {
 	const [visible, setVisible] = useState(false)
@@ -15,32 +14,32 @@ export const AddTaskItem = ({idList, onAddTask}) => {
 		setInputValue('')
 	}
 
-	const addTask = (e) => {
-		e.preventDefault()
-		if(!inputValue){
-			return alert('Введите задачу')
-		}
-		const obj = {
-			listId: idList,
-			text: inputValue,
-			completed: false
-		}
-		setIsSending(true)
-		api.addTask(idList, obj)
-			.then(({data}) => {
-				onAddTask(idList, data)
-				toggleVisible()
-			})
-			.catch(() => {
-				alert('Ошибка при добавлении задачи')
-			})
-			.finally(() => {
-				setIsSending(false)
-			})
-	}
+	// const addTask = (e) => {
+	// 	e.preventDefault()
+	{/*	if(!inputValue){*/}
+	{/*		return alert('Введите задачу')*/}
+	{/*	}*/}
+	{/*	const obj = {*/}
+	// 		listId: idList,
+	// 		text: inputValue,
+	// 		completed: false
+	// 	}
+	// 	setIsSending(true)
+	// 	api.addTask(idList, obj)
+	// 		.then(({data}) => {
+	// 			onAddTask(idList, data)
+	// 			toggleVisible()
+	{/*		})*/}
+	// 		.catch(() => {
+	// 			alert('Ошибка при добавлении задачи')
+	// 		})
+	// 		.finally(() => {
+	// 			setIsSending(false)
+	// 		})
+	// }
 
 	return (
-		<form onSubmit={addTask} className='add-task-item'>
+		<form onSubmit={()=>console.log('addTask')} className='add-task-item'>
 			{visible
 				? <div className='add-task-item__form'>
 					<input className='main-input add-task-item__input'
@@ -58,9 +57,10 @@ export const AddTaskItem = ({idList, onAddTask}) => {
 				</div>
 				: <div onClick={toggleVisible}
 							 className='add-task-item__wrapper'>
-					<img className='add-task-item__icon'
-							 src={addSvg}
-							 alt="Добавить список"/>
+					<abbr className='add-task-item__icon' data-icon="e"></abbr>
+					{/*<img className='add-task-item__icon'*/}
+					{/*		 src={addSvg}*/}
+					{/*		 alt="Добавить список"/>*/}
 					<span className='add-task-item__title'>Новая задача</span>
 				</div>}
 

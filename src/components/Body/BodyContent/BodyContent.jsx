@@ -25,8 +25,7 @@ export const BodyContent = ({tasksTest}) => {
 				return (<TaskItem key={t.id} {...t}/>)
 			})}
 
-			{/*<AddTaskItem key={idList} onAddTask={onAddTask}*/}
-			{/*						 idList={idList}/>*/}
+			<AddTaskItem />
 		</div>
 	)
 }
