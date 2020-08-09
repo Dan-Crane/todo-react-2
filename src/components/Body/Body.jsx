@@ -31,7 +31,7 @@ export const Body = () => {
 	}
 
 const handleUpdate = (taskId, data) =>{
-		console.log(taskId)
+		actions.updataTodo(taskId, data)
 }
 
 	if (!list || !tasks) return <div className='preloader-wrap'><PreloaderCircle/></div>
@@ -49,6 +49,7 @@ const handleUpdate = (taskId, data) =>{
 				onDelete={handleDelete}
 				tasksTest={tasks}
 				onSubmit={handleSubmit}
+				onUpdate={handleUpdate}
 				// 	idList={lists.id}
 				// 					lists={lists}
 				// 					onAddTask={onAddTask}

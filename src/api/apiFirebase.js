@@ -66,6 +66,10 @@ export const createTask = (data) => {
 		});
 }
 
+export const updataTodo = (taskId, data) =>{
+	return db.collection("tasks").doc(taskId).update(data)
+}
+
 export const deleteTask = (taskId) => {
 	return db.collection("tasks").doc(taskId).delete()
 		.catch((error) => {

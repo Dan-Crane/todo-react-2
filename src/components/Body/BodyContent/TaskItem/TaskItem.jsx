@@ -9,15 +9,8 @@ import {useOutsideAlerter} from "../../../../hooks/OutsideAlerter";
 export const TaskItem = ({
 													 onRemoveTask, idList, onEditTask, onChangeChecked, sendState,
 
-													 taskId, text, completed, onDelete,
+													 taskId, text, completed, onDelete, onUpdate
 												 }) => {
-
-	/*
-	completed
-	taskId
-	listId
-	text
-	* */
 
 	const [editMode, setEditMode] = useState(false)
 	const [valueItem, setValueItem] = useState(text)
@@ -45,12 +38,13 @@ export const TaskItem = ({
 		// setVisible(false)
 	}
 
-	const onChecked = (e) => {
-		onChangeChecked(taskId, idList, e.target.checked);
-	}
-
 	const handleClick = () => {
 		setVisible(s => !s)
+	}
+
+//новый функционал
+	const handleChange = (e) => {
+		onUpdate(taskId, {completed: e.target.checked})
 	}
 
 	return (
@@ -70,7 +64,7 @@ export const TaskItem = ({
 				{/*			</svg>*/}
 				{/*		</label></>}*/}
 				<> <input id={`check-${taskId}`}
-									onChange={onChecked}
+									onChange={(e) => handleChange(e)}
 									checked={completed}
 									type='checkbox'/>
 					<label htmlFor={`check-${taskId}`}>
@@ -87,7 +81,7 @@ export const TaskItem = ({
 					? <span className='body-content__text'>{text}</span>
 					: <input className='body-content__input'
 									 value={valueItem}
-									 onChange={e => itemChangeValue(e)}
+									 onChange={itemChangeValue}
 									 autoFocus={true}/>
 				}
 

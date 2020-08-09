@@ -27,6 +27,17 @@ export const useApi = () => {
 			})
 	}
 
+	const updataTodo = (taskId, data) => {
+		return apiFirebase.updataTodo(taskId, data)
+			.then(data => {
+				setTasks([...tasks.map(t => {
+					return t.id !== taskId
+						? {...t, ...data}
+						: t
+				})])
+			})
+	}
+
 	const deleteTask = (taskId) => {
 		return apiFirebase.deleteTask(taskId)
 			.then(taskId => {
@@ -43,6 +54,7 @@ export const useApi = () => {
 			getLists,
 			getTasks,
 			createTask,
+			updataTodo,
 			deleteTask
 		},
 	}

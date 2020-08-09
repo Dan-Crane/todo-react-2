@@ -6,8 +6,7 @@ import './BodyContent.scss'
 import {AddTaskItem} from "./AddTaskItem/AddTaskItem";
 import {TaskItem} from "./TaskItem/TaskItem";
 
-export const BodyContent = ({tasksTest, onSubmit, onDelete}) => {
-	console.log(tasksTest)
+export const BodyContent = ({tasksTest, onSubmit, onDelete, onUpdate}) => {
 	return (
 		<div className='body__item-tasks body-content'>
 			{/*{!withoutEmpty && tasks && !tasks.length && <h2 className='item-task__isnt-task'>Задачи отсутствуют</h2>}*/}
@@ -25,7 +24,8 @@ export const BodyContent = ({tasksTest, onSubmit, onDelete}) => {
 					{...t}
 					taskId={t.id}
 					key={t.id}
-					onDelete={onDelete}/>)
+					onDelete={onDelete}
+					onUpdate={onUpdate}/>)
 			})}
 
 			<AddTaskItem onSubmit={onSubmit}/>
