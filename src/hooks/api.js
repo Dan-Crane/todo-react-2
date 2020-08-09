@@ -2,13 +2,25 @@ import {useState, useEffect} from 'react'
 import *as apiFirebase from '../api/apiFirebase'
 
 export const useApi = () => {
-	const [lists, setLists] = useState([])
-	const [tasks, setTasks] = useState([])
+	const [lists, setLists] = useState([	{
+		"color": "blue",
+		"colorId": 3,
+		"name": "Книги",
+		"id": 1
+	}])
+	const [tasks, setTasks] = useState([    {
+		"listId": 1,
+		"text": "тест",
+		"completed": false,
+		"id": 1
+	}])
 
 	useEffect(() => {
-		apiFirebase.getLists().then(setLists)
+		// apiFirebase.getLists().then(setLists)
 
 	}, [])
+
+
 
 	const getLists = () => {
 		return apiFirebase.getLists()

@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 
 import './Navbar.scss'
 
@@ -14,9 +14,13 @@ export const Navbar = ({
 												 activeList, onAllActiveList
 											 }) => {
 
-	const {data: {lists}} = useApi()
-
 	const [visible, setVisible] = useState(false)
+	const {data: {lists}, actions} = useApi()
+
+	useEffect(() => {
+		//блок запроса
+		// actions.getLists()
+	}, [actions])
 
 	let navbarStyle = 'navbar'
 	if (visible) navbarStyle += ' show'

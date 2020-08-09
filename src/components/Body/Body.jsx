@@ -9,15 +9,26 @@ import {TitleBody} from "./BodyTitile/BodyTitile";
 import {BodyContent} from "./BodyContent/BodyContent";
 
 import {PreloaderCircle} from "../PreloaderCircle/PreloaderCrcle";
+import {TaskDetails} from "./TaskDetails/TaskDetails";
 
-export const Body = () => {
+export const Body = ({match}) => {
+	const [selectedTask, setSelectedTask] = useState(null)
 	const {data: {lists, tasks}, actions} = useApi()
-	let match = useRouteMatch('/list/:listId?');
-	const list = lists.find(i => i.id === match.params.listId)
+	// const list = lists.find(i => i.id === match.params.listId)
 
-	useEffect(() => {
-		actions.getTasks(match.params.listId)
-	}, [actions, match.params.listId])
+	const list ={ "color": "blue",
+		"colorId": 3,
+		"name": "Книги",
+		"id": 1}
+
+	// useEffect(() => {
+	//
+	// 	if (match.params.listId) {
+	// 		actions.getTasks(match.params.listId)
+	// 	} else {
+	// 		actions.getLists()
+	// 	}
+	// }, [actions, match.params.listId])
 
 	const handleSubmit = (text) => {
 		actions.createTask({
@@ -30,9 +41,13 @@ export const Body = () => {
 		actions.deleteTask(taskId)
 	}
 
-const handleUpdate = (taskId, data) =>{
+	const handleUpdate = (taskId, data) => {
 		actions.updataTodo(taskId, data)
-}
+	}
+
+	const handleSelect = (task) => {
+		setSelectedTask(task)
+	}
 
 	if (!list || !tasks) return <div className='preloader-wrap'><PreloaderCircle/></div>
 
@@ -46,10 +61,11 @@ const handleUpdate = (taskId, data) =>{
 				// 				 onEditTitle={onEditTitle}
 			/>
 			<BodyContent
-				onDelete={handleDelete}
 				tasksTest={tasks}
+				onSelect={handleSelect}
 				onSubmit={handleSubmit}
 				onUpdate={handleUpdate}
+				onDelete={handleDelete}
 				// 	idList={lists.id}
 				// 					lists={lists}
 				// 					onAddTask={onAddTask}
@@ -60,6 +76,9 @@ const handleUpdate = (taskId, data) =>{
 				// 					onChangeChecked={onChangeChecked}
 				// 					sendState={sendState}
 			/>
+			{selectedTask &&
+			<TaskDetails/>
+			}
 		</section>
 	)
 }

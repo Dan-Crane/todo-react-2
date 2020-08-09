@@ -30,10 +30,22 @@ const App = () => {
 					{/*																			 sendState={sendState}/>)}*/}
 					{/*</Route>*/}
 					<Route exact
+								 path='/'
+								 component={Body}
+					/>
+					<Route exact
+								 path='/important'
+								 component={Body}
+					/>
+					<Route exact
+								 path='/planned'
+								 component={Body}
+					/>
+					<Route exact
 								 path='/list/:listId?'
 								 component={Body}
-						// render={()=> <Body/>}
 					/>
+
 					{/*<Route render={ () => <h1> 404 notfound </h1>} />*/}
 					<Redirect to="/"/>
 

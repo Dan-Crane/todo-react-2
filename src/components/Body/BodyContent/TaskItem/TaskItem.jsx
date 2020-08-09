@@ -9,7 +9,7 @@ import {useOutsideAlerter} from "../../../../hooks/OutsideAlerter";
 export const TaskItem = ({
 													 onRemoveTask, idList, onEditTask, onChangeChecked, sendState,
 
-													 taskId, text, completed, onDelete, onUpdate
+													 taskId, text, completed, onDelete, onUpdate, onSelect
 												 }) => {
 
 	const [editMode, setEditMode] = useState(false)
@@ -42,7 +42,7 @@ export const TaskItem = ({
 		setVisible(s => !s)
 	}
 
-//новый функционал
+// новый функционал
 	const handleChange = (e) => {
 		onUpdate(taskId, {completed: e.target.checked})
 	}
@@ -85,41 +85,21 @@ export const TaskItem = ({
 									 autoFocus={true}/>
 				}
 
-				<div className='body-content__control-btn-wrap control-btn-wrap'>
-					<div data-icon="k"
-							 className={`control-btn-wrap__tog-show-btn ${btnShowStyle}`}
-							 onClick={handleClick}></div>
-
-					{visible && <div ref={ref} className={`control-btn-wrap__popup ${btnShowStyle}`}>
-						<ControlButtons
-							onDelete={onDelete}
-							taskId={taskId}
-
-							editMode={editMode}
-							doneEdit={doneEdit}
-							cancelEditMode={cancelEditMode}
-							onRemoveTask={onRemoveTask}
-							idList={idList}
-							setEditMode={setEditMode}
-							visible/>
-					</div>}
+				<div className='body-content__wrap-btn wrap-btn'>
+					<abbr data-icon="i"
+								className='wrap-btn__delete'
+								onClick={() => onDelete(taskId)}>
+					</abbr>
+					<abbr data-icon="k"
+								className='wrap-btn__details'
+								onClick={handleClick}></abbr>
 				</div>
 
 
-			</form>
-			<div className='body-content__wrap'>
-				<ControlButtons
-					onDelete={onDelete}
-					taskId={taskId}
 
-					editMode={editMode}
-					doneEdit={doneEdit}
-					cancelEditMode={cancelEditMode}
-					onRemoveTask={onRemoveTask}
-					idList={idList}
-					setEditMode={setEditMode}
-					visible/>
-			</div>
+
+			</form>
+
 
 		</div>
 	)

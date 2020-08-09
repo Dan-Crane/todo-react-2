@@ -61,7 +61,7 @@ const AddList = ({colors, addList, addVisible}) => {
 
 	return (
 		<div className='add-list-btn'>
-			<List items={[
+			<List lists={[
 				{
 					className: 'add-btn',
 					icon: <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,22 +78,21 @@ const AddList = ({colors, addList, addVisible}) => {
 			{visible && <form onSubmit={onAddList}
 												className='add-list-btn__popup'>
 
-				<img src={closeSvg}
-						 alt="close"
-						 className='add-list-btn__close'
-						 onClick={onClose}/>
+				<abbr data-icon="g"
+							className='add-list-btn__close'
+							onClick={onClose}/>
 				<input className='main-input add-list-btn__input'
 							 placeholder='Название листа'
 							 autoFocus={true}
 							 onChange={onInputChange}
 							 value={input}/>
 				<div className='add-list-btn__color-block'>
-					{colors.map(i => {
-						return <Badge key={i.id}
-													color={i.name}
-													onClick={() => selectedColor(i.id)}
-													className={selectColor === i.id && 'active'}/>
-					})}
+					{/*{colors.map(i => {*/}
+					{/*	return <Badge key={i.id}*/}
+					{/*								color={i.name}*/}
+					{/*								onClick={() => selectedColor(i.id)}*/}
+					{/*								className={selectColor === i.id && 'active'}/>*/}
+					{/*})}*/}
 				</div>
 				<button type='submit'
 								disabled={disableBtn}

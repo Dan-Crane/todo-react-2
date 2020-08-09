@@ -10,17 +10,12 @@ import {api} from "../../../api/api";
 import {NavLink} from "react-router-dom";
 
 export const List = ({
-											 lists, isRemovable, onRemoveList,
+											 lists, isRemovable,
 											 onActiveList, activeList, onClick,
 											 visible
 										 }) => {
 
-	const onRemove = (item) => {
-		if (window.confirm('Вы действительно хотите удалить список?')) {
-			api.deleteList(item.id)
-				.then(res => onRemoveList(item))
-		}
-	}
+
 
 	let toggleVisible = ''
 	if (visible) toggleVisible += ' active-visible'
@@ -29,7 +24,7 @@ export const List = ({
 	return (
 		<ul className='navbar__list list-navbar'
 				onClick={onClick}>
-			{lists.map((i, index) => {
+			{lists && lists.map((i, index) => {
 				return (
 					<NavLink key={index}
 									 to={i.to || `/list/${i.id}`}>
