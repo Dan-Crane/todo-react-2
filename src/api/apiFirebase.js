@@ -66,8 +66,8 @@ export const createTask = (data) => {
 		});
 }
 
-export const deleteTask = (idTask) => {
-	return db.collection("tasks").doc(idTask).delete()
+export const deleteTask = (taskId) => {
+	return db.collection("tasks").doc(taskId).delete()
 		.catch((error) => {
 			console.error("Error removing document: ", error);
 		});

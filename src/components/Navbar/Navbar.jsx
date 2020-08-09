@@ -1,21 +1,22 @@
-import React, {useState, useContext, useLayoutEffect} from "react";
+import React, {useState, useContext} from "react";
 
 import './Navbar.scss'
-
-import {DBContext} from "../../context/db";
 
 import {List} from "./List/List";
 import AddList from "./AddList/AddList";
 import {Preloader} from "../Preloader/Preloader";
 
+import {useApi} from "../../hooks/api";
+
 export const Navbar = ({
-												 activeLocation, colors, lists,
+												 activeLocation, colors,
 												 addList, onRemoveList, onActiveList,
 												 activeList, onAllActiveList
 											 }) => {
 
+	const {data: {lists}} = useApi()
+
 	const [visible, setVisible] = useState(false)
-	const DB = useContext(DBContext)
 
 	let navbarStyle = 'navbar'
 	if (visible) navbarStyle += ' show'
@@ -32,18 +33,18 @@ export const Navbar = ({
 					icon: <abbr data-icon="f"></abbr>,
 					name: 'Все задачи',
 					to: '/'
-				},{
+				}, {
 					icon: <abbr data-icon="m"></abbr>,
 					name: 'Важные',
 					to: '/important'
-				},{
+				}, {
 					icon: <abbr data-icon="j"></abbr>,
 					name: 'Запланированные',
 					to: '/planned'
 				}]
 			} visible={visible}/>
 
-			<List lists={DB.listsTest} visible={visible}/>
+			<List lists={lists} visible={visible}/>
 
 		</nav>
 	)

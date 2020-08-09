@@ -9,8 +9,16 @@ import {useOutsideAlerter} from "../../../../hooks/OutsideAlerter";
 export const TaskItem = ({
 													 onRemoveTask, idList, onEditTask, onChangeChecked, sendState,
 
-													 id, text, completed, onDelete,
+													 taskId, text, completed, onDelete,
 												 }) => {
+
+	/*
+	completed
+	taskId
+	listId
+	text
+	* */
+
 	const [editMode, setEditMode] = useState(false)
 	const [valueItem, setValueItem] = useState(text)
 	const {visible, setVisible, ref} = useOutsideAlerter(false)
@@ -32,13 +40,13 @@ export const TaskItem = ({
 	}
 
 	const doneEdit = () => {
-		onEditTask(idList, {id, text: valueItem})
+		onEditTask(idList, {taskId, text: valueItem})
 		setEditMode(false)
 		// setVisible(false)
 	}
 
 	const onChecked = (e) => {
-		onChangeChecked(id, idList, e.target.checked);
+		onChangeChecked(taskId, idList, e.target.checked);
 	}
 
 	const handleClick = () => {
@@ -61,11 +69,11 @@ export const TaskItem = ({
 				{/*							strokeLinecap="round" strokeLinejoin="round"/>*/}
 				{/*			</svg>*/}
 				{/*		</label></>}*/}
-				<> <input id={`check-${id}`}
+				<> <input id={`check-${taskId}`}
 									onChange={onChecked}
 									checked={completed}
 									type='checkbox'/>
-					<label htmlFor={`check-${id}`}>
+					<label htmlFor={`check-${taskId}`}>
 						<svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" stroke="white" strokeWidth="1.5"
 										strokeLinecap="round" strokeLinejoin="round"/>
@@ -91,7 +99,7 @@ export const TaskItem = ({
 					{visible && <div ref={ref} className={`control-btn-wrap__popup ${btnShowStyle}`}>
 						<ControlButtons
 							onDelete={onDelete}
-							id={id}
+							taskId={taskId}
 
 							editMode={editMode}
 							doneEdit={doneEdit}
@@ -108,7 +116,7 @@ export const TaskItem = ({
 			<div className='body-content__wrap'>
 				<ControlButtons
 					onDelete={onDelete}
-					id={id}
+					taskId={taskId}
 
 					editMode={editMode}
 					doneEdit={doneEdit}

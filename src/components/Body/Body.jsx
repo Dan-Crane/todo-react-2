@@ -1,43 +1,40 @@
 import React, {useContext, useEffect, useState} from "react";
+import {useRouteMatch} from "react-router-dom";
+
+import {useApi} from "../../hooks/api";
 
 import './Body.scss'
 
 import {TitleBody} from "./BodyTitile/BodyTitile";
 import {BodyContent} from "./BodyContent/BodyContent";
 
-import {DBContext} from "../../context/db";
-import {useRouteMatch} from "react-router-dom";
 import {PreloaderCircle} from "../PreloaderCircle/PreloaderCrcle";
 
 export const Body = () => {
-	const db = useContext(DBContext)
+	const {data: {lists, tasks}, actions} = useApi()
 	let match = useRouteMatch('/list/:listId?');
-	const list = db.listsTest.find(i => i.id === match.params.listId)
-	const [tasksTest, setTasksTest] = useState([])
+	const list = lists.find(i => i.id === match.params.listId)
 
 	useEffect(() => {
-		setTasksTest()
-
-		list && db.getTasks(list.id)
-			.then(setTasksTest)
-	}, [db, match.params.listId])
+		actions.getTasks(match.params.listId)
+	}, [actions, match.params.listId])
 
 	const handleSubmit = (text) => {
-		db.createTask({
+		actions.createTask({
 			text,
 			listId: list.id
 		})
-			.then(task => {
-				setTasksTest([...tasksTest, task])
-			})
 	}
 
 	const handleDelete = (taskId) => {
-		db.deleteTask(taskId)
-		setTasksTest([...tasksTest.filter(t => t.id !== taskId)])
+		actions.deleteTask(taskId)
 	}
 
-	if (!list || !tasksTest) return <div className='preloader-wrap'><PreloaderCircle/></div>
+const handleUpdate = (taskId, data) =>{
+		console.log(taskId)
+}
+
+	if (!list || !tasks) return <div className='preloader-wrap'><PreloaderCircle/></div>
 
 	return (
 		<section className='body'>
@@ -50,7 +47,7 @@ export const Body = () => {
 			/>
 			<BodyContent
 				onDelete={handleDelete}
-				tasksTest={tasksTest}
+				tasksTest={tasks}
 				onSubmit={handleSubmit}
 				// 	idList={lists.id}
 				// 					lists={lists}

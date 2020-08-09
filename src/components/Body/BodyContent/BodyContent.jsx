@@ -5,10 +5,9 @@ import './BodyContent.scss'
 
 import {AddTaskItem} from "./AddTaskItem/AddTaskItem";
 import {TaskItem} from "./TaskItem/TaskItem";
-import {DBContext} from "../../../context/db";
-import {apiFirebase} from "../../../api/apiFirebase";
 
 export const BodyContent = ({tasksTest, onSubmit, onDelete}) => {
+	console.log(tasksTest)
 	return (
 		<div className='body__item-tasks body-content'>
 			{/*{!withoutEmpty && tasks && !tasks.length && <h2 className='item-task__isnt-task'>Задачи отсутствуют</h2>}*/}
@@ -24,6 +23,7 @@ export const BodyContent = ({tasksTest, onSubmit, onDelete}) => {
 				// console.log(t)
 				return (<TaskItem
 					{...t}
+					taskId={t.id}
 					key={t.id}
 					onDelete={onDelete}/>)
 			})}
