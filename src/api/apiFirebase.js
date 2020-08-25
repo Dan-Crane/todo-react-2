@@ -20,7 +20,7 @@ export const getLists = () => {
 		});
 }
 
-export const getTasks = (listId) => {
+export const getListTasks = (listId) => {
 	return db.collection('tasks')
 		.where('listId', '==', listId)
 		.get()
@@ -35,7 +35,7 @@ export const getTasks = (listId) => {
 			console.log("Error getting documents: ", error);
 		});
 }
-export const getListTasks = () => {
+export const getTasks = () => {
 	return db.collection('tasks')
 		.where('listId', '==', '')
 		.get()

@@ -11,6 +11,7 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none;
 
+
   @media all and (max-width: 768px) {
     margin-bottom: 15px;
   }
@@ -42,6 +43,11 @@
 
       }
     }
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
   }
 
   li {

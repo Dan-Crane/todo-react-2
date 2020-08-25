@@ -1,12 +1,7 @@
 import React, {useContext} from "react";
 
 import './BodyTitile.scss'
-
-import {DBContext} from "../../../context/store";
-
-import {api} from "../../../api/api";
-import {NavLink, useRouteMatch} from "react-router-dom";
-import {PreloaderCircle} from "../../PreloaderCircle/PreloaderCrcle";
+import {NavLink} from "react-router-dom";
 
 export const TitleBody = ({list, colorTitle}) => {
 
@@ -17,7 +12,7 @@ export const TitleBody = ({list, colorTitle}) => {
 					{list.name}
 				</h2>
 			</NavLink>
-			<abbr data-icon="c" className='title-wrap__icon'></abbr>
+			<abbr data-icon="c" className='title-wrap__icon'/>
 			{/*<img className='title-wrap__icon'*/}
 			{/*		 src={changeSvg}*/}
 			{/*		 alt="change list"*/}

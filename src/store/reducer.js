@@ -5,12 +5,12 @@ export const reducer = (state, action) => {
 				...state,
 				lists: action.payload.lists
 			}
-		case 'GET_LIST_TASKS':
+		case 'GET_TASKS':
 			return {
 				...state,
 				tasks: action.payload.tasks
 			}
-		case 'GET_TASKS':
+		case 'GET_LIST_TASKS':
 			return {
 				...state,
 				tasks: action.payload.tasks
@@ -18,7 +18,7 @@ export const reducer = (state, action) => {
 		case 'CREATE_TASK':
 			return {
 				...state,
-				tasks: state.tasks.push(action.payload.task)
+				tasks: [...state.tasks, action.payload.task]
 			}
 		case 'UPDATE_TASK':
 			return {
@@ -36,7 +36,7 @@ export const reducer = (state, action) => {
 		case 'DELETE_TASK':
 			return {
 				...state,
-				tasks: state.filter(t => t.id !== action.payload.taskId)
+				tasks: state.tasks.filter(t => t.id !== action.payload.taskId)
 			}
 		default:
 			return state

@@ -1,27 +1,27 @@
-import React, {useContext, useEffect, useState} from "react";
-import {useRouteMatch} from "react-router-dom";
+import React, {useEffect, useState} from "react";
 
-import {useApi} from "../../hooks/api";
+import {useStore} from "../../hooks/store";
 
 import './Body.scss'
 
 import {TitleBody} from "./BodyTitile/BodyTitile";
 import {BodyContent} from "./BodyContent/BodyContent";
-
 import {PreloaderCircle} from "../PreloaderCircle/PreloaderCrcle";
 import {TaskDetails} from "./TaskDetails/TaskDetails";
 
+
 export const Body = ({match}) => {
+	const {state, actions} = useStore()
 	const [selectedTask, setSelectedTask] = useState(null)
-	const {data: {lists, tasks}, actions} = useApi()
-	const list = lists.find(i => i.id === match.params.listId)
+	const list = state.lists.find(i => i.id === match.params.listId)
 
 	useEffect(() => {
+		setSelectedTask(null)
 
 		if (match.params.listId) {
-			actions.getTasks(match.params.listId)
+			actions.getListTasks(match.params.listId)
 		} else {
-			actions.getLists()
+			actions.getTasks()
 		}
 	}, [actions, match.params.listId])
 
@@ -44,7 +44,7 @@ export const Body = ({match}) => {
 		setSelectedTask(task)
 	}
 
-	if (!list || !tasks) return <div className='preloader-wrap'><PreloaderCircle/></div>
+	if (!list || !state.tasks) return <div className='preloader-wrap'><PreloaderCircle/></div>
 
 	return (
 		<section className='body'>
@@ -56,7 +56,7 @@ export const Body = ({match}) => {
 				// onEditTitle={onEditTitle}
 			/>
 				<BodyContent
-					tasksTest={tasks}
+					tasks={state.tasks}
 					onSelect={handleSelect}
 					onSubmit={handleSubmit}
 					onUpdate={handleUpdate}

@@ -10,20 +10,20 @@ export const getLists = () => {
 		}))
 }
 
-export const getListTasks = () => {
+export const getTasks = () => {
 	return apiFirebase.getTasks()
 		.then(tasks => ({
-			type: 'GET_LIST_TASKS',
+			type: 'GET_TASKS',
 			payload: {
 				tasks
 			}
 		}))
 }
 
-export const getTasks = (listId) => {
-	return apiFirebase.getTasks(listId)
+export const getListTasks = (listId) => {
+	return apiFirebase.getListTasks(listId)
 		.then(tasks => ({
-			type: 'GET_TASKS',
+			type: 'GET_LIST_TASKS',
 			payload: {
 				tasks
 			}
@@ -59,15 +59,3 @@ export const deleteTask = (taskId) => {
 			}
 		}))
 }
-
-// {
-// 	setTasks([...tasks.map(t => {
-// 		return t.id !== taskId
-// 			? {...t, ...data}
-// 			: t
-// 	})])
-// }
-
-// {
-// 	setTasks([...tasks.filter(t => t.id !== taskId)])
-// }

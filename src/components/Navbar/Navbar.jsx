@@ -1,12 +1,10 @@
-import React, {useState, useContext, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 
 import './Navbar.scss'
 
 import {List} from "./List/List";
 import AddList from "./AddList/AddList";
-import {Preloader} from "../Preloader/Preloader";
 
-import {useApi} from "../../hooks/api";
 import {useStore} from "../../hooks/store";
 
 export const Navbar = ({
