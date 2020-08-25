@@ -6,7 +6,6 @@ import './List.scss'
 import removableIcon from '../../../assets/icons/removeIcon.svg'
 
 import {Badge} from "../../Badge/Badge";
-import {api} from "../../../api/api";
 import {NavLink} from "react-router-dom";
 
 export const List = ({
@@ -19,7 +18,6 @@ export const List = ({
 
 	let toggleVisible = ''
 	if (visible) toggleVisible += ' active-visible'
-
 
 	return (
 		<ul className='navbar__list list-navbar'
