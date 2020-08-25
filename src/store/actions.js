@@ -1,5 +1,26 @@
 import * as apiFirebase from "../api/apiFirebase";
 
+// auth
+export const logInUser = (email, password) => {
+	return apiFirebase.logInUser(email, password).then(() => ({}))
+}
+export const logOutUser = () => {
+	return apiFirebase.logOutUser().then(() => ({}))
+}
+export const setAuth = () => {
+	return dispatch => apiFirebase.setAuth(user => {
+		return user ? dispatch({
+			type: 'LOGIN_USER',
+			payload: {
+				user
+			}
+		}) : dispatch({
+			type: 'LOGOUT_USER'
+		});
+	})
+}
+
+// DB
 export const getLists = () => {
 	return apiFirebase.getLists()
 		.then(lists => ({

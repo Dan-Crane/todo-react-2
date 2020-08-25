@@ -1,10 +1,30 @@
 import {db, auth} from '../firebase'
 
 // auth
+export const logInUser = (email, password) => {
+	return auth.signInWithEmailAndPassword(email, password)
+		.catch(error => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+		});
+}
 
+export const logOutUser = () => {
+	return auth.signOut()
+}
+
+export const register = (email, password) => {
+	return auth.createUserWithEmailAndPassword(email, password)
+		.catch(error => {
+			var errorCode = error.code;
+			var errorMessage = error.message;
+		});
+}
+export const setAuth = (onAuth) => {
+	 return auth.onAuthStateChanged(onAuth)
+}
 
 // db
-
 export const getLists = () => {
 	return db.collection('lists')
 		.get()
@@ -67,7 +87,7 @@ export const createTask = (data) => {
 		});
 }
 
-export const updateTask = (taskId, data) =>{
+export const updateTask = (taskId, data) => {
 	return db.collection("tasks").doc(taskId).update(data)
 		.then(() => ({
 			id: taskId,
