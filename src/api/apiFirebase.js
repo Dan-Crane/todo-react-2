@@ -1,23 +1,9 @@
-import {db} from '../firebase'
+import {db, auth} from '../firebase'
 
-export const apiFirebase = (collectionName) => {
-	const collection = db.collection(collectionName)
+// auth
 
-	return (query = () => collection) => {
-		return query(collection)
-			.get()
-			.then(snapshot => {
-				const response = snapshot.docs.map(doc => ({
-					id: doc.id,
-					...doc.data()
-				}))
-				return response
-			})
-			.catch(error => {
-				console.log("Error getting documents: ", error);
-			});
-	}
-}
+
+// db
 
 export const getLists = () => {
 	return db.collection('lists')
@@ -49,6 +35,21 @@ export const getTasks = (listId) => {
 			console.log("Error getting documents: ", error);
 		});
 }
+export const getListTasks = () => {
+	return db.collection('tasks')
+		.where('listId', '==', '')
+		.get()
+		.then(snapshot => {
+			const response = snapshot.docs.map(doc => ({
+				id: doc.id,
+				...doc.data()
+			}))
+			return response
+		})
+		.catch(error => {
+			console.log("Error getting documents: ", error);
+		});
+}
 
 export const createTask = (data) => {
 	return db.collection("tasks").add({
@@ -66,12 +67,17 @@ export const createTask = (data) => {
 		});
 }
 
-export const updataTodo = (taskId, data) =>{
+export const updateTask = (taskId, data) =>{
 	return db.collection("tasks").doc(taskId).update(data)
+		.then(() => ({
+			id: taskId,
+			...data
+		}))
 }
 
 export const deleteTask = (taskId) => {
 	return db.collection("tasks").doc(taskId).delete()
+		.then(() => taskId)
 		.catch((error) => {
 			console.error("Error removing document: ", error);
 		});

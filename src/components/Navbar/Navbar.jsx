@@ -7,6 +7,7 @@ import AddList from "./AddList/AddList";
 import {Preloader} from "../Preloader/Preloader";
 
 import {useApi} from "../../hooks/api";
+import {useStore} from "../../hooks/store";
 
 export const Navbar = ({
 												 activeLocation, colors,
@@ -15,11 +16,11 @@ export const Navbar = ({
 											 }) => {
 
 	const [visible, setVisible] = useState(false)
-	const {data: {lists}, actions} = useApi()
+	const {state, actions} = useStore()
+
 
 	useEffect(() => {
-		//блок запроса
-		// actions.getLists()
+		actions.getLists()
 	}, [actions])
 
 	let navbarStyle = 'navbar'
@@ -48,7 +49,9 @@ export const Navbar = ({
 				}]
 			} visible={visible}/>
 
-			<List lists={lists} visible={visible}/>
+			<List lists={state.lists} visible={visible}/>
+
+			<AddList/>
 
 		</nav>
 	)

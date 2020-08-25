@@ -4,9 +4,13 @@ import {BrowserRouter as Router} from "react-router-dom";
 
 import App from "./components/App/App";
 
+import { Provider, initialState, reducer, actions } from "./store";
+
 ReactDOM.render(
-	<Router>
-		<App/>
-	</Router>,
+	<Provider initialState={initialState} reducer={reducer} actions={actions}>
+		<Router>
+			<App/>
+		</Router>
+	</Provider>,
 	document.getElementById('root')
 );

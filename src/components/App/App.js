@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {Redirect, Route, Switch, useHistory, useLocation} from "react-router-dom";
+import React from 'react';
+import {Redirect, Route, Switch} from "react-router-dom";
 
 import './App.scss'
 import '../../assets/style/styles.css'
@@ -7,9 +7,7 @@ import '../../assets/style/styles.css'
 import {Navbar} from "../Navbar/Navbar";
 import {Body} from "../Body/Body";
 
-
 const App = () => {
-
 	return (
 		<div className="todo">
 			<Navbar/>
@@ -42,7 +40,7 @@ const App = () => {
 								 component={Body}
 					/>
 					<Route exact
-								 path='/list/:listId?'
+								 path='/list/:listId/:taskId?'
 								 component={Body}
 					/>
 
@@ -52,7 +50,6 @@ const App = () => {
 				</Switch>
 			</div>
 		</div>
-
 	);
 }
 

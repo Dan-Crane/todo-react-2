@@ -14,21 +14,16 @@ import {TaskDetails} from "./TaskDetails/TaskDetails";
 export const Body = ({match}) => {
 	const [selectedTask, setSelectedTask] = useState(null)
 	const {data: {lists, tasks}, actions} = useApi()
-	// const list = lists.find(i => i.id === match.params.listId)
+	const list = lists.find(i => i.id === match.params.listId)
 
-	const list ={ "color": "blue",
-		"colorId": 3,
-		"name": "Книги",
-		"id": 1}
+	useEffect(() => {
 
-	// useEffect(() => {
-	//
-	// 	if (match.params.listId) {
-	// 		actions.getTasks(match.params.listId)
-	// 	} else {
-	// 		actions.getLists()
-	// 	}
-	// }, [actions, match.params.listId])
+		if (match.params.listId) {
+			actions.getTasks(match.params.listId)
+		} else {
+			actions.getLists()
+		}
+	}, [actions, match.params.listId])
 
 	const handleSubmit = (text) => {
 		actions.createTask({
@@ -42,7 +37,7 @@ export const Body = ({match}) => {
 	}
 
 	const handleUpdate = (taskId, data) => {
-		actions.updataTodo(taskId, data)
+		actions.updateTask(taskId, data)
 	}
 
 	const handleSelect = (task) => {
@@ -56,29 +51,29 @@ export const Body = ({match}) => {
 			<TitleBody
 				list={list}
 				// title={lists.name}
-				// 				 colorTitle={colorTitle}
-				// 				 id={lists.id}
-				// 				 onEditTitle={onEditTitle}
+				// colorTitle={colorTitle}
+				// id={lists.id}
+				// onEditTitle={onEditTitle}
 			/>
-			<BodyContent
-				tasksTest={tasks}
-				onSelect={handleSelect}
-				onSubmit={handleSubmit}
-				onUpdate={handleUpdate}
-				onDelete={handleDelete}
-				// 	idList={lists.id}
-				// 					lists={lists}
-				// 					onAddTask={onAddTask}
-				// 					tasks={lists.tasks}
-				// 					withoutEmpty={withoutEmpty}
-				// 					onRemoveTask={onRemoveTask}
-				// 					onEditTask={onEditTask}
-				// 					onChangeChecked={onChangeChecked}
-				// 					sendState={sendState}
-			/>
-			{selectedTask &&
-			<TaskDetails/>
-			}
+				<BodyContent
+					tasksTest={tasks}
+					onSelect={handleSelect}
+					onSubmit={handleSubmit}
+					onUpdate={handleUpdate}
+					onDelete={handleDelete}
+					// idList={lists.id}
+					// lists={lists}
+					// onAddTask={onAddTask}
+					// tasks={lists.tasks}
+					// withoutEmpty={withoutEmpty}
+					// onRemoveTask={onRemoveTask}
+					// onEditTask={onEditTask}
+					// onChangeChecked={onChangeChecked}
+					// sendState={sendState}
+				/>
+				{selectedTask &&
+				<TaskDetails/>
+				}
 		</section>
 	)
 }

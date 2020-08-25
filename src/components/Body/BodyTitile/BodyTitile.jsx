@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 
 import './BodyTitile.scss'
 
-import {DBContext} from "../../../context/db";
+import {DBContext} from "../../../context/store";
 
 import {api} from "../../../api/api";
 import {NavLink, useRouteMatch} from "react-router-dom";

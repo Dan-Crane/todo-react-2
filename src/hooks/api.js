@@ -1,26 +1,13 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useMemo} from 'react'
 import *as apiFirebase from '../api/apiFirebase'
 
 export const useApi = () => {
-	const [lists, setLists] = useState([	{
-		"color": "blue",
-		"colorId": 3,
-		"name": "Книги",
-		"id": 1
-	}])
-	const [tasks, setTasks] = useState([    {
-		"listId": 1,
-		"text": "тест",
-		"completed": false,
-		"id": 1
-	}])
+	const [lists, setLists] = useState([])
+	const [tasks, setTasks] = useState([])
 
 	useEffect(() => {
-		// apiFirebase.getLists().then(setLists)
-
+		apiFirebase.getLists().then(setLists)
 	}, [])
-
-
 
 	const getLists = () => {
 		return apiFirebase.getLists()
@@ -39,8 +26,8 @@ export const useApi = () => {
 			})
 	}
 
-	const updataTodo = (taskId, data) => {
-		return apiFirebase.updataTodo(taskId, data)
+	const updateTask = (taskId, data) => {
+		return apiFirebase.updateTask(taskId, data)
 			.then(data => {
 				setTasks([...tasks.map(t => {
 					return t.id !== taskId
@@ -57,17 +44,19 @@ export const useApi = () => {
 			})
 	}
 
+	const actions = useMemo(() => ({
+		getLists,
+		getTasks,
+		createTask,
+		updateTask,
+		deleteTask
+	}), [])
+
 	return {
 		data: {
 			lists,
 			tasks
 		},
-		actions: {
-			getLists,
-			getTasks,
-			createTask,
-			updataTodo,
-			deleteTask
-		},
+		actions
 	}
 }

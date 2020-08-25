@@ -19,10 +19,8 @@ export const BodyContent = ({tasksTest, onSubmit, onDelete, onUpdate, onSelect})
 			{/*																	 onChangeChecked={onChangeChecked}*/}
 			{/*																	 sendState={sendState}/>)}*/}
 			{tasksTest.map(t => {
-				// console.log(t)
 				return (<TaskItem
-					{...t}
-					taskId={t.id}
+					task={t}
 					key={t.id}
 					onSelect={onSelect}
 					onUpdate={onUpdate}
