@@ -25,8 +25,9 @@ export const setAuth = (onAuth) => {
 }
 
 // db
-export const getLists = () => {
+export const getLists = (userId) => {
 	return db.collection('lists')
+		.where("userId", "==", userId)
 		.get()
 		.then(snapshot => {
 			const response = snapshot.docs.map(doc => ({
@@ -55,9 +56,10 @@ export const getListTasks = (listId) => {
 			console.log("Error getting documents: ", error);
 		});
 }
-export const getTasks = () => {
+export const getTasks = (userId) => {
 	return db.collection('tasks')
 		.where('listId', '==', '')
+		.where("userId", "==", userId)
 		.get()
 		.then(snapshot => {
 			const response = snapshot.docs.map(doc => ({
@@ -71,10 +73,13 @@ export const getTasks = () => {
 		});
 }
 
-export const createTask = (data) => {
+export const createTask = (data, listId = '') => {
 	return db.collection("tasks").add({
 		...data,
 		completed: false,
+		notes: '',
+		dueDate: null,
+		steps: []
 	})
 		.then(docRef => docRef.get())
 		.then(task => ({

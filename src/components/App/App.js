@@ -15,7 +15,7 @@ const App = () => {
 
 	useEffect(() => {
 		actions.setAuth()
-	}, [])
+	}, [actions])
 
 	if (!state.user) {
 		return (

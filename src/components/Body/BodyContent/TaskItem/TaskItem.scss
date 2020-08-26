@@ -147,6 +147,35 @@
 
   }
 
+  &__important{
+    display: inline-flex;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    @media all and (max-width: 768px) {
+      &:before {
+        padding-right: 4px;
+      }
+    }
+    @media all and (min-width: 768px) {
+      &:hover {
+        color: darken(#4DD599, 20);
+      }
+    }
+
+    &:active {
+      color: #4DD599;
+    }
+    &.active {
+      color: darken(#4DD599, 20);
+      @media all and (min-width: 768px) {
+        &:hover {
+          color: darken(#4DD599, 40);
+        }
+      }
+    }
+  }
+
   &__delete {
     display: inline-flex;
     font-size: 20px;
@@ -154,7 +183,7 @@
     transition: color 0.15s ease-in-out;
     @media all and (max-width: 768px) {
       &:before {
-        padding: 4px;
+        //padding-right: 4px;
       }
     }
     @media all and (min-width: 768px) {
@@ -177,7 +206,7 @@
     transition: color 0.15s ease-in-out;
     @media all and (max-width: 768px) {
       &:before {
-        padding: 4px;
+        //padding-right: 4px;
       }
     }
     @media all and (min-width: 768px) {

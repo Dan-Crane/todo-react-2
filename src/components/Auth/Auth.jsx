@@ -26,6 +26,10 @@ export const Auth = () => {
 				<button onClick={(e) => {
 					e.preventDefault()
 					actions.logInUser(email, password)} }>Войти</button>
+				<button onClick={(e) => {
+					e.preventDefault()
+					actions.register(email, password)
+				}}>Зарегистрироваться</button>
 			</form>
 		</div>
 	)

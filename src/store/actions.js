@@ -7,6 +7,9 @@ export const logInUser = (email, password) => {
 export const logOutUser = () => {
 	return apiFirebase.logOutUser().then(() => ({}))
 }
+export const register = (email, password) => {
+	return apiFirebase.register(email, password).then(() => ({}))
+}
 export const setAuth = () => {
 	return dispatch => apiFirebase.setAuth(user => {
 		return user ? dispatch({
@@ -21,8 +24,8 @@ export const setAuth = () => {
 }
 
 // DB
-export const getLists = () => {
-	return apiFirebase.getLists()
+export const getLists = (userId) => {
+	return apiFirebase.getLists(userId)
 		.then(lists => ({
 			type: 'GET_LISTS',
 			payload: {
@@ -31,8 +34,8 @@ export const getLists = () => {
 		}))
 }
 
-export const getTasks = () => {
-	return apiFirebase.getTasks()
+export const getTasks = (userId) => {
+	return apiFirebase.getTasks(userId)
 		.then(tasks => ({
 			type: 'GET_TASKS',
 			payload: {

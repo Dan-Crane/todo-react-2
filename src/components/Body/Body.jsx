@@ -13,22 +13,23 @@ import {TaskDetails} from "./TaskDetails/TaskDetails";
 export const Body = ({match}) => {
 	const {state, actions} = useStore()
 	const [selectedTask, setSelectedTask] = useState(null)
-	const list = state.lists.find(i => i.id === match.params.listId)
+	const list = state.lists.find(i => i.id === match.params.listId) || { name: 'Задачи'}
 
 	useEffect(() => {
 		setSelectedTask(null)
-
+console.log(state.user.uid)
 		if (match.params.listId) {
 			actions.getListTasks(match.params.listId)
 		} else {
-			actions.getTasks()
+			actions.getTasks(state.user.uid)
 		}
 	}, [actions, match.params.listId])
 
 	const handleSubmit = (text) => {
 		actions.createTask({
 			text,
-			listId: list.id
+			userId: state.user.uid,
+			listId: list.id || ''
 		})
 	}
 
