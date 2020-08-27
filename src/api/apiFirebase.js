@@ -29,13 +29,7 @@ export const getLists = (userId) => {
 	return db.collection('lists')
 		.where("userId", "==", userId)
 		.get()
-		.then(snapshot => {
-			const response = snapshot.docs.map(doc => ({
-				id: doc.id,
-				...doc.data()
-			}))
-			return response
-		})
+		.then(mapSnapshot)
 		.catch(error => {
 			console.log("Error getting documents: ", error);
 		});
@@ -45,47 +39,59 @@ export const getListTasks = (listId) => {
 	return db.collection('tasks')
 		.where('listId', '==', listId)
 		.get()
-		.then(snapshot => {
-			const response = snapshot.docs.map(doc => ({
-				id: doc.id,
-				...doc.data()
-			}))
-			return response
-		})
-		.catch(error => {
-			console.log("Error getting documents: ", error);
-		});
-}
-export const getTasks = (userId) => {
-	return db.collection('tasks')
-		.where('listId', '==', '')
-		.where("userId", "==", userId)
-		.get()
-		.then(snapshot => {
-			const response = snapshot.docs.map(doc => ({
-				id: doc.id,
-				...doc.data()
-			}))
-			return response
-		})
+		.then(mapSnapshot)
 		.catch(error => {
 			console.log("Error getting documents: ", error);
 		});
 }
 
+export const getImportantTasks = (userId) => {
+	return db.collection('tasks')
+		// .where('listId', '==', '')
+		.where("userId", "==", userId)
+		.where('important', '==', true  )
+		.get()
+		.then(mapSnapshot)
+		.catch(error => {
+			console.log("Error getting documents: ", error);
+		});
+}
+
+export const getPlannedTasks = (userId) => {
+	return db.collection('tasks')
+		.where('listId', '==', '')
+		.where("userId", "==", userId)
+		.where('dueDate', '==', !null)
+		.get()
+		.then(mapSnapshot)
+		.catch(error => {
+			console.log("Error getting documents: ", error);
+		});
+}
+
+export const getTasks = (userId) => {
+	return db.collection('tasks')
+		.where('listId', '==', '')
+		.where("userId", "==", userId)
+		.get()
+		.then(mapSnapshot)
+		.catch(error => {
+			console.log("Error getting documents: ", error);
+		});
+}
+
+
 export const createTask = (data, listId = '') => {
 	return db.collection("tasks").add({
 		...data,
+		important: false,
 		completed: false,
 		notes: '',
 		dueDate: null,
 		steps: []
 	})
 		.then(docRef => docRef.get())
-		.then(task => ({
-			id: task.id,
-			...task.data()
-		}))
+		.then(mapDoc)
 
 		.catch(function (error) {
 			console.error("Error adding document: ", error);
@@ -106,4 +112,16 @@ export const deleteTask = (taskId) => {
 		.catch((error) => {
 			console.error("Error removing document: ", error);
 		});
+}
+
+// убрать дублированный код
+const mapSnapshot = (snapshot) => {
+	return snapshot.docs.map(mapDoc)
+}
+
+const mapDoc = (doc) => {
+	return {
+		id: doc.id,
+		...doc.data()
+	}
 }

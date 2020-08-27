@@ -41,6 +41,13 @@
       color: darken(red, 20);
     }
   }
+
+  &__title{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 6px;
+  }
 }
 
 @keyframes show {

@@ -13,17 +13,20 @@ import {TaskDetails} from "./TaskDetails/TaskDetails";
 export const Body = ({match}) => {
 	const {state, actions} = useStore()
 	const [selectedTask, setSelectedTask] = useState(null)
-	const list = state.lists.find(i => i.id === match.params.listId) || { name: 'Задачи'}
+	const list = state.lists.find(i => i.id === match.params.listId) || {name: 'Задачи'}
 
 	useEffect(() => {
 		setSelectedTask(null)
-console.log(state.user.uid)
 		if (match.params.listId) {
 			actions.getListTasks(match.params.listId)
-		} else {
+		} else if (match.url === '/important') {
+			actions.getImportantTasks(state.user.uid)
+		} else if (match.url === '/planned') {
+			actions.getPlannedTasks(state.user.uid)
+		} else if (match.url === '/') {
 			actions.getTasks(state.user.uid)
 		}
-	}, [actions, match.params.listId])
+	}, [actions, match.url])
 
 	const handleSubmit = (text) => {
 		actions.createTask({
@@ -56,25 +59,26 @@ console.log(state.user.uid)
 				// id={lists.id}
 				// onEditTitle={onEditTitle}
 			/>
-				<BodyContent
-					tasks={state.tasks}
-					onSelect={handleSelect}
-					onSubmit={handleSubmit}
-					onUpdate={handleUpdate}
-					onDelete={handleDelete}
-					// idList={lists.id}
-					// lists={lists}
-					// onAddTask={onAddTask}
-					// tasks={lists.tasks}
-					// withoutEmpty={withoutEmpty}
-					// onRemoveTask={onRemoveTask}
-					// onEditTask={onEditTask}
-					// onChangeChecked={onChangeChecked}
-					// sendState={sendState}
-				/>
-				{selectedTask &&
-				<TaskDetails/>
-				}
+			<BodyContent
+				tasks={state.tasks}
+				onSelect={handleSelect}
+				onSubmit={handleSubmit}
+				onUpdate={handleUpdate}
+				onDelete={handleDelete}
+				// idList={lists.id}
+				// lists={lists}
+				// onAddTask={onAddTask}
+				// tasks={lists.tasks}
+				// withoutEmpty={withoutEmpty}
+				// onRemoveTask={onRemoveTask}
+				// onEditTask={onEditTask}
+				// onChangeChecked={onChangeChecked}
+				// sendState={sendState}
+			/>
+			{selectedTask &&
+			<TaskDetails task={selectedTask}
+									 onClose={handleSelect}/>
+			}
 		</section>
 	)
 }

@@ -9,7 +9,6 @@ export const TaskItem = ({
 //new props
 													 task, onDelete, onUpdate, onSelect
 												 }) => {
-
 	const [editMode, setEditMode] = useState(false)
 	const [valueItem, setValueItem] = useState(task.text)
 	const {visible, setVisible, ref} = useOutsideAlerter(false)
