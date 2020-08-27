@@ -76,8 +76,8 @@ export const Body = ({match}) => {
 				// sendState={sendState}
 			/>
 			{selectedTask &&
-			<TaskDetails task={selectedTask}
-									 onClose={handleSelect}/>
+					<TaskDetails task={selectedTask}
+											 onClose={handleSelect}/>
 			}
 		</section>
 	)

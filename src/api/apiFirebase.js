@@ -61,7 +61,7 @@ export const getPlannedTasks = (userId) => {
 	return db.collection('tasks')
 		.where('listId', '==', '')
 		.where("userId", "==", userId)
-		.where('dueDate', '==', !null)
+		.where('dueDate', '>=', Date.now())
 		.get()
 		.then(mapSnapshot)
 		.catch(error => {

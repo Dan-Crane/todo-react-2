@@ -13,7 +13,9 @@ export const TaskDetails = ({task, onClose}) => {
 						 text={task.text}/>
 			<abbr className='task-details__close'
 						data-icon="g"
+						tabindex='0'
 						onClick={() => onClose(null)}/>
+			{task.dueDate.seconds}
 		</div>
 	)
 }
