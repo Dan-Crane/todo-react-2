@@ -45,33 +45,32 @@ export const getListTasks = (listId) => {
 		});
 }
 
-export const getImportantTasks = (userId) => {
-	return db.collection('tasks')
-		// .where('listId', '==', '')
-		.where("userId", "==", userId)
-		.where('important', '==', true  )
-		.get()
-		.then(mapSnapshot)
-		.catch(error => {
-			console.log("Error getting documents: ", error);
-		});
-}
-
-export const getPlannedTasks = (userId) => {
-	return db.collection('tasks')
-		.where('listId', '==', '')
-		.where("userId", "==", userId)
-		.where('dueDate', '>=', Date.now())
-		.get()
-		.then(mapSnapshot)
-		.catch(error => {
-			console.log("Error getting documents: ", error);
-		});
-}
+// export const getImportantTasks = (userId) => {
+// 	return db.collection('tasks')
+// 		// .where('listId', '==', '')
+// 		.where("userId", "==", userId)
+// 		.where('important', '==', true  )
+// 		.get()
+// 		.then(mapSnapshot)
+// 		.catch(error => {
+// 			console.log("Error getting documents: ", error);
+// 		});
+// }
+//
+// export const getPlannedTasks = (userId) => {
+// 	return db.collection('tasks')
+// 		.where('listId', '==', '')
+// 		.where("userId", "==", userId)
+// 		.where('dueDate', '>=', Date.now())
+// 		.get()
+// 		.then(mapSnapshot)
+// 		.catch(error => {
+// 			console.log("Error getting documents: ", error);
+// 		});
+// }
 
 export const getTasks = (userId) => {
 	return db.collection('tasks')
-		.where('listId', '==', '')
 		.where("userId", "==", userId)
 		.get()
 		.then(mapSnapshot)

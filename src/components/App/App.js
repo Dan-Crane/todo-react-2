@@ -17,6 +17,13 @@ const App = () => {
 		actions.setAuth()
 	}, [actions])
 
+	useEffect(() => {
+		if (state.user) {
+			actions.getLists(state.user.uid)
+			actions.getTasks(state.user.uid)
+		}
+	}, [actions, state.user])
+
 	if (!state.user) {
 		return (
 			<>

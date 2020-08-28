@@ -2,13 +2,12 @@ import React, {useState} from "react";
 
 import './Input.scss'
 
-export const Input = ({placeholder, text}) => {
+export const Input = ({placeholder, text, type}) => {
 	const [input, setInput] = useState(text)
-
 	return (
 		<div className='input-wrap'>
 			<label htmlFor="inp" className="inp">
-				<input type="text"
+				<input type={type}
 							 id='inp'
 							 placeholder='&nbsp;'
 							 value={input}

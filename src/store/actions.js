@@ -44,25 +44,25 @@ export const getTasks = (userId) => {
 		}))
 }
 
-export const getImportantTasks = (userId) => {
-	return apiFirebase.getImportantTasks(userId)
-		.then(tasks => ({
-			type: 'GET_LIST_TASKS',
-			payload: {
-				tasks
-			}
-		}))
-}
-
-export const getPlannedTasks = (userId) => {
-	return apiFirebase.getPlannedTasks(userId)
-		.then(tasks => ({
-			type: 'GET_LIST_TASKS',
-			payload: {
-				tasks
-			}
-		}))
-}
+// export const getImportantTasks = (userId) => {
+// 	return apiFirebase.getImportantTasks(userId)
+// 		.then(tasks => ({
+// 			type: 'GET_LIST_TASKS',
+// 			payload: {
+// 				tasks
+// 			}
+// 		}))
+// }
+//
+// export const getPlannedTasks = (userId) => {
+// 	return apiFirebase.getPlannedTasks(userId)
+// 		.then(tasks => ({
+// 			type: 'GET_LIST_TASKS',
+// 			payload: {
+// 				tasks
+// 			}
+// 		}))
+// }
 
 export const getListTasks = (listId) => {
 	return apiFirebase.getListTasks(listId)

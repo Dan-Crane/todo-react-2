@@ -14,19 +14,32 @@ export const Body = ({match}) => {
 	const {state, actions} = useStore()
 	const [selectedTask, setSelectedTask] = useState(null)
 	const list = state.lists.find(i => i.id === match.params.listId) || {name: 'Задачи'}
+	const path = match.path
 
-	useEffect(() => {
-		setSelectedTask(null)
-		if (match.params.listId) {
-			actions.getListTasks(match.params.listId)
-		} else if (match.url === '/important') {
-			actions.getImportantTasks(state.user.uid)
-		} else if (match.url === '/planned') {
-			actions.getPlannedTasks(state.user.uid)
-		} else if (match.url === '/') {
-			actions.getTasks(state.user.uid)
-		}
-	}, [actions, match.url])
+	const getTaskByFilter = ({
+		'/': tasks => tasks,
+		'/important': tasks => tasks.filter(task => task.important),
+		'/planned': tasks => tasks.filter(task=> task.dueDate)
+	})
+
+	const getTaskByList = (tasks, listId) => tasks.filter(task => task.listId === listId)
+
+	console.log(match.params.listId)
+
+	const tasks = match.params.listId ? getTaskByList(state.tasks, match.params.listId) : getTaskByFilter[path](state.tasks)
+
+	// useEffect(() => {
+	// 	setSelectedTask(null)
+	// 	if (match.params.listId) {
+	// 		actions.getListTasks(match.params.listId)
+	// 	} else if (match.url === '/important') {
+	// 		actions.getImportantTasks(state.user.uid)
+	// 	} else if (match.url === '/planned') {
+	// 		actions.getPlannedTasks(state.user.uid)
+	// 	} else if (match.url === '/') {
+	// 		actions.getTasks(state.user.uid)
+	// 	}
+	// }, [actions, match.url])
 
 	const handleSubmit = (text) => {
 		actions.createTask({
@@ -48,7 +61,7 @@ export const Body = ({match}) => {
 		setSelectedTask(task)
 	}
 
-	if (!list || !state.tasks) return <div className='preloader-wrap'><PreloaderCircle/></div>
+	if (!list || !tasks) return <div className='preloader-wrap'><PreloaderCircle/></div>
 
 	return (
 		<section className='body'>
@@ -60,7 +73,7 @@ export const Body = ({match}) => {
 				// onEditTitle={onEditTitle}
 			/>
 			<BodyContent
-				tasks={state.tasks}
+				tasks={tasks}
 				onSelect={handleSelect}
 				onSubmit={handleSubmit}
 				onUpdate={handleUpdate}

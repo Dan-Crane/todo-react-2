@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 
 import './Navbar.scss'
 
@@ -16,10 +16,6 @@ export const Navbar = ({
 	const [visible, setVisible] = useState(false)
 	const {state, actions} = useStore()
 
-
-	useEffect(() => {
-		actions.getLists(state.user.uid)
-	}, [actions, state.user])
 
 	let navbarStyle = 'navbar'
 	if (visible) navbarStyle += ' show'
@@ -42,15 +38,15 @@ export const Navbar = ({
 
 			<List lists={
 				[{
-					icon: <abbr data-icon="n"></abbr>,
+					icon: <abbr data-icon="n"/>,
 					name: 'Задачи',
 					to: '/'
 				}, {
-					icon: <abbr data-icon="z"></abbr>,
+					icon: <abbr data-icon="z"/>,
 					name: 'Важные',
 					to: '/important'
 				}, {
-					icon: <abbr data-icon="j"></abbr>,
+					icon: <abbr data-icon="j"/>,
 					name: 'Запланированные',
 					to: '/planned'
 				}]
