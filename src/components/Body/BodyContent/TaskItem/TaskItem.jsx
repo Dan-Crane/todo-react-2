@@ -1,25 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 
 import './TaskItem.scss'
 
-import {useOutsideAlerter} from "../../../../hooks/OutsideAlerter";
+export const TaskItem = ({task, onDelete, onUpdate, onSelect}) => {
 
-export const TaskItem = ({
-													 onRemoveTask, idList, onEditTask, onChangeChecked, sendState,
-//new props
-													 task, onDelete, onUpdate, onSelect
-												 }) => {
-	const [editMode, setEditMode] = useState(false)
-	const [valueItem, setValueItem] = useState(task.text)
-	const {visible, setVisible, ref} = useOutsideAlerter(false)
-
-	let btnShowStyle = ''
-	if (visible) btnShowStyle += ' active'
-	if (!visible) btnShowStyle += ' disable'
-
-	const itemChangeValue = (e) => {
-		setValueItem(e.target.value)
-	}
 	const onSubmitForm = e => {
 		e.preventDefault()
 	}
@@ -59,13 +43,7 @@ export const TaskItem = ({
 			</div>
 			<form className='body-content__form'
 						onSubmit={onSubmitForm}>
-				{!editMode
-					? <span className='body-content__text'>{task.text}</span>
-					: <input className='body-content__input'
-									 value={valueItem}
-									 onChange={itemChangeValue}
-									 autoFocus={true}/>
-				}
+				<span className='body-content__text'>{task.text}</span>
 
 				<div className='body-content__wrap-btn wrap-btn'>
 					<abbr data-icon={task.important ? 'z' : 'y'}

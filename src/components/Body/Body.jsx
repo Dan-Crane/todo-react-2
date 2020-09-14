@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
 import {useStore} from "../../hooks/store";
 
@@ -14,6 +14,10 @@ export const Body = ({match}) => {
 	const {state, actions} = useStore()
 	const [selectedTask, setSelectedTask] = useState(null)
 	const list = state.lists.find(i => i.id === match.params.listId) || {name: 'Задачи'}
+
+	console.log(state);
+
+	// логика фильтра
 	const path = match.path
 
 	const getTaskByFilter = ({
@@ -22,24 +26,14 @@ export const Body = ({match}) => {
 		'/planned': tasks => tasks.filter(task=> task.dueDate)
 	})
 
+
 	const getTaskByList = (tasks, listId) => tasks.filter(task => task.listId === listId)
 
-	console.log(match.params.listId)
-
 	const tasks = match.params.listId ? getTaskByList(state.tasks, match.params.listId) : getTaskByFilter[path](state.tasks)
-
-	// useEffect(() => {
-	// 	setSelectedTask(null)
-	// 	if (match.params.listId) {
-	// 		actions.getListTasks(match.params.listId)
-	// 	} else if (match.url === '/important') {
-	// 		actions.getImportantTasks(state.user.uid)
-	// 	} else if (match.url === '/planned') {
-	// 		actions.getPlannedTasks(state.user.uid)
-	// 	} else if (match.url === '/') {
-	// 		actions.getTasks(state.user.uid)
-	// 	}
-	// }, [actions, match.url])
+	// const test = tasks.slice()
+	// const test2 = [...tasks]
+	// console.log(test);
+	// console.log(test2);
 
 	const handleSubmit = (text) => {
 		actions.createTask({
@@ -67,10 +61,6 @@ export const Body = ({match}) => {
 		<section className='body'>
 			<TitleBody
 				list={list}
-				// title={lists.name}
-				// colorTitle={colorTitle}
-				// id={lists.id}
-				// onEditTitle={onEditTitle}
 			/>
 			<BodyContent
 				tasks={tasks}
@@ -78,15 +68,6 @@ export const Body = ({match}) => {
 				onSubmit={handleSubmit}
 				onUpdate={handleUpdate}
 				onDelete={handleDelete}
-				// idList={lists.id}
-				// lists={lists}
-				// onAddTask={onAddTask}
-				// tasks={lists.tasks}
-				// withoutEmpty={withoutEmpty}
-				// onRemoveTask={onRemoveTask}
-				// onEditTask={onEditTask}
-				// onChangeChecked={onChangeChecked}
-				// sendState={sendState}
 			/>
 			{selectedTask &&
 					<TaskDetails task={selectedTask}

@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React from "react";
 
 import './BodyTitile.scss'
 import {NavLink} from "react-router-dom";
@@ -13,10 +13,6 @@ export const TitleBody = ({list, colorTitle}) => {
 				</h2>
 			</NavLink>
 			<abbr data-icon="c" className='title-wrap__icon'/>
-			{/*<img className='title-wrap__icon'*/}
-			{/*		 src={changeSvg}*/}
-			{/*		 alt="change list"*/}
-			{/*		 onClick={editTitle}/>*/}
 		</div>
 
 	)

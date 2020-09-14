@@ -19,6 +19,7 @@ const App = () => {
 
 	useEffect(() => {
 		if (state.user) {
+			actions.getColors()
 			actions.getLists(state.user.uid)
 			actions.getTasks(state.user.uid)
 		}

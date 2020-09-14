@@ -25,6 +25,15 @@ export const setAuth = (onAuth) => {
 }
 
 // db
+export const getColors = () => {
+	return db.collection('colors')
+		.get()
+		.then(mapSnapshot)
+		.catch(error => {
+			console.log("Error getting documents: ", error);
+		});
+}
+
 export const getLists = (userId) => {
 	return db.collection('lists')
 		.where("userId", "==", userId)

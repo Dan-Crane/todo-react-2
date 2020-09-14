@@ -10,10 +10,19 @@ export const reducer = (state, action) => {
 				...state,
 				user: null
 			}
+		case 'GET_COLORS':
+			return {
+				...state,
+				colors: action.payload.colors
+			}
 		case 'GET_LISTS':
 			return {
 				...state,
-				lists: action.payload.lists
+				lists: action.payload.lists.map(l => ({
+					...l,
+					color: state.colors.find(c => c.id === l.colorId)
+				}))
+
 			}
 		case 'GET_TASKS':
 			return {

@@ -24,6 +24,17 @@ export const setAuth = () => {
 }
 
 // DB
+
+
+export const getColors = () => {
+	return apiFirebase.getColors()
+		.then(colors => ({
+			type: 'GET_COLORS',
+			payload: {
+				colors
+			}
+		}))
+}
 export const getLists = (userId) => {
 	return apiFirebase.getLists(userId)
 		.then(lists => ({
