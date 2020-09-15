@@ -20,6 +20,10 @@ export const Navbar = ({
 	let navbarStyle = 'navbar'
 	if (visible) navbarStyle += ' show'
 
+	const handleDelete = (listId) => {
+		actions.deleteList(listId)
+	}
+
 	return (
 		<nav className={navbarStyle}>
 			<abbr className={`navbar__tog-show `}
@@ -40,7 +44,7 @@ export const Navbar = ({
 				[{
 					icon: <abbr data-icon="n"/>,
 					name: 'Задачи',
-					to: '/'
+					to: '/',
 				}, {
 					icon: <abbr data-icon="z"/>,
 					name: 'Важные',
@@ -50,9 +54,13 @@ export const Navbar = ({
 					name: 'Запланированные',
 					to: '/planned'
 				}]
-			} visible={visible}/>
+			}
+						visible={visible}/>
 
-			<List lists={state.lists} visible={visible}/>
+			<List lists={state.lists}
+						visible={visible}
+						onDelete={handleDelete}
+						isRemovable/>
 
 			<AddList/>
 

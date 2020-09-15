@@ -21,10 +21,10 @@ export const api = {
 			.then(res => res.data)
 	},
 
-	deleteList(id) {
-		return instanceApi.delete('lists/' + id)
-			.then(res => res.data)
-	},
+	// deleteList(id) {
+	// 	return instanceApi.delete('lists/' + id)
+	// 		.then(res => res.data)
+	// },
 
 	changeTitle(id, title) {
 		return instanceApi.patch('lists/' + id, {name: title})

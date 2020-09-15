@@ -22,7 +22,11 @@ export const reducer = (state, action) => {
 					...l,
 					color: state.colors.find(c => c.id === l.colorId)
 				}))
-
+			}
+		case 'DELETE_LIST':
+			return {
+				...state,
+				lists: state.lists.filter(l => l.id !== action.payload.listId)
 			}
 		case 'GET_TASKS':
 			return {

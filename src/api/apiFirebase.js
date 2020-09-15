@@ -21,7 +21,7 @@ export const register = (email, password) => {
 		});
 }
 export const setAuth = (onAuth) => {
-	 return auth.onAuthStateChanged(onAuth)
+	return auth.onAuthStateChanged(onAuth)
 }
 
 // db
@@ -42,6 +42,11 @@ export const getLists = (userId) => {
 		.catch(error => {
 			console.log("Error getting documents: ", error);
 		});
+}
+
+export const deleteList = (listId) => {
+	return db.collection('lists').doc(listId).delete()
+		.then(() => listId)
 }
 
 export const getListTasks = (listId) => {

@@ -24,8 +24,6 @@ export const setAuth = () => {
 }
 
 // DB
-
-
 export const getColors = () => {
 	return apiFirebase.getColors()
 		.then(colors => ({
@@ -41,6 +39,16 @@ export const getLists = (userId) => {
 			type: 'GET_LISTS',
 			payload: {
 				lists
+			}
+		}))
+}
+
+export const deleteList = (listId) => {
+	return apiFirebase.deleteList(listId)
+		.then(listId => ({
+			type: 'DELETE_LIST',
+			payload: {
+				listId
 			}
 		}))
 }

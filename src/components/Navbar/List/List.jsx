@@ -3,17 +3,17 @@ import classNames from 'classnames'
 
 import './List.scss'
 
-import removableIcon from '../../../assets/icons/removeIcon.svg'
-
 import {Badge} from "../../Badge/Badge";
 import {NavLink} from "react-router-dom";
 
 export const List = ({
 											 lists, isRemovable,
 											 onActiveList, activeList, onClick,
-											 visible
-										 }) => {
+											 visible,
 
+	//new props
+	onDelete
+										 }) => {
 
 
 	let toggleVisible = ''
@@ -25,10 +25,12 @@ export const List = ({
 			{lists && lists.map((i, index) => {
 				return (
 					<NavLink key={index}
-									 to={i.to || `/list/${i.id}`}>
+									 to={i.added ? 'null' : i.to || `/list/${i.id}`}>
 
 						<li
-							className={classNames(i.className, {active: i.active ? i.active : activeList && activeList.id === i.id}, toggleVisible)}
+							className={classNames(i.className, {active: i.active
+									? i.active
+									: activeList && activeList.id === i.id}, toggleVisible)}
 							onClick={onActiveList ? () => onActiveList(i) : null}
 						>
 							<i className={toggleVisible}>
@@ -39,11 +41,9 @@ export const List = ({
 							{/*<div className={`list-navbar__count ${toggleVisible}`}>*/}
 							{/*	{i.tasks && `(${i.tasks.length})`}*/}
 							{/*</div>*/}
-							{isRemovable && <img src={removableIcon}
-																	 className={`list-navbar__btn-remove ${toggleVisible}`}
-																	 onClick={() => {
-																	 }}
-																	 alt="remove"/>}
+							{isRemovable && <abbr data-icon="i"
+																		className={`list-navbar__btn-remove ${toggleVisible}`}
+																		onClick={() => onDelete(i.id)}/>}
 						</li>
 					</NavLink>
 				)
