@@ -16,7 +16,6 @@ export const BodyContent = ({tasks, onSubmit, onDelete, onUpdate, onSelect}) => 
 					onUpdate={onUpdate}
 					onDelete={onDelete}/>)
 			})}
-
 			<AddTaskItem onSubmit={onSubmit}/>
 		</div>
 	)

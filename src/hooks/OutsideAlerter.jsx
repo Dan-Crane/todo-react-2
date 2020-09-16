@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 
 export const useOutsideAlerter = initialValue => {
 	const ref = useRef(null);
@@ -24,5 +24,5 @@ export const useOutsideAlerter = initialValue => {
 		};
 	}, [ref]);
 
-	return { visible, setVisible, ref };
+	return {visible, setVisible, ref};
 };

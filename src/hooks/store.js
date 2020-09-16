@@ -1,9 +1,9 @@
-import { useContext } from 'react'
+import {useContext} from 'react'
 
-import { StoreContext } from '../context/store'
+import {StoreContext} from '../context/store'
 
 export const useStore = () => {
-	const { state, actions } = useContext(StoreContext)
+	const {state, actions} = useContext(StoreContext)
 
 	return {
 		state,

@@ -34,10 +34,14 @@
 
 .auth-nav {
   padding: 10px 12px;
-  @media all and (max-width: 768px){
-padding: 6px;
+  @media all and (max-width: 768px) {
+    transition: all 0.15s ease-in-out;
+    padding: 6px;
+    opacity: 0;
   }
-
+&.show{
+  opacity: 1;
+}
   &__title {
     font-family: Montserrat;
     letter-spacing: -0.5px;
@@ -47,22 +51,19 @@ padding: 6px;
     opacity: 1;
     transition: all 0.15s ease-in-out;
     white-space: nowrap;
-    @media all and (max-width: 768px){
+    @media all and (max-width: 768px) {
       font-size: 18px;
       line-height: 18px;
     }
-  }
-  .hidden{
-    opacity: 0;
   }
 
   &__wrap {
     display: flex;
     align-items: center;
     opacity: .4;
-    @media all and (min-width: 768px){
+    @media all and (min-width: 768px) {
       transition: opacity 0.15s ease-in-out;
-      &:hover{
+      &:hover {
         opacity: .6;
       }
     }
@@ -74,7 +75,7 @@ padding: 6px;
     flex: 1 1 auto;
     cursor: default;
     opacity: 1;
-    @media all and (max-width: 768px){
+    @media all and (max-width: 768px) {
       font-size: 12px;
       line-height: 14px;
       max-width: 100px;
@@ -89,12 +90,13 @@ padding: 6px;
     font-size: 20px;
     cursor: pointer;
     transition: color, opacity 0.15s ease-in-out;
-    @media all and (min-width: 768px){
-      &:hover{
+    @media all and (min-width: 768px) {
+      &:hover {
         color: tomato;
       }
     }
-    &:active{
+
+    &:active {
       color: darken(tomato, 20);
     }
   }

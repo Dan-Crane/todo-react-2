@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 
+import {useWindowSize} from "../../hooks/windowSize";
+
 import './Navbar.scss'
 
 import {List} from "./List/List";
@@ -13,30 +15,33 @@ export const Navbar = ({
 												 activeList, onAllActiveList
 											 }) => {
 
-	const [visible, setVisible] = useState(false)
+	const [mobileScreen, setMobileScreen] = useState(false)
+	const [width] = useWindowSize()
 	const {state, actions} = useStore()
 
+	// const [visible, setVisible] = useState(false)
+	// mobileScreen setMobileScreen
 
-	let navbarStyle = 'navbar'
-	if (visible) navbarStyle += ' show'
+	// let navbarStyle = 'navbar'
+	// if (visible) navbarStyle += ' show'
 
 	const handleDelete = (listId) => {
 		actions.deleteList(listId)
 	}
 
 	return (
-		<nav className={navbarStyle}>
+		<nav className={`navbar ${mobileScreen && 'show'}`}>
 			<abbr className={`navbar__tog-show `}
 						data-icon="o"
-						onClick={() => setVisible((v) => !v)}/>
+						onClick={() => setMobileScreen((v) => !v)}/>
 
-			<div className='navbar__auth auth-nav'>
-				<h3 className={`auth-nav__title ${visible ? '' : 'hidden'}`}>React ToDo</h3>
+			<div className={`navbar__auth auth-nav ${width > 768 ? 'show' : mobileScreen && 'show'}`}>
+				<h3 className='auth-nav__title'>React ToDo</h3>
 				<div className='auth-nav__wrap'>
-					<span className={`auth-nav__email ${visible ? '' : 'hidden'}`}>{state.user.email}</span>
+					<span className='auth-nav__email'>{state.user.email}</span>
 					<abbr data-icon="q"
 								onClick={() => actions.logOutUser()}
-								className={`auth-nav__logout ${visible ? '' : 'hidden'}`}/>
+								className={`auth-nav__logout ${width > 768 ? 'show' : mobileScreen && 'show'}`}/>
 				</div>
 			</div>
 
@@ -55,14 +60,14 @@ export const Navbar = ({
 					to: '/planned'
 				}]
 			}
-						visible={visible}/>
+						visible={mobileScreen}/>
 
 			<List lists={state.lists}
-						visible={visible}
+						visible={mobileScreen}
 						onDelete={handleDelete}
 						isRemovable/>
 
-			<AddList/>
+			<AddList visible={mobileScreen}/>
 
 		</nav>
 	)

@@ -8,11 +8,13 @@ import {List} from "../List/List";
 import {Badge} from "../../Badge/Badge";
 import {api} from "../../../api/api";
 
-const AddList = ({colors, addList, addVisible}) => {
+const AddList = ({colors, addList, addVisible,
+
+
+
+								 visible}) => {
 	const {state, actions} = useStore()
-
-
-	const [visible, setVisible] = useState(false)
+	const [displayPopup, setDisplayPopup] = useState(false)
 	const [selectColor, selectedColor] = useState(null)
 	const [input, setInput] = useState('')
 	const [disableBtn, setDisableBtn] = useState(false)
@@ -49,7 +51,7 @@ const AddList = ({colors, addList, addVisible}) => {
 	}
 
 	const onClose = () => {
-		setVisible(false)
+		setDisplayPopup(false)
 		setInput('')
 		// selectedColor(colors[0].id)
 	}
@@ -64,11 +66,11 @@ const AddList = ({colors, addList, addVisible}) => {
 					name: 'Добавить список',
 					added: true
 				},]}
-						visible={addVisible}
+						visible={visible}
 						onClick={() => {
-							setVisible(true)
+							setDisplayPopup(true)
 						}}/>
-			{visible && <form onSubmit={onAddList}
+			{displayPopup && <form onSubmit={onAddList}
 												className='add-list-btn__popup'>
 
 				<abbr data-icon="g"

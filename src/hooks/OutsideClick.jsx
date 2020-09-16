@@ -4,12 +4,12 @@ export const useOutsideClick = (ref, callback, when) => {
 
 	const savedCallback = useRef(callback)
 
-	useEffect(()=>{
+	useEffect(() => {
 		savedCallback.current = callback
-	},[])
+	}, [])
 
-	const handler = (e)=>{
-		if(ref.current && !ref.current.contains(e.target)) savedCallback.current()
+	const handler = (e) => {
+		if (ref.current && !ref.current.contains(e.target)) savedCallback.current()
 	}
 
 	useEffect(() => {
