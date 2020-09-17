@@ -2,7 +2,7 @@
   $self: &;
 
   font-size: 14px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Chrome/Safari/Opera */
@@ -11,14 +11,15 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none;
 
+
   @media all and (max-width: 768px) {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
   }
 
   .badge {
     position: relative;
-    left: 4px;
-    @media all and (max-width: 768px){
+    left: 1px;
+    @media all and (max-width: 768px) {
       left: 0;
     }
   }
@@ -27,6 +28,7 @@
     display: inline-flex;
     margin-right: 10px;
     transition: all 0.15s ease-in-out;
+    min-width: 14px;
 
     @media all and (max-width: 768px) {
       margin-right: 0;
@@ -35,13 +37,11 @@
     &.active-visible {
       margin-right: 10px;
     }
+  }
 
-    svg {
-      path {
-        fill: #7C7C7C;
-
-      }
-    }
+  a {
+    text-decoration: none;
+    color: #000;
   }
 
   li {
@@ -57,7 +57,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      &.active-visible{
+      &.active-visible {
         justify-content: flex-start;
       }
     }
@@ -99,12 +99,14 @@
 
     #{$self}__btn-remove {
       transition: all 0.15s ease-in-out;
-      padding: 3px;
       opacity: 0;
+      font-size: 16px;
+      display: inline-flex;
 
-      &:active{
+      &:active {
         background-color: #4DD599;
-      };
+      }
+
 
       @media all and (min-width: 769px) {
         &:hover {
@@ -120,7 +122,6 @@
           opacity: .8;
           visibility: visible;
           min-width: 16px;
-          padding: 3px;
         }
       }
 
@@ -150,7 +151,6 @@
   }
 
   .add-btn {
-
     opacity: .6;
 
     &:hover {
