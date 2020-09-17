@@ -5,7 +5,7 @@ import {useWindowSize} from "../../hooks/windowSize";
 import './Navbar.scss'
 
 import {List} from "./List/List";
-import AddList from "./AddList/AddList";
+import {AddList} from "./AddList/AddList";
 
 import {useStore} from "../../hooks/store";
 

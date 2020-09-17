@@ -11,8 +11,8 @@ export const List = ({
 											 onActiveList, activeList, onClick,
 											 visible,
 
-	//new props
-	onDelete
+											 //new props
+											 onDelete
 										 }) => {
 
 
@@ -20,19 +20,18 @@ export const List = ({
 	if (visible) toggleVisible += ' active-visible'
 
 	return (
-		<ul className='navbar__list list-navbar'
-				onClick={onClick}>
+		<ul className='navbar__list list-navbar'>
 			{lists && lists.map((i, index) => {
 				return (
 					<NavLink key={index}
 									 to={i.added ? 'null' : i.to || `/list/${i.id}`}>
 
 						<li
-							className={classNames(i.className, {active: i.active
+							className={classNames({
+								active: i.active
 									? i.active
-									: activeList && activeList.id === i.id}, toggleVisible)}
-							onClick={onActiveList ? () => onActiveList(i) : null}
-						>
+									: activeList && activeList.id === i.id
+							})}>
 							<i className={toggleVisible}>
 								{i.icon ? i.icon : <Badge color={i.color.name}/>}
 							</i>
@@ -42,7 +41,7 @@ export const List = ({
 							{/*	{i.tasks && `(${i.tasks.length})`}*/}
 							{/*</div>*/}
 							{isRemovable && <abbr data-icon="i"
-																		className={`list-navbar__btn-remove ${toggleVisible}`}
+																		className={`list-navbar__btn-remove`}
 																		onClick={() => onDelete(i.id)}/>}
 						</li>
 					</NavLink>

@@ -43,6 +43,16 @@ export const getLists = (userId) => {
 		}))
 }
 
+export const createList = (obj) => {
+	return apiFirebase.createList(obj)
+		.then(obj => ({
+			type: 'CREATE_LIST',
+			payload: {
+				obj
+			}
+		}))
+}
+
 export const deleteList = (listId) => {
 	return apiFirebase.deleteList(listId)
 		.then(listId => ({

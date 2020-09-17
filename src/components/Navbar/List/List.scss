@@ -19,7 +19,7 @@
   .badge {
     position: relative;
     left: 1px;
-    @media all and (max-width: 768px){
+    @media all and (max-width: 768px) {
       left: 0;
     }
   }
@@ -36,13 +36,6 @@
 
     &.active-visible {
       margin-right: 10px;
-    }
-
-    svg {
-      path {
-        fill: #7C7C7C;
-
-      }
     }
   }
 
@@ -64,7 +57,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      &.active-visible{
+      &.active-visible {
         justify-content: flex-start;
       }
     }
@@ -110,9 +103,10 @@
       font-size: 16px;
       display: inline-flex;
 
-      &:active{
+      &:active {
         background-color: #4DD599;
-      };
+      }
+
 
       @media all and (min-width: 769px) {
         &:hover {

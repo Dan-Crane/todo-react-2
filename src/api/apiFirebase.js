@@ -44,6 +44,14 @@ export const getLists = (userId) => {
 		});
 }
 
+export const createList = (obj) => {
+	return db.collection('lists').add({
+		...obj
+	})
+		.then(docRef => docRef.get())
+		.then(mapDoc)
+}
+
 export const deleteList = (listId) => {
 	return db.collection('lists').doc(listId).delete()
 		.then(() => listId)
