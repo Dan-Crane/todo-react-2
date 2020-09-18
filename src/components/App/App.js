@@ -13,6 +13,13 @@ import {useStore} from "../../hooks/store";
 const App = () => {
 	const {state, actions} = useStore()
 
+	const routes = [
+		{path: '/', Component: Body},
+		{path: '/important', Component: Body},
+		{path: '/planned', Component: Body},
+		{path: '/list/:listId/:taskId?', Component: Body},
+	]
+
 	useEffect(() => {
 		actions.setAuth()
 	}, [actions])
@@ -38,20 +45,6 @@ const App = () => {
 				<Navbar/>
 				<div className='todo__body'>
 					<Switch>
-						{/*<Route exact path='/'>*/}
-						{/*	{lists && lists.length === 0*/}
-						{/*		? <h2 className='todo__isnt-task'>Задачи отсутствуют</h2>*/}
-						{/*		: lists && lists.map(item => <Body lists={item}*/}
-						{/*																			 key={item.id}*/}
-						{/*																			 onAddTask={onAddTask}*/}
-						{/*																			 onEditTitle={onEditTitle}*/}
-						{/*																			 colorTitle={item.color.hex}*/}
-						{/*																			 onRemoveTask={onRemoveTask}*/}
-						{/*																			 onEditTask={onEditTask}*/}
-						{/*																			 onChangeChecked={onChangeChecked}*/}
-						{/*																			 withoutEmpty={true}*/}
-						{/*																			 sendState={sendState}/>)}*/}
-						{/*</Route>*/}
 						<Route exact
 									 path='/'
 									 component={Body}
