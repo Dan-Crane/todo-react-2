@@ -75,21 +75,14 @@
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
 
-    &.entering {
-      animation: showPopup .15s ease-in-out;
+    &-show {
+      animation: showPopup .15s forwards ease-in-out;
     }
 
-    &.entered {
-
+    &-hide {
+      animation: hiddenPopup .15s forwards ease-in-out;
     }
 
-    &.exiting {
-    }
-
-    &.exited {
-      animation: hiddenPopup .15s ease-in-out;
-      opacity: 0
-    }
   }
 
   &__input {

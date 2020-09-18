@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 import {useStore} from "../../../hooks/store";
-import {Transition} from "react-transition-group";
+import {CSSTransition} from "react-transition-group";
 
 import './AddList.scss'
 import {Badge} from "../../Badge/Badge";
@@ -62,11 +62,18 @@ export const AddList = ({
 				<span className='add-list-btn__text'>Добавить список</span>
 			</div>
 
-			<Transition
+			<CSSTransition
 				in={displayPopup}
-				timeout={150}>
-				{stateTransition => <form onSubmit={handleAddList}
-												className={`add-list-btn__popup ${stateTransition}`}>
+				timeout={2000}
+				classNames={{
+					enter: 'add-list-btn__popup-show',
+					exitActive: 'add-list-btn__popup-hide',
+				}}
+				mountOnEnter
+				unmountOnExit>
+
+				<form onSubmit={handleAddList}
+							className={`add-list-btn__popup`}>
 
 					<abbr data-icon="g"
 								className='add-list-btn__close'
@@ -89,8 +96,8 @@ export const AddList = ({
 									style={disableBtn ? {backgroundColor: 'green'} : {backgroundColor: ''}}
 									className='main-btn add-list-btn__btn'>{disableBtn ? 'Добавление...' : 'Добавить'}
 					</button>
-				</form>}
-			</Transition>
+				</form>
+			</CSSTransition>
 		</div>
 	);
 };
