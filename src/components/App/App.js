@@ -13,12 +13,7 @@ import {useStore} from "../../hooks/store";
 const App = () => {
 	const {state, actions} = useStore()
 
-	const routes = [
-		{path: '/', Component: Body},
-		{path: '/important', Component: Body},
-		{path: '/planned', Component: Body},
-		{path: '/list/:listId/:taskId?', Component: Body},
-	]
+
 
 	useEffect(() => {
 		actions.setAuth()
@@ -43,6 +38,7 @@ const App = () => {
 		return (
 			<div className="todo">
 				<Navbar/>
+
 				<div className='todo__body'>
 					<Switch>
 						<Route exact

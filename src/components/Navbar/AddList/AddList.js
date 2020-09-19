@@ -20,7 +20,6 @@ export const AddList = ({
 
 	useEffect(() => {
 		selectedColor(state.colors[0])
-		console.log(state.colors[0])
 	}, [state.colors])
 
 	const onInputChange = (e) => {

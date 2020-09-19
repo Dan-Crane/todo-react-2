@@ -11,6 +11,7 @@ export const Input = ({placeholder, text, type}) => {
 							 id='inp'
 							 placeholder='&nbsp;'
 							 value={input}
+							 autoFocus
 							 onChange={(event => setInput(event.target.value))}/>
 				<span className="label">{placeholder}</span>
 				<span className="focus-bg"/>

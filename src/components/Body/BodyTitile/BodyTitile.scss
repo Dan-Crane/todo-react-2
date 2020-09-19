@@ -1,5 +1,7 @@
 .title-wrap {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: relative;
   padding-bottom: 20px;
   @media all and (max-width: 768px) {
@@ -16,9 +18,12 @@
     background-color: #e3e3e3;
   }
 
-  a {
-    text-decoration: none;
-    cursor: pointer;
+  .fade-enter-active {
+    animation: show 300ms ease-in-out;
+  }
+
+  .fade-exit-active {
+    animation: hide 300ms ease-in-out;
   }
 
   &__title {
@@ -33,19 +38,64 @@
     @media all and (max-width: 768px) {
       font-size: 24px;
     }
+
+    &--show {
+    }
+
+    &--hide {
+    }
   }
 
-  &__icon {
+  &__edit-title {
+    &--show {
+      animation: show 3000ms ease-in-out;
+    }
+
+    &--hide {
+      animation: hide 3000ms ease-in-out;
+    }
+  }
+
+  &__img-box {
+    display: flex;
+    align-items: center;
+
+    abbr:not(:last-child) {
+      margin-right: 14px;
+    }
+  }
+
+  &__edit, &__sort {
     opacity: .2;
     cursor: pointer;
     transition: all 0.15s ease-in-out;
     font-size: 18px;
     line-height: 14px;
+    display: inline-flex;
 
     @media all and (min-width: 769px) {
       &:hover {
         opacity: .8;
       }
     }
+
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

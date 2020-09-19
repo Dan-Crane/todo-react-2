@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {useLocation, useParams, useHistory} from 'react-router-dom'
 
 import {useStore} from "../../hooks/store";
 
@@ -13,9 +14,8 @@ import {TaskDetails} from "./TaskDetails/TaskDetails";
 export const Body = ({match}) => {
 	const {state, actions} = useStore()
 	const [selectedTask, setSelectedTask] = useState(null)
-	const list = state.lists.find(i => i.id === match.params.listId) || {name: 'Задачи'}
+	const list = match && state.lists.find(i => i.id === match.params.listId) || {name: 'Задачи'}
 
-	console.log(state);
 
 	// логика фильтра
 	const path = match.path
@@ -28,12 +28,8 @@ export const Body = ({match}) => {
 
 
 	const getTaskByList = (tasks, listId) => tasks.filter(task => task.listId === listId)
-
+	//тут
 	const tasks = match.params.listId ? getTaskByList(state.tasks, match.params.listId) : getTaskByFilter[path](state.tasks)
-	// const test = tasks.slice()
-	// const test2 = [...tasks]
-	// console.log(test);
-	// console.log(test2);
 
 	const handleSubmit = (text) => {
 		actions.createTask({
@@ -61,6 +57,7 @@ export const Body = ({match}) => {
 		<section className='body'>
 			<TitleBody
 				list={list}
+				onUpdate={handleUpdate}
 			/>
 			<BodyContent
 				tasks={tasks}
