@@ -11,8 +11,8 @@ export const TitleBody = ({list, onUpdate}) => {
 
 	const handleChange = (e) => {
 		e.preventDefault()
-		console.log(list.id)
 		onUpdate('list', list.id, {name: inputValue})
+		setEditMode(!editMode)
 	}
 
 	return (
@@ -50,11 +50,14 @@ export const TitleBody = ({list, onUpdate}) => {
 						? <div
 							className='title-wrap__img-box'>
 							<abbr
-								onClick={() => setEditMode(!editMode)}
+								onClick={handleChange}
 								data-icon="d"
 								className='title-wrap__ok'/>
 							<abbr
-								onClick={() => setEditMode(!editMode)}
+								onClick={() => {
+									setEditMode(!editMode)
+									setInputValue(list.name)
+								}}
 								data-icon="i"
 								className='title-wrap__cancel'/>
 						</div>
