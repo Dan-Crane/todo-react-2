@@ -30,34 +30,47 @@ export const TitleBody = ({list, onUpdate}) => {
 					key={editMode}
 					in={editMode}
 					timeout={300}
-					classNames={'fade'}>
-					{editMode
-						?
-						<div>
-							<Input placeholder={'Название списка'} text={list.name} type='text'
-										 // onBlur={() => setEditMode(!editMode)}
-							/>
-
-						</div>
+					classNames={'fade-text'}>
+					{editMode ?
+						<Input placeholder={'Название списка'} text={list.name} type='text'/>
 						:
-						<>
-							<h2 style={{color: list.color ? list.color.hex : 'black'}} className='title-wrap__title'>
-								{list.name}
-							</h2>
-							<div className='title-wrap__img-box'>
+						<h2 style={{color: list.color ? list.color.hex : 'black'}} className='title-wrap__title'>
+							{list.name}
+						</h2>}
+				</CSSTransition>
+			</SwitchTransition>
 
-								<abbr onClick={() => setEditMode(!editMode)}
-											data-icon="c"
-											className='title-wrap__edit'/>
-								<abbr data-icon="a" className='title-wrap__sort'/>
-
-							</div>
-						</>
+			<SwitchTransition >
+				<CSSTransition
+					key={editMode}
+					in={editMode}
+					timeout={300}
+					classNames={'fade-btn'}>
+					{editMode ? <div
+							className='title-wrap__img-box'>
+							<abbr
+								onClick={() => setEditMode(!editMode)}
+								data-icon="d"
+								className='title-wrap__ok'/>
+							<abbr
+								onClick={() => setEditMode(!editMode)}
+								data-icon="i"
+								className='title-wrap__cancel'/>
+						</div>
+						: <div
+							className='title-wrap__img-box'>
+							<abbr
+								onClick={() => setEditMode(!editMode)}
+								data-icon="c"
+								className='title-wrap__edit'/>
+							<abbr
+								data-icon="b"
+								className='title-wrap__sort'/>
+						</div>
 					}
 
 				</CSSTransition>
 			</SwitchTransition>
-
 
 		</div>
 

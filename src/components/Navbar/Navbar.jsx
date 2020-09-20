@@ -47,7 +47,7 @@ export const Navbar = ({
 
 			<List lists={
 				[{
-					icon: <abbr data-icon="n"/>,
+					icon: <abbr data-icon="f"/>,
 					name: 'Задачи',
 					to: '/',
 				}, {

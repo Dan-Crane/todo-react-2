@@ -6,6 +6,7 @@ $main-color: #4DD599;
 }
 
 .input-wrap{
+  width: 100%;
   display: grid;
   font-family: Roboto;
   -webkit-text-size-adjust: 100%;
@@ -16,7 +17,7 @@ $main-color: #4DD599;
   position: relative;
   //margin: auto;
   width: 100%;
-  max-width: 280px;
+  //max-width: 280px;
   border-radius: 3px;
   overflow: hidden;
 

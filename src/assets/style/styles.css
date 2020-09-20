@@ -38,9 +38,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-entypo-list:before {
-  content: "\66";
-}
 .icon-closesvg:before {
   content: "\67";
 }
@@ -71,9 +68,6 @@
 .icon-sign-in:before {
   content: "\71";
 }
-.icon-list-ul:before {
-  content: "\6e";
-}
 .icon-chevron-right:before {
   content: "\6f";
 }
@@ -86,6 +80,9 @@
 .icon-star-4:before {
   content: "\7a";
 }
-.icon-sort-amount-desc:before {
-  content: "\61";
+.icon-sort:before {
+  content: "\62";
+}
+.icon-list-1:before {
+  content: "\66";
 }

@@ -63,7 +63,7 @@ export const AddList = ({
 
 			<CSSTransition
 				in={displayPopup}
-				timeout={2000}
+				timeout={150}
 				classNames={{
 					enter: 'add-list-btn__popup-show',
 					exitActive: 'add-list-btn__popup-hide',
