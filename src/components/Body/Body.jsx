@@ -70,6 +70,7 @@ export const Body = ({match}) => {
 	return (
 		<section className='body'>
 			<TitleBody
+				key={list.id}
 				list={list}
 				onUpdate={handleUpdate}
 			/>

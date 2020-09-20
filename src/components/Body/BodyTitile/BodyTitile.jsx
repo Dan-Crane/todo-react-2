@@ -12,7 +12,7 @@ export const TitleBody = ({list, onUpdate}) => {
 	const handleChange = (e) => {
 		e.preventDefault()
 		console.log(list.id)
-		onUpdate('list', list.id, {name: inputValue})
+		// onUpdate('list', list.id, {name: inputValue})
 	}
 
 	return (
