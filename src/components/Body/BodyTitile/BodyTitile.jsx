@@ -12,7 +12,7 @@ export const TitleBody = ({list, onUpdate}) => {
 	const handleChange = (e) => {
 		e.preventDefault()
 		console.log(list.id)
-		// onUpdate('list', list.id, {name: inputValue})
+		onUpdate('list', list.id, {name: inputValue})
 	}
 
 	return (
@@ -40,40 +40,41 @@ export const TitleBody = ({list, onUpdate}) => {
 				</CSSTransition>
 			</SwitchTransition>
 
-			{list.hardCode
-				? null
-				: <SwitchTransition>
-					<CSSTransition
-						key={editMode}
-						in={editMode}
-						timeout={300}
-						classNames={'fade-btn'}>
-						{editMode
-							? <div
-								className='title-wrap__img-box'>
-								<abbr
-									onClick={() => setEditMode(!editMode)}
-									data-icon="d"
-									className='title-wrap__ok'/>
-								<abbr
-									onClick={() => setEditMode(!editMode)}
-									data-icon="i"
-									className='title-wrap__cancel'/>
-							</div>
-							: <div
-								className='title-wrap__img-box'>
-								<abbr
+			<SwitchTransition>
+				<CSSTransition
+					key={editMode}
+					in={editMode}
+					timeout={300}
+					classNames={'fade-btn'}>
+					{editMode
+						? <div
+							className='title-wrap__img-box'>
+							<abbr
+								onClick={() => setEditMode(!editMode)}
+								data-icon="d"
+								className='title-wrap__ok'/>
+							<abbr
+								onClick={() => setEditMode(!editMode)}
+								data-icon="i"
+								className='title-wrap__cancel'/>
+						</div>
+						: <div
+							className='title-wrap__img-box'>
+							{list.hardCode
+								? null
+								: <abbr
 									onClick={() => setEditMode(!editMode)}
 									data-icon="c"
 									className='title-wrap__edit'/>
-								<abbr
-									data-icon="b"
-									className='title-wrap__sort'/>
-							</div>
-						}
-					</CSSTransition>
-				</SwitchTransition>
-			}
+							}
+							<abbr
+								data-icon="b"
+								className='title-wrap__sort'/>
+						</div>
+					}
+				</CSSTransition>
+			</SwitchTransition>
+
 
 		</div>
 	)
