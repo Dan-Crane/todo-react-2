@@ -28,6 +28,13 @@ export const reducer = (state, action) => {
 				...state,
 				lists: [...state.lists, action.payload.obj]
 			}
+		case 'UPDATE_LIST':
+			return {
+				...state,
+				lists: state.lists.map(list => list.id === action.payload.list.id
+					? {...list ,...action.payload.list}
+					: list)
+			}
 		case 'DELETE_LIST':
 			return {
 				...state,

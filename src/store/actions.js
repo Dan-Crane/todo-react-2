@@ -53,6 +53,16 @@ export const createList = (obj) => {
 		}))
 }
 
+export const updateList = (listId, data) => {
+	return apiFirebase.updateList(listId, data)
+		.then(list => ({
+			type: 'UPDATE_LIST',
+			payload: {
+				list
+			}
+		}))
+}
+
 export const deleteList = (listId) => {
 	return apiFirebase.deleteList(listId)
 		.then(listId => ({

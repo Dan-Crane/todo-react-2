@@ -10,7 +10,7 @@ export const TaskItem = ({task, onDelete, onUpdate, onSelect}) => {
 
 // новый функционал
 	const handleChange = (e) => {
-		onUpdate(task.id, {completed: e.target.checked})
+		onUpdate('task', task.id, {completed: e.target.checked})
 	}
 
 	return (
@@ -48,7 +48,7 @@ export const TaskItem = ({task, onDelete, onUpdate, onSelect}) => {
 				<div className='body-content__wrap-btn wrap-btn'>
 					<abbr data-icon={task.important ? 'z' : 'y'}
 								className={`wrap-btn__important ${task.important && 'active'}`}
-								onClick={(e) => onUpdate(task.id, {important: !task.important})}/>
+								onClick={(e) => onUpdate('task', task.id, {important: !task.important})}/>
 					<abbr data-icon="i"
 								className='wrap-btn__delete'
 								onClick={() => onDelete(task.id)}/>

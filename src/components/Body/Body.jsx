@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {useLocation, useParams, useHistory} from 'react-router-dom'
 
 import {useStore} from "../../hooks/store";
 
@@ -14,18 +13,28 @@ import {TaskDetails} from "./TaskDetails/TaskDetails";
 export const Body = ({match}) => {
 	const {state, actions} = useStore()
 	const [selectedTask, setSelectedTask] = useState(null)
-	const list = match && state.lists.find(i => i.id === match.params.listId) || {name: 'Задачи'}
+	const list =  state.lists.find(i => i.id === match.params.listId) || {name: 'Задачи', hardCode: true}
 
+	const getList = () => {
+	}
 
 	// логика фильтра
 	const path = match.path
 
 	const getTaskByFilter = ({
-		'/': tasks => tasks,
-		'/important': tasks => tasks.filter(task => task.important),
-		'/planned': tasks => tasks.filter(task=> task.dueDate)
+		'/': tasks => {
+			list.name = 'Задачи'
+			return tasks
+		},
+		'/important': tasks => {
+			list.name = 'Важные'
+			return tasks.filter(task => task.important)
+		},
+		'/planned': tasks => {
+			list.name = 'Запланированные'
+			return  tasks.filter(task => task.dueDate)
+		}
 	})
-
 
 	const getTaskByList = (tasks, listId) => tasks.filter(task => task.listId === listId)
 	//тут
@@ -43,8 +52,13 @@ export const Body = ({match}) => {
 		actions.deleteTask(taskId)
 	}
 
-	const handleUpdate = (taskId, data) => {
-		actions.updateTask(taskId, data)
+	const handleUpdate = (option, id, data) => {
+		if (option === 'task') {
+			return actions.updateTask(id, data)
+		} else if (option === 'list') {
+			return actions.updateList(id, data)
+		}
+
 	}
 
 	const handleSelect = (task) => {
@@ -67,8 +81,8 @@ export const Body = ({match}) => {
 				onDelete={handleDelete}
 			/>
 			{selectedTask &&
-					<TaskDetails task={selectedTask}
-											 onClose={handleSelect}/>
+			<TaskDetails task={selectedTask}
+									 onClose={handleSelect}/>
 			}
 		</section>
 	)

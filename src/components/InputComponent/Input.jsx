@@ -1,19 +1,17 @@
-import React, {useState} from "react";
+import React from "react";
 
 import './Input.scss'
 
-export const Input = ({placeholder, text, type, onBlur, stateBlur}) => {
-	const [input, setInput] = useState(text)
+export const Input = ({placeholder, type, value, setValue}) => {
 	return (
 		<div className='input-wrap'>
 			<label htmlFor="inp" className="inp">
 				<input type={type}
 							 id='inp'
 							 placeholder='&nbsp;'
-							 value={input}
+							 value={value}
 							 autoFocus
-							 onBlur={onBlur ? onBlur : null}
-							 onChange={(event => setInput(event.target.value))}/>
+							 onChange={(event => setValue(event.target.value))}/>
 				<span className="label">{placeholder}</span>
 				<span className="focus-bg"/>
 			</label>
