@@ -1,0 +1,33 @@
+:root{
+  --bg: #e1e8f0;
+  --bg-accent: darken(#e1e8f0, 20);
+  --text-color: black;
+  --nav-size: 60px;
+  --border: 1px solid darken(#e1e8f0, 10);
+  --border-radius: 8px;
+  --speed: 500ms;
+}
+
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.dropdown{
+  display: flex;
+  &__li{
+
+  }
+  &__link{
+
+  }
+  &__menu{
+
+  }
+}

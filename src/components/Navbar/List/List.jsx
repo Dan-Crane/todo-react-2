@@ -52,7 +52,11 @@ export const List = ({
 									{/*</div>*/}
 									{isRemovable && <abbr data-icon="i"
 																				className={`list-navbar__btn-remove`}
-																				onClick={() => onDelete(i.id)}/>}
+																				onClick={(e) => {
+																					e.preventDefault()
+																					e.stopPropagation()
+																					onDelete(i.id)
+																				}}/>}
 								</li>
 							</NavLink>
 						</CSSTransition>

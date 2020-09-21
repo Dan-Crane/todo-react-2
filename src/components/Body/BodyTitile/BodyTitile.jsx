@@ -4,6 +4,7 @@ import './BodyTitile.scss'
 import {CSSTransition, SwitchTransition} from "react-transition-group";
 
 import {Input} from "../../InputComponent/Input";
+import {ControlBox, ControlItem} from "../../ControlBox/ControlBox";
 
 export const TitleBody = ({list, onUpdate}) => {
 	const [editMode, setEditMode] = useState(false)
@@ -47,33 +48,36 @@ export const TitleBody = ({list, onUpdate}) => {
 					timeout={300}
 					classNames={'fade-btn'}>
 					{editMode
-						? <div
-							className='title-wrap__img-box'>
-							<abbr
-								onClick={handleChange}
-								data-icon="d"
-								className='title-wrap__ok'/>
-							<abbr
-								onClick={() => {
-									setEditMode(!editMode)
-									setInputValue(list.name)
-								}}
-								data-icon="i"
-								className='title-wrap__cancel'/>
-						</div>
-						: <div
-							className='title-wrap__img-box'>
-							{list.hardCode
-								? null
-								: <abbr
-									onClick={() => setEditMode(!editMode)}
-									data-icon="c"
-									className='title-wrap__edit'/>
-							}
-							<abbr
-								data-icon="b"
-								className='title-wrap__sort'/>
-						</div>
+						?	<ControlBox>
+							<ControlItem icon={<svg className="icon-check">
+								<use xlinkHref="#icon-check"/>
+							</svg>}
+													 color={'#4DD599'}
+													 sendFunc={() => {
+														 onUpdate('list', list.id, {name: inputValue})
+														 setEditMode(!editMode)
+													 }}/>
+
+							<ControlItem icon={<svg className="icon-times">
+								<use xlinkHref="#icon-times"/>
+							</svg>}
+													 color={'tomato'}
+													 sendFunc={() => {
+														 setEditMode(!editMode)
+														 setInputValue(list.name)
+													 }}/>
+						</ControlBox>
+
+						:	<ControlBox>
+							{!list.hardCode && <ControlItem icon={<svg className="icon-pencil">
+									<use xlinkHref="#icon-pencil"/>
+								</svg>}
+															 sendFunc={() => setEditMode(!editMode)}/>}
+
+							<ControlItem icon={<svg className="icon-sort">
+								<use xlinkHref="#icon-sort"/>
+							</svg>}/>
+						</ControlBox>
 					}
 				</CSSTransition>
 			</SwitchTransition>

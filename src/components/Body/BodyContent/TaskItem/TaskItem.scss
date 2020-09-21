@@ -158,11 +158,6 @@
     font-size: 20px;
     cursor: pointer;
     transition: color 0.15s ease-in-out;
-    @media all and (max-width: 768px) {
-      &:before {
-        //padding-right: 4px;
-      }
-    }
     @media all and (min-width: 768px) {
       &:hover {
         color: tomato;
@@ -181,11 +176,6 @@
     position: relative;
     cursor: pointer;
     transition: color 0.15s ease-in-out;
-    @media all and (max-width: 768px) {
-      &:before {
-        //padding-right: 4px;
-      }
-    }
     @media all and (min-width: 768px) {
       &:hover {
         color: darken(#4DD599, 15);
