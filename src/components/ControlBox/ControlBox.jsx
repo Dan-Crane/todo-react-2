@@ -20,7 +20,7 @@ export const ControlItem = ({ icon, sendFunc, children, color }) => {
 
 	return (
 		<li className='control-box__list'>
-			<a href="" style={color && {color: color} || {color: 'black'}} className='control-box__btn-icon' onClick={handlerSendFunction} tabIndex={0}>
+			<a href="" style={color ? {color: color} : {color: 'black'}} className='control-box__btn-icon' onClick={handlerSendFunction} tabIndex={0}>
 				{ icon }
 			</a>
 

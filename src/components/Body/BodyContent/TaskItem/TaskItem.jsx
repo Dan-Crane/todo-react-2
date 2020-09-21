@@ -1,6 +1,8 @@
 import React from "react";
 
 import './TaskItem.scss'
+import {ControlBox, ControlItem} from "../../../ControlBox/ControlBox";
+import {CSSTransition, SwitchTransition} from "react-transition-group";
 
 export const TaskItem = ({task, onDelete, onUpdate, onSelect}) => {
 
@@ -16,19 +18,6 @@ export const TaskItem = ({task, onDelete, onUpdate, onSelect}) => {
 	return (
 		<div className='body-content__row'>
 			<div className='body-content__checkbox'>
-				{/*//условие на загрузку*/}
-				{/*{sendState === id*/}
-				{/*	? <PreloaderCircle/>*/}
-				{/*	: <> <input id={`check-${id}`}*/}
-				{/*							onChange={onChecked}*/}
-				{/*							checked={completed}*/}
-				{/*							type='checkbox'/>*/}
-				{/*		<label htmlFor={`check-${id}`}>*/}
-				{/*			<svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
-				{/*				<path d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001" stroke="white" strokeWidth="1.5"*/}
-				{/*							strokeLinecap="round" strokeLinejoin="round"/>*/}
-				{/*			</svg>*/}
-				{/*		</label></>}*/}
 				<> <input id={`check-${task.id}`}
 									onChange={(e) => handleChange(e)}
 									checked={task.completed}
@@ -45,17 +34,50 @@ export const TaskItem = ({task, onDelete, onUpdate, onSelect}) => {
 						onSubmit={onSubmitForm}>
 				<span className='body-content__text'>{task.text}</span>
 
-				<div className='body-content__wrap-btn wrap-btn'>
-					<abbr data-icon={task.important ? 'z' : 'y'}
-								className={`wrap-btn__important ${task.important && 'active'}`}
-								onClick={(e) => onUpdate('task', task.id, {important: !task.important})}/>
-					<abbr data-icon="i"
-								className='wrap-btn__delete'
-								onClick={() => onDelete(task.id)}/>
-					<abbr data-icon="k"
-								className='wrap-btn__details'
-								onClick={() => onSelect(task)}/>
-				</div>
+				<ControlBox>
+					<SwitchTransition>
+						<CSSTransition key={task.important}
+													 in={task.important}
+													 timeout={300}
+													 classNames='star-animation'>
+
+							{task.important
+								? <ControlItem icon={<svg className="icon-star-4">
+									<use xlinkHref="#icon-star-4"/>
+								</svg>}
+															 color={'#FF8905'}
+															 sendFunc={() => {
+																 onUpdate('task', task.id, {important: !task.important})
+															 }}/>
+								: <ControlItem icon={<svg className="icon-star-empty-1">
+									<use xlinkHref="#icon-star-empty-1"/>
+								</svg>}
+															 sendFunc={() => {
+																 onUpdate('task', task.id, {important: !task.important})
+															 }}/>}
+						</CSSTransition>
+					</SwitchTransition>
+
+
+					<ControlItem icon={<svg className="icon-times">
+						<use xlinkHref="#icon-times"/>
+					</svg>}/>
+
+					<ControlItem icon={<svg className="icon-dots-2">
+						<use xlinkHref="#icon-dots-2"/>
+					</svg>}/>
+				</ControlBox>
+				{/*<div className='body-content__wrap-btn wrap-btn'>*/}
+				{/*	<abbr data-icon={task.important ? 'z' : 'y'}*/}
+				{/*				className={`wrap-btn__important ${task.important && 'active'}`}*/}
+				{/*				onClick={(e) => onUpdate('task', task.id, {important: !task.important})}/>*/}
+				{/*	<abbr data-icon="i"*/}
+				{/*				className='wrap-btn__delete'*/}
+				{/*				onClick={() => onDelete(task.id)}/>*/}
+				{/*	<abbr data-icon="k"*/}
+				{/*				className='wrap-btn__details'*/}
+				{/*				onClick={() => onSelect(task)}/>*/}
+				{/*</div>*/}
 			</form>
 		</div>
 	)

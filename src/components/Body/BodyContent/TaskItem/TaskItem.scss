@@ -5,14 +5,6 @@
     align-items: center;
     transition: all 0.15s ease-in-out;
 
-
-    //тут при ховере сделать появление
-    //@media all and (min-width: 768px) {
-    //  &:hover .wrap-btn {
-    //    opacity: .4;
-    //  }
-    //}
-
     &:not(:last-child) {
       margin-bottom: 5px;
     }
@@ -110,10 +102,27 @@
     width: 100%;
     display: flex;
     align-items: center;
-  }
 
-  &__wrap-btn {
-
+    .star-animation-enter  {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    .star-animation-enter-active  {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+    .star-animation-exit  {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+    .star-animation-exit-active {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    .star-animation-enter-active,
+    .star-animation-exit-active {
+      transition: opacity 150ms, transform 300ms;
+    }
   }
 }
 

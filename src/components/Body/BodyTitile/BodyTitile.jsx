@@ -52,7 +52,7 @@ export const TitleBody = ({list, onUpdate}) => {
 							<ControlItem icon={<svg className="icon-check">
 								<use xlinkHref="#icon-check"/>
 							</svg>}
-													 color={'#4DD599'}
+													 color={'#04DD5C'}
 													 sendFunc={() => {
 														 onUpdate('list', list.id, {name: inputValue})
 														 setEditMode(!editMode)
@@ -61,7 +61,7 @@ export const TitleBody = ({list, onUpdate}) => {
 							<ControlItem icon={<svg className="icon-times">
 								<use xlinkHref="#icon-times"/>
 							</svg>}
-													 color={'tomato'}
+													 color={'#EE0463'}
 													 sendFunc={() => {
 														 setEditMode(!editMode)
 														 setInputValue(list.name)

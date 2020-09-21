@@ -65,7 +65,7 @@ export const Body = ({match}) => {
 		setSelectedTask(task)
 	}
 
-	if (!list || !tasks) return <div className='preloader-wrap'><PreloaderCircle/></div>
+	if (!list || !tasks || state.tasks.length === 0) return <div className='preloader-wrap'><PreloaderCircle/></div>
 
 	return (
 		<section className='body'>
