@@ -5,6 +5,7 @@ import {CSSTransition, SwitchTransition} from "react-transition-group";
 
 import {Input} from "../../InputComponent/Input";
 import {ControlBox, ControlItem} from "../../ControlBox/ControlBox";
+import {DropdownItem, DropdownMenu} from "../../DropdownMenu/DropdownMenu";
 
 export const TitleBody = ({list, onUpdate}) => {
 	const [editMode, setEditMode] = useState(false)
@@ -48,7 +49,7 @@ export const TitleBody = ({list, onUpdate}) => {
 					timeout={300}
 					classNames={'fade-btn'}>
 					{editMode
-						?	<ControlBox>
+						? <ControlBox>
 							<ControlItem icon={<svg className="icon-check">
 								<use xlinkHref="#icon-check"/>
 							</svg>}
@@ -68,15 +69,27 @@ export const TitleBody = ({list, onUpdate}) => {
 													 }}/>
 						</ControlBox>
 
-						:	<ControlBox>
+						: <ControlBox>
 							{!list.hardCode && <ControlItem icon={<svg className="icon-pencil">
-									<use xlinkHref="#icon-pencil"/>
-								</svg>}
-															 sendFunc={() => setEditMode(!editMode)}/>}
+								<use xlinkHref="#icon-pencil"/>
+							</svg>}
+																							sendFunc={() => setEditMode(!editMode)}/>}
 
 							<ControlItem icon={<svg className="icon-sort">
 								<use xlinkHref="#icon-sort"/>
-							</svg>}/>
+							</svg>}>
+									<DropdownMenu>
+										<DropdownItem>
+											По алфавиту
+										</DropdownItem>
+										<DropdownItem>
+											По важности
+										</DropdownItem>
+										<DropdownItem>
+											По дате
+										</DropdownItem>
+									</DropdownMenu>
+							</ControlItem>
 						</ControlBox>
 					}
 				</CSSTransition>

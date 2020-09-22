@@ -58,26 +58,16 @@ export const TaskItem = ({task, onDelete, onUpdate, onSelect}) => {
 						</CSSTransition>
 					</SwitchTransition>
 
-
 					<ControlItem icon={<svg className="icon-times">
 						<use xlinkHref="#icon-times"/>
-					</svg>}/>
+					</svg>}
+											 sendFunc={() => onDelete(task.id)}/>
 
 					<ControlItem icon={<svg className="icon-dots-2">
 						<use xlinkHref="#icon-dots-2"/>
-					</svg>}/>
+					</svg>}
+											 sendFunc={() => onSelect(task)}/>
 				</ControlBox>
-				{/*<div className='body-content__wrap-btn wrap-btn'>*/}
-				{/*	<abbr data-icon={task.important ? 'z' : 'y'}*/}
-				{/*				className={`wrap-btn__important ${task.important && 'active'}`}*/}
-				{/*				onClick={(e) => onUpdate('task', task.id, {important: !task.important})}/>*/}
-				{/*	<abbr data-icon="i"*/}
-				{/*				className='wrap-btn__delete'*/}
-				{/*				onClick={() => onDelete(task.id)}/>*/}
-				{/*	<abbr data-icon="k"*/}
-				{/*				className='wrap-btn__details'*/}
-				{/*				onClick={() => onSelect(task)}/>*/}
-				{/*</div>*/}
 			</form>
 		</div>
 	)
