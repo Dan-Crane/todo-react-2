@@ -47,6 +47,7 @@ export const Body = ({match}) => {
 		completed: (a, b) => b.completed - a.completed,
 	}
 
+	//test
 	//временно sortBy
 	const sortedTasks = sortBy ? tasks.slice().sort(sortFn[sortBy]) : tasks
 
