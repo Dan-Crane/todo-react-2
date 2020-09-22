@@ -52,6 +52,14 @@ export const createList = (obj) => {
 		.then(mapDoc)
 }
 
+export const updateList = (listId, data) => {
+	return db.collection("lists").doc(listId).update(data)
+		.then(() => ({
+			id: listId,
+			...data
+		}))
+}
+
 export const deleteList = (listId) => {
 	return db.collection('lists').doc(listId).delete()
 		.then(() => listId)

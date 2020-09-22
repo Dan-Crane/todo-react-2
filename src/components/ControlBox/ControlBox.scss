@@ -1,0 +1,108 @@
+.control-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  // заканчивая до и <
+  @media all and (max-width: 768px) {
+    min-width: 40px;
+  }
+
+  &__list {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    @media all and (max-width: 768px) {
+      &:not(:last-child) {
+        margin-right: 8px;
+      }
+    }
+
+    .display-dropdown {
+      &__wrap {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translateY(32px);
+        min-width: 100%;
+
+        z-index: 1;
+        background-color: #e1e8f0;
+        padding: 4px 12px;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+
+        @media all and (max-width: 768px) {
+          transform: translateY(25px);
+        }
+      }
+
+      &-enter {
+        opacity: 0;
+      }
+
+      &-enter-active {
+        opacity: 1;
+        transition: opacity 300ms;
+      }
+
+      &-exit {
+        opacity: 1;
+      }
+
+      &-exit-active {
+        opacity: 0;
+        transition: opacity 300ms;
+      }
+    }
+  }
+
+  &__btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity, background-color 0.15s ease-in-out;
+    cursor: pointer;
+    //начиная от и >
+    @media all and (min-width: 768px) {
+      opacity: .4;
+      &:hover {
+        opacity: .6;
+      }
+    }
+    // заканчивая до и <
+    @media all and (max-width: 768px) {
+      opacity: .6;
+    }
+
+    // размер svg спрайта
+    svg {
+      width: 20px;
+      height: 20px;
+      @media all and (max-width: 768px) {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    &:active {
+      background-color: darken(#4DD599, 10) !important;
+      border-radius: 2px;
+    }
+
+    &:focus {
+      border-radius: 2px;
+      background-color: darken(#4DD599, 0);
+      //border: 1px solid darken(#4DD599, 50);
+    }
+  }
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  height: 32px;
+  width: 32px;
+  display: inline-block;
+  fill: currentColor;
+}

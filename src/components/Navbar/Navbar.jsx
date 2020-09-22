@@ -47,7 +47,7 @@ export const Navbar = ({
 
 			<List lists={
 				[{
-					icon: <abbr data-icon="n"/>,
+					icon: <abbr data-icon="f"/>,
 					name: 'Задачи',
 					to: '/',
 				}, {
@@ -62,11 +62,10 @@ export const Navbar = ({
 			}
 						visible={mobileScreen}/>
 
-			<List lists={state.lists}
-						visible={mobileScreen}
-						onDelete={handleDelete}
-						isRemovable/>
-
+				<List lists={state.lists}
+							visible={mobileScreen}
+							onDelete={handleDelete}
+							isRemovable/>
 			<AddList visible={mobileScreen}/>
 
 		</nav>
