@@ -5,8 +5,8 @@ export const useOutsideAlerter = initialValue => {
 	const [visible, setVisible] = useState(initialValue);
 
 	const handleClickOutside = event => {
-		event.preventDefault()
 		if (ref.current && !ref.current.contains(event.target)) {
+			event.preventDefault()
 			event.stopPropagation();
 			setVisible(false);
 		}

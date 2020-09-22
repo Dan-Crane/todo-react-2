@@ -13,10 +13,10 @@ import {TaskDetails} from "./TaskDetails/TaskDetails";
 export const Body = ({match}) => {
 	const {state, actions} = useStore()
 	const [selectedTask, setSelectedTask] = useState(null)
-	const list =  state.lists.find(i => i.id === match.params.listId) || {name: 'Задачи', hardCode: true}
-
-	const getList = () => {
-	}
+	//временно
+	const [sortBy, setSortBy] = useState('')
+	//
+	const list = state.lists.find(i => i.id === match.params.listId) || {name: 'Задачи', hardCode: true}
 
 	// логика фильтра
 	const path = match.path
@@ -32,14 +32,32 @@ export const Body = ({match}) => {
 		},
 		'/planned': tasks => {
 			list.name = 'Запланированные'
-			return  tasks.filter(task => task.dueDate)
+			return tasks.filter(task => task.dueDate)
 		}
 	})
 
 	const getTaskByList = (tasks, listId) => tasks.filter(task => task.listId === listId)
-	//тут
+
 	const tasks = match.params.listId ? getTaskByList(state.tasks, match.params.listId) : getTaskByFilter[path](state.tasks)
 
+	const sortFn = {
+		title: (a, b) => a.text.localeCompare(b.text),
+		date: (a, b) => new Date(a.seconds * 1000) - new Date(b.seconds * 1000),
+		important: (a, b) => b.important - a.important,
+		completed: (a, b) => b.completed - a.completed,
+	}
+
+	//временно sortBy
+	const sortedTasks = sortBy ? tasks.slice().sort(sortFn[sortBy]) : tasks
+
+	//header
+	const handleSortChange = (sort) => {
+		setSortBy(sort)
+		console.log(sort);
+	}
+
+
+	//body
 	const handleSubmit = (text) => {
 		actions.createTask({
 			text,
@@ -73,9 +91,10 @@ export const Body = ({match}) => {
 				key={list.id}
 				list={list}
 				onUpdate={handleUpdate}
+				onSortChange={handleSortChange}
 			/>
 			<BodyContent
-				tasks={tasks}
+				tasks={sortedTasks}
 				onSelect={handleSelect}
 				onSubmit={handleSubmit}
 				onUpdate={handleUpdate}

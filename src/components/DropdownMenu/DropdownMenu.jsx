@@ -2,8 +2,7 @@ import React from "react";
 
 import './DropdownMenu.scss'
 
-export const DropdownMenu = ({icon, children}) => {
-
+export const DropdownMenu = ({children}) => {
 	return (
 		<ul
 			className='dropdown'>
@@ -15,7 +14,6 @@ export const DropdownMenu = ({icon, children}) => {
 }
 
 export const DropdownItem = ({icon, children, sendFunc}) => {
-
 	return (
 		<li
 			tabIndex={0}

@@ -7,7 +7,7 @@ import {Input} from "../../InputComponent/Input";
 import {ControlBox, ControlItem} from "../../ControlBox/ControlBox";
 import {DropdownItem, DropdownMenu} from "../../DropdownMenu/DropdownMenu";
 
-export const TitleBody = ({list, onUpdate}) => {
+export const TitleBody = ({list, onUpdate, onSortChange}) => {
 	const [editMode, setEditMode] = useState(false)
 	const [inputValue, setInputValue] = useState(list.name)
 
@@ -78,17 +78,20 @@ export const TitleBody = ({list, onUpdate}) => {
 							<ControlItem icon={<svg className="icon-sort">
 								<use xlinkHref="#icon-sort"/>
 							</svg>}>
-									<DropdownMenu>
-										<DropdownItem>
-											По алфавиту
-										</DropdownItem>
-										<DropdownItem>
-											По важности
-										</DropdownItem>
-										<DropdownItem>
-											По дате
-										</DropdownItem>
-									</DropdownMenu>
+								<DropdownMenu>
+									<DropdownItem sendFunc={() => onSortChange('title')}>
+										По алфавиту
+									</DropdownItem>
+									<DropdownItem sendFunc={() => onSortChange('date')}>
+										По дате
+									</DropdownItem>
+									<DropdownItem sendFunc={() => onSortChange('important')}>
+										По важности
+									</DropdownItem>
+									<DropdownItem sendFunc={() => onSortChange('completed')}>
+										По завершенным
+									</DropdownItem>
+								</DropdownMenu>
 							</ControlItem>
 						</ControlBox>
 					}

@@ -17,7 +17,6 @@ export const ControlItem = ({icon, sendFunc, children, color}) => {
 
 	const {visible, setVisible, ref} = useOutsideAlerter(false)
 
-	// const [open, setOpen] = useState(false)
 	const handlerSendFunction = (e) => {
 		e.preventDefault()
 		setVisible(!visible)
@@ -25,10 +24,10 @@ export const ControlItem = ({icon, sendFunc, children, color}) => {
 	}
 	return (
 		<li className='control-box__list'>
-			<a href="" style={color ? {color: color} : {color: 'black'}} className='control-box__btn-icon'
+			<div style={color ? {color: color} : {color: 'black'}} className='control-box__btn-icon'
 				 onClick={handlerSendFunction} tabIndex={0}>
 				{icon}
-			</a>
+			</div>
 
 			{children &&
 			<CSSTransition
