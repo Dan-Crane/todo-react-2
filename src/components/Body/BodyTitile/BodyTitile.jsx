@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 
-import './BodyTitile.scss'
 import {CSSTransition, SwitchTransition} from "react-transition-group";
+import {useLocation} from 'react-router-dom';
+
+import './BodyTitile.scss'
 
 import {Input} from "../../InputComponent/Input";
 import {ControlBox, ControlItem} from "../../ControlBox/ControlBox";
@@ -10,6 +12,8 @@ import {DropdownItem, DropdownMenu} from "../../DropdownMenu/DropdownMenu";
 export const TitleBody = ({list, onUpdate, onSortChange}) => {
 	const [editMode, setEditMode] = useState(false)
 	const [inputValue, setInputValue] = useState(list.name)
+	const location = useLocation()
+	console.log(location.pathname)
 
 	const handleChange = (e) => {
 		e.preventDefault()
@@ -85,12 +89,18 @@ export const TitleBody = ({list, onUpdate, onSortChange}) => {
 									<DropdownItem sendFunc={() => onSortChange('date')}>
 										По дате
 									</DropdownItem>
-									<DropdownItem sendFunc={() => onSortChange('important')}>
-										По важности
-									</DropdownItem>
-									<DropdownItem sendFunc={() => onSortChange('completed')}>
-										По завершенным
-									</DropdownItem>
+									{
+										location.pathname !== '/important' &&
+										<DropdownItem sendFunc={() => onSortChange('important')}>
+											По важности
+										</DropdownItem>
+									}
+									{
+										location.pathname !== '/completed' &&
+										<DropdownItem sendFunc={() => onSortChange('completed')}>
+											По завершенным
+										</DropdownItem>
+									}
 								</DropdownMenu>
 							</ControlItem>
 						</ControlBox>
