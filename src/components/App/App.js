@@ -13,8 +13,6 @@ import {useStore} from "../../hooks/store";
 const App = () => {
 	const {state, actions} = useStore()
 
-
-
 	useEffect(() => {
 		actions.setAuth()
 	}, [actions])
