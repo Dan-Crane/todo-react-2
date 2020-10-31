@@ -13,7 +13,6 @@ export const TitleBody = ({list, onUpdate, onSortChange}) => {
 	const [editMode, setEditMode] = useState(false)
 	const [inputValue, setInputValue] = useState(list.name)
 	const location = useLocation()
-	console.log(location.pathname)
 
 	const handleChange = (e) => {
 		e.preventDefault()
@@ -95,12 +94,10 @@ export const TitleBody = ({list, onUpdate, onSortChange}) => {
 											По важности
 										</DropdownItem>
 									}
-									{
-										location.pathname !== '/completed' &&
-										<DropdownItem sendFunc={() => onSortChange('completed')}>
-											По завершенным
-										</DropdownItem>
-									}
+									<DropdownItem sendFunc={() => onSortChange('completed')}>
+										По завершенным
+									</DropdownItem>
+
 								</DropdownMenu>
 							</ControlItem>
 						</ControlBox>

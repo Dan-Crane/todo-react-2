@@ -22,7 +22,7 @@ export const List = ({
 
 	return (
 		<ul className='navbar__list list-navbar'>
-			<TransitionGroup>
+			<TransitionGroup component={null}>
 				{lists && lists.map((i, index) => {
 					return (
 						<CSSTransition
@@ -34,8 +34,17 @@ export const List = ({
 							timeout={400}
 							mountOnEnter
 							unmountOnExit>
-							<NavLink to={i.added ? 'null' : i.to || `/list/${i.id}`} className='list-navbar__wrap'>
-
+							<NavLink to={i.added ? 'null' : i.to || `/list/${i.id}`}
+											 className='list-navbar__wrap'
+											 // active при выбранной вкладке
+											 isActive={(match) => {
+												 if (!match) {
+													 return false;
+												 } else if (match.url === '') return false
+												 else if (match.url === i.to || `/list/${i.id}`) {
+													 return true;
+												 }
+											 }}>
 								<li
 									className={classNames({
 										active: i.active
