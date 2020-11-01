@@ -58,9 +58,8 @@ export const AddTaskItem = ({idList, onAddTask, onSubmit}) => {
 								 autoFocus={true}
 								 onChange={(e) => setInputValue(e.target.value)}
 								 type="text"/>
-					<button disabled={isSending}
-									className='add-task-item__btn-add main-btn'>
-						{isSending ? 'Добавление...' : 'Добавить задачу'}</button>
+					<button className='add-task-item__btn-add main-btn'>
+						Добавить задачу</button>
 					<button onClick={toggleVisible}
 									className='add-task-item__btn-close'>Отмена
 					</button>
