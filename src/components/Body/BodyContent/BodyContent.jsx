@@ -10,7 +10,7 @@ export const BodyContent = ({tasks, onSubmit, onDelete, onUpdate, onSelect}) => 
 	return (
 		<div className='body__item-tasks body-content'>
 			{
-				<TransitionGroup>
+				<TransitionGroup component={null}>
 					{tasks.map(t => (
 						<CSSTransition
 							key={t.id}
@@ -25,15 +25,6 @@ export const BodyContent = ({tasks, onSubmit, onDelete, onUpdate, onSelect}) => 
 					))}
 				</TransitionGroup>
 			}
-
-			{/*{tasks.map(t => {*/}
-			{/*	return (<TaskItem*/}
-			{/*		task={t}*/}
-			{/*		key={t.id}*/}
-			{/*		onSelect={onSelect}*/}
-			{/*		onUpdate={onUpdate}*/}
-			{/*		onDelete={onDelete}/>)*/}
-			{/*})}*/}
 			<AddTaskItem onSubmit={onSubmit}/>
 		</div>
 	)
