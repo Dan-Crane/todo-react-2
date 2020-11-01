@@ -14,9 +14,16 @@ export const AddTaskItem = ({idList, onAddTask, onSubmit}) => {
 		setInputValue('')
 	}
 
-	return (
-		<div className='add-task-item'>
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		e.stopPropagation()
+		onSubmit(inputValue)
+		setInputValue('')
+		toggleVisible()
+	}
 
+	return (
+		<form onSubmit={event => event.preventDefault()} className='add-task-item'>
 			<SwitchTransition mode='out-in'>
 				<CSSTransition key={visible}
 											 in={visible}
@@ -28,7 +35,8 @@ export const AddTaskItem = ({idList, onAddTask, onSubmit}) => {
 								<div className='add-task-item__wrap-itp'>
 									<Input placeholder='Название задачи' type='text' value={inputValue} setValue={setInputValue}/>
 								</div>
-								<button className='add-task-item__btn-add main-btn'>
+								<button onClick={handleSubmit}
+									className='add-task-item__btn-add main-btn'>
 									Добавить задачу
 								</button>
 								<button onClick={toggleVisible}
@@ -45,6 +53,6 @@ export const AddTaskItem = ({idList, onAddTask, onSubmit}) => {
 					</>
 				</CSSTransition>
 			</SwitchTransition>
-		</div>
+		</form>
 	)
 }
