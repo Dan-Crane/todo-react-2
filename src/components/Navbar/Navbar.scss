@@ -112,13 +112,12 @@
     flex: 1 1 auto;
     cursor: default;
     opacity: 1;
-    @media all and (max-width: 768px) {
-      font-size: 12px;
-      line-height: 14px;
-      max-width: 100px;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+    @media all and (max-width: 768px) {
+      font-size: 12px;
+      line-height: 14px;
     }
   }
 
