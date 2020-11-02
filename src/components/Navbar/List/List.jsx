@@ -7,71 +7,59 @@ import './List.scss'
 import {Badge} from "../../Badge/Badge";
 import {NavLink} from "react-router-dom";
 
-export const List = ({
-											 lists, isRemovable,
-											 onActiveList, activeList, onClick,
-											 visible,
-
-											 //new props
-											 onDelete
-										 }) => {
-
-
-	let toggleVisible = ''
-	if (visible) toggleVisible += ' active-visible'
+export const List = (props) => {
+	const {
+		lists, isRemovable,
+		//new props
+		burgerShow, onDelete
+	} = props
 
 	return (
 		<ul className='navbar__list list-navbar'>
 			<TransitionGroup component={null}>
-				{lists && lists.map((i, index) => {
-					return (
+				{lists && lists.map((i, index) => (
 						<CSSTransition
 							key={index}
 							classNames={{
-								enterActive: 'list-navbar__wrap-add',
-								exitActive: 'list-navbar__wrap-del',
+								enterActive: 'list-navbar__link-add',
+								exitActive: 'list-navbar__link-del',
 							}}
 							timeout={400}
 							mountOnEnter
 							unmountOnExit>
-							<NavLink to={i.added ? 'null' : i.to || `/list/${i.id}`}
-											 className='list-navbar__wrap'
-											 // active при выбранной вкладке
-											 isActive={(match) => {
-												 if (!match) {
-													 return false;
-												 } else if (match.url === '') return false
-												 else if (match.url === i.to || `/list/${i.id}`) {
-													 return true;
-												 }
-											 }}>
-								<li
-									className={classNames({
-										active: i.active
-											? i.active
-											: activeList && activeList.id === i.id
-									})}>
-									<i className={toggleVisible}>
+							<li className='list-navbar__item'>
+								<NavLink to={i.added ? 'null' : i.to || `/list/${i.id}`}
+												 className='list-navbar__link'
+									// active при выбранной вкладке
+												 isActive={(match) => {
+													 if (!match) {
+														 return false;
+													 } else if (match.url === '') return false
+													 else if (match.url === i.to || `/list/${i.id}`) {
+														 return true;
+													 }
+												 }}>
+									<i className={`list-navbar__icon ${burgerShow && 'show'}`}
+										 style={i.icon ? {opacity: .6} : {}}>
 										{i.icon ? i.icon : <Badge color={i.color.name}/>}
 									</i>
-									<span className={toggleVisible}>{i.name}</span>
+									<span className={`list-navbar__text ${burgerShow && 'show'}`}>{i.name}</span>
 
-									{/*<div className={`list-navbar__count ${toggleVisible}`}>*/}
-									{/*	{i.tasks && `(${i.tasks.length})`}*/}
-									{/*</div>*/}
-									{isRemovable && <abbr data-icon="i"
-																				className={`list-navbar__btn-remove`}
-																				onClick={(e) => {
-																					e.preventDefault()
-																					e.stopPropagation()
-																					onDelete(i.id)
-																				}}/>}
-								</li>
-							</NavLink>
+									{isRemovable &&
+									<svg className={`icon-times list-navbar__btn-remove ${burgerShow && 'show'}`}
+											 onClick={(e) => {
+												 e.preventDefault()
+												 e.stopPropagation()
+												 onDelete(i.id)
+											 }}>
+										<use xlinkHref="#icon-times"/>
+									</svg>}
+								</NavLink>
+							</li>
 						</CSSTransition>
 
 					)
-				})}
+				)}
 			</TransitionGroup>
 		</ul>
 	)

@@ -9,8 +9,7 @@ import {Badge} from "../../Badge/Badge";
 export const AddList = ({
 													colors, addList, addVisible,
 
-
-													visible
+													burgerShow
 												}) => {
 	const {state, actions} = useStore()
 	const [displayPopup, setDisplayPopup] = useState(false)
@@ -57,8 +56,10 @@ export const AddList = ({
 
 			<div className='navbar__list list-navbar add-list-btn__wrap'
 					 onClick={() => setDisplayPopup(s => !s)}>
-				<abbr className='add-list-btn__icon' data-icon="e"/>
-				<span className='add-list-btn__text'>Добавить список</span>
+				<svg className={`icon-plus-1 add-list-btn__icon ${burgerShow && 'show'}`}>
+					<use xlinkHref="#icon-plus-1"/>
+				</svg>
+				<span className={`add-list-btn__text ${burgerShow && 'show'}`}>Добавить список</span>
 			</div>
 
 			<CSSTransition
@@ -73,10 +74,10 @@ export const AddList = ({
 
 				<form onSubmit={handleAddList}
 							className={`add-list-btn__popup`}>
-
-					<abbr data-icon="g"
-								className='add-list-btn__close'
-								onClick={onClose}/>
+					<svg className="icon-closesvg add-list-btn__close"
+							 onClick={onClose}>
+						<use xlinkHref="#icon-closesvg"/>
+					</svg>
 					<input className='main-input add-list-btn__input'
 								 placeholder='Название листа'
 								 autoFocus={true}

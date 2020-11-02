@@ -17,6 +17,7 @@ export const AddTaskItem = ({idList, onAddTask, onSubmit}) => {
 	const handleSubmit = (e) => {
 		e.preventDefault()
 		e.stopPropagation()
+		if(inputValue.length === 0) return
 		onSubmit(inputValue)
 		setInputValue('')
 		toggleVisible()

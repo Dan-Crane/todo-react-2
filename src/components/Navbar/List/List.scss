@@ -11,145 +11,141 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none;
 
-  &__wrap {
-    display: block;
+  &__link {
+    flex: 1 1 auto;
+    display: flex;
+    min-height: 20px;
     transition: all 0.15s ease-in-out;
-
-    &-add{
-      animation: delList 400ms reverse ease-in-out;
-    }
-    &-del{
-      animation: delList 400ms forwards ease-in-out;
-    }
-    &.active{
-      background: #FFFFFF;
-      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-      border-radius: 4px;
-    }
-    &:active{
-      background: rgba(46, 193, 128, 0.59);
-      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-      border-radius: 4px;
-    }
-  }
-
-  @media all and (max-width: 768px) {
-    margin-bottom: 16px;
-  }
-
-  .badge {
-    position: relative;
-    left: 1px;
-    @media all and (max-width: 768px) {
-      left: 0;
-    }
-  }
-
-  i {
-    display: inline-flex;
-    margin-right: 10px;
-    transition: all 0.15s ease-in-out;
-    min-width: 14px;
-
-    @media all and (max-width: 768px) {
-      margin-right: 0;
-    }
-
-    &.active-visible {
-      margin-right: 10px;
-    }
-  }
-
-  a {
     text-decoration: none;
     color: #000;
-  }
 
-  li {
-    display: flex;
     align-items: center;
     cursor: pointer;
     padding: 10px 12px;
-    transition: all 0.15s ease-in-out;
     margin-bottom: 4px;
 
     @media all and (max-width: 768px) {
       padding: 6px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      &.active-visible {
-        justify-content: flex-start;
-      }
+      //justify-content: center;
+
     }
 
-    span {
-      flex: 1;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      width: 160px;
-      white-space: nowrap;
-      transition: all 0.15s ease-in-out;
-      @media all and (max-width: 768px) {
-        opacity: 0;
-        visibility: hidden;
-        width: 0px;
-        flex: 0;
-      }
-
-      &.active-visible {
-        flex: 1;
-        opacity: 1;
-        visibility: visible;
-      }
+    &-add {
+      animation: delList 400ms reverse ease-in-out;
     }
 
+    &-del {
+      animation: delList 400ms forwards ease-in-out;
+    }
 
-    @media all and (min-width: 768px){
+    &.active {
+      background: #FFFFFF;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+
+    &:active {
+      background: rgba(46, 193, 128, 0.59);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+
+    @media all and (min-width: 768px) {
       &:hover {
         background-color: #dce8f6;
       }
     }
 
-    &.active {
-      background: #FFFFFF;
-      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-      border-radius: 4px;
-    }
-
-    &:hover #{$self}__btn-remove {
-      opacity: .2;
-    }
-
-    #{$self}__btn-remove {
-      transition: all 0.15s ease-in-out;
-      opacity: 0;
-      font-size: 16px;
-      display: inline-flex;
-
-      &:active {
-        background-color: #4DD599;
-      }
-
-
-      @media all and (min-width: 769px) {
-        &:hover {
-          opacity: .8;
+    @media all and (min-width: 768px) {
+      &:hover {
+        .list-navbar__btn-remove {
+          opacity: .2;
         }
       }
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    transition: all 0.15s ease-in-out;
+    width: 20px;
+    height: 20px;
+
+    &.show{
+      margin-right: 6px;
+    }
+
+    svg{
+      width: 100%;
+      height: 100%;
+    }
+    .badge {
+      width: 20px;
+      height: 20px;
+      position: relative;
+      left: 1px;
       @media all and (max-width: 768px) {
-        opacity: 0;
-        visibility: hidden;
-        width: 0;
-        padding: 0;
-        &.active-visible {
-          opacity: .8;
-          visibility: visible;
-          min-width: 16px;
-        }
+        left: 0;
       }
+    }
+    @media all and (max-width: 768px) {
+      margin-right: 0;
+    }
+  }
 
+  &__text {
+    flex: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 160px;
+    white-space: nowrap;
+    transition: all 0.15s ease-in-out;
+    @media all and (max-width: 768px) {
+      opacity: 0;
+      visibility: hidden;
+      width: 0;
+      flex: 0;
+    }
+    &.show{
+      opacity: 1;
+      visibility: visible;
+      width: 100%;
+      flex: 1;
+    }
+  }
 
+  #{$self}__btn-remove {
+    transition: opacity 0.15s ease-in-out;
+    opacity: .6;
+    font-size: 16px;
+    //display: inline-flex;
+
+    &:active {
+      background-color: #4DD599;
+    }
+
+    @media all and (min-width: 768px) {
+      opacity: 0;
+      &:hover {
+        opacity: .8;
+      }
+    }
+    @media all and (max-width: 768px) {
+      opacity: 0;
+      appearance: none;
+      position: absolute;
+      z-index: -5;
+    }
+    &.show{
+      opacity: .6;
+      appearance: auto;
+      position: relative;
+      z-index: 5;
     }
   }
 
@@ -165,24 +161,11 @@
       margin-right: 0;
       width: 0;
     }
-
-    &.active-visible {
-      opacity: 1;
-      visibility: visible;
-      margin-right: 8px;
-      min-width: 17px;
-    }
   }
 
-  .add-btn {
-    opacity: .6;
-
-    &:hover {
-      opacity: 1;
-    }
+  @media all and (max-width: 768px) {
+    margin-bottom: 16px;
   }
-
-
 }
 
 

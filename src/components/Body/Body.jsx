@@ -16,7 +16,7 @@ export const Body = ({match}) => {
 	//временно
 	const [sortBy, setSortBy] = useState('')
 	//
-	const list = state.lists.find(i => i.id === match.params.listId) || {name: 'Задачи', hardCode: true}
+	const list = state.lists.find(i => i.id === match.params.listId) || {name: 'Задачи', hardCode: true, id: Math.floor(Math.random() * Math.floor(40))}
 
 	// логика фильтра
 	const path = match.path
@@ -95,6 +95,7 @@ export const Body = ({match}) => {
 				onSortChange={handleSortChange}
 			/>
 			<BodyContent
+				listId={list.id}
 				tasks={sortedTasks}
 				onSelect={handleSelect}
 				onSubmit={handleSubmit}

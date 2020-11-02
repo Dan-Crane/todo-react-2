@@ -6,7 +6,7 @@ import './BodyContent.scss'
 import {AddTaskItem} from "./AddTaskItem/AddTaskItem";
 import {TaskItem} from "./TaskItem/TaskItem";
 
-export const BodyContent = ({tasks, onSubmit, onDelete, onUpdate, onSelect}) => {
+export const BodyContent = ({tasks, onSubmit, onDelete, onUpdate, onSelect, listId}) => {
 	return (
 		<div className='body__item-tasks body-content'>
 			{
@@ -25,7 +25,7 @@ export const BodyContent = ({tasks, onSubmit, onDelete, onUpdate, onSelect}) => 
 					))}
 				</TransitionGroup>
 			}
-			<AddTaskItem onSubmit={onSubmit}/>
+			<AddTaskItem key={listId} onSubmit={onSubmit}/>
 		</div>
 	)
 }

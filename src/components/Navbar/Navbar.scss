@@ -4,24 +4,36 @@
   background-color: #eff6ff;
   width: 240px;
   height: 100vh;
-  transition: all 0.15s ease-in-out;
+  transition: all 0.300s ease-in-out;
+
 
   @media all and (max-width: 768px) {
-    width: 40px;
+    width: 41px;
     padding: 10px 4px;
+    position: absolute;
+    z-index: 2;
   }
 
   &.show {
-    width: 240px;
+    width: 88%;
     padding: 10px 4px;
   }
 
   &__tog-show {
-    font-size: 28px;
-    line-height: 28px;
-    text-align: center;
-    transition: all 5s ease-in-out;
+    height: 24px;
     color: #4DD599;
+    display: flex;
+    justify-content: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    &.show {
+      justify-content: flex-end;
+    }
+
     @media all and (min-width: 769px) {
       display: none;
     }
@@ -30,18 +42,43 @@
   &__auth {
 
   }
+
+  .burger-show {
+    &-enter {
+      opacity: 0;
+    }
+
+    &-enter-active {
+      opacity: 1;
+    }
+
+    &-exit {
+      opacity: 1;
+    }
+
+    &-exit-active {
+      opacity: 0;
+    }
+
+    &-enter-active,
+    &-exit-active {
+      transition: opacity 300ms;
+    }
+  }
 }
 
 .auth-nav {
   padding: 10px 12px;
   @media all and (max-width: 768px) {
-    transition: all 0.15s ease-in-out;
+    transition: all 0.300s ease-in-out;
     padding: 6px;
     opacity: 0;
   }
-&.show{
-  opacity: 1;
-}
+
+  &.show {
+    opacity: 1;
+  }
+
   &__title {
     font-family: Montserrat;
     letter-spacing: -0.5px;
@@ -49,7 +86,7 @@
     line-height: 24px;
     margin-bottom: 4px;
     opacity: 1;
-    transition: all 0.15s ease-in-out;
+    transition: all 0.300s ease-in-out;
     white-space: nowrap;
     @media all and (max-width: 768px) {
       font-size: 18px;
@@ -62,7 +99,7 @@
     align-items: center;
     opacity: .4;
     @media all and (min-width: 768px) {
-      transition: opacity 0.15s ease-in-out;
+      transition: opacity 0.300s ease-in-out;
       &:hover {
         opacity: .6;
       }
@@ -89,7 +126,7 @@
     display: inline-flex;
     font-size: 20px;
     cursor: pointer;
-    transition: color, opacity 0.15s ease-in-out;
+    transition: color, opacity 0.300s ease-in-out;
     @media all and (min-width: 768px) {
       &:hover {
         color: tomato;
