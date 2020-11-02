@@ -7,7 +7,6 @@ import {Input} from "../../../InputComponent/Input";
 import {useOutsideAlerter} from "../../../../hooks/OutsideAlerter";
 
 export const AddTaskItem = ({idList, onAddTask, onSubmit}) => {
-	// const [visible, setVisible] = useState(false)
 	const [inputValue, setInputValue] = useState('')
 
 	const {visible, setVisible, ref} = useOutsideAlerter(false)
