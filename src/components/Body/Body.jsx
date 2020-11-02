@@ -77,7 +77,6 @@ export const Body = ({match}) => {
 		} else if (option === 'list') {
 			return actions.updateList(id, data)
 		}
-
 	}
 
 	const handleSelect = (task) => {

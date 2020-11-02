@@ -4,6 +4,7 @@ import {db, auth} from '../firebase'
 export const logInUser = (email, password) => {
 	return auth.signInWithEmailAndPassword(email, password)
 		.catch(error => {
+			console.log(error.code, error.message)
 			const errorCode = error.code;
 			const errorMessage = error.message;
 		});
@@ -16,6 +17,7 @@ export const logOutUser = () => {
 export const register = (email, password) => {
 	return auth.createUserWithEmailAndPassword(email, password)
 		.catch(error => {
+			console.log(error.code, error.message)
 			var errorCode = error.code;
 			var errorMessage = error.message;
 		});

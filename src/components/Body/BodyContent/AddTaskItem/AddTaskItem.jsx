@@ -4,10 +4,13 @@ import {CSSTransition, SwitchTransition, TransitionGroup} from "react-transition
 import './AddTaskItem.scss'
 
 import {Input} from "../../../InputComponent/Input";
+import {useOutsideAlerter} from "../../../../hooks/OutsideAlerter";
 
 export const AddTaskItem = ({idList, onAddTask, onSubmit}) => {
-	const [visible, setVisible] = useState(false)
+	// const [visible, setVisible] = useState(false)
 	const [inputValue, setInputValue] = useState('')
+
+	const {visible, setVisible, ref} = useOutsideAlerter(false)
 
 	const toggleVisible = () => {
 		setVisible(s => !s)
@@ -32,7 +35,7 @@ export const AddTaskItem = ({idList, onAddTask, onSubmit}) => {
 											 classNames={'fade'}>
 					<>
 						{visible
-							? <div className='add-task-item__form'>
+							? <div className='add-task-item__form' ref={ref}>
 								<div className='add-task-item__wrap-itp'>
 									<Input placeholder='Название задачи' type='text' value={inputValue} setValue={setInputValue}/>
 								</div>

@@ -28,8 +28,8 @@ const App = () => {
 	if (!state.user) {
 		return (
 			<>
-				<Redirect to='/auth'/>
 				<Route path='/auth' component={Auth}/>
+				<Redirect to='/auth'/>
 			</>
 		)
 	} else {
