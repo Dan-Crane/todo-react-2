@@ -16,11 +16,12 @@ export const logOutUser = () => {
 
 export const register = (email, password) => {
 	return auth.createUserWithEmailAndPassword(email, password)
-		.catch(error => {
-			console.log(error.code, error.message)
-			var errorCode = error.code;
-			var errorMessage = error.message;
-		});
+		// // .then(obj => console.log(obj))
+		// .catch(error => {
+		// 	const errorCode = error.code;
+		// 	const errorMessage = error.message;
+		// 	return errorCode, errorMessage
+		// });
 }
 export const setAuth = (onAuth) => {
 	return auth.onAuthStateChanged(onAuth)

@@ -9,7 +9,6 @@ import {BodyContent} from "./BodyContent/BodyContent";
 import {PreloaderCircle} from "../PreloaderCircle/PreloaderCrcle";
 import {TaskDetails} from "./TaskDetails/TaskDetails";
 
-
 export const Body = ({match}) => {
 	const {state, actions} = useStore()
 	const [selectedTask, setSelectedTask] = useState(null)
