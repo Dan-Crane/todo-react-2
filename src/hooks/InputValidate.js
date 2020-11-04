@@ -65,12 +65,11 @@ export function useInputValidation(value, validations) {
 	}
 }
 
-export function useInput(initialValue, validationsObj) {
+export function useInput(initialValue) {
 	const [value, setValue] = useState(initialValue)
 	const [errors, setErrors] = useState('')
 	const [isDirty, setIsDirty] = useState(false)
-
-	// const valid = useInputValidation(value, validationsObj)
+	const [btnDisable, setBtnDisable] = useState(true)
 
 	async function handleChange(event) {
 		let {target: {type, name, value, checked, selected}} = event
@@ -85,13 +84,13 @@ export function useInput(initialValue, validationsObj) {
 		await setErrors(errors)
 
 		if (errors[name] !== null) {
-			return setIsDirty(true)
+			return setIsDirty(true), setBtnDisable(true)
 		} else {
-			return setIsDirty(false)
+			return setIsDirty(false), setBtnDisable(false)
 		}
 	}
 
-	async function onBlur(event) {
+	async function handleBlur(event) {
 		let {target: {type, name, value, checked, selected}} = event
 		value = type === 'checkbox' ? checked :
 			type === 'select' ? selected : value
@@ -104,18 +103,18 @@ export function useInput(initialValue, validationsObj) {
 		await setErrors(errors)
 
 		if (errors[name] !== null) {
-			return setIsDirty(true)
+			return setIsDirty(true), setBtnDisable(true)
 		} else {
-			return setIsDirty(false)
+			return setIsDirty(false), setBtnDisable(false)
 		}
 	}
 
 	return {
 		value,
-		handleChange,
 		errors,
-		onBlur,
 		isDirty,
-		// ...valid,
+		btnDisable,
+		handleChange,
+		handleBlur,
 	}
 }

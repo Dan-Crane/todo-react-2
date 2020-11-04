@@ -5,10 +5,10 @@ import './Input.scss'
 export const Input = ({placeholder, type, value, setValue, autoFocus, onBlur, name}) => {
 	return (
 		<div className='input-wrap'>
-			<label htmlFor="inp" className="inp">
+			<label htmlFor={name} className="inp">
 				<input type={type}
 							 name={name}
-							 id='inp'
+							 id={name}
 							 placeholder='&nbsp;'
 							 value={value}
 							 autoFocus={autoFocus || false}

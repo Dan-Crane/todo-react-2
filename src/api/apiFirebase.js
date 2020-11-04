@@ -3,11 +3,11 @@ import {db, auth} from '../firebase'
 // auth
 export const logInUser = (email, password) => {
 	return auth.signInWithEmailAndPassword(email, password)
-		.catch(error => {
-			console.log(error.code, error.message)
-			const errorCode = error.code;
-			const errorMessage = error.message;
-		});
+		// .catch(error => {
+		// 	console.log(error.code, error.message)
+		// 	const errorCode = error.code;
+		// 	const errorMessage = error.message;
+		// });
 }
 
 export const logOutUser = () => {

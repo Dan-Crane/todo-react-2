@@ -10,77 +10,102 @@ import {Input} from "../../InputComponent/Input";
 import './Login.scss'
 
 export function Login() {
-	const [emailValue, setEmailValue] = useState('')
-	const [passwordValue, setPasswordValue] = useState('')
 	const {actions} = useStore()
 	const [error, setError] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const history = useHistory()
-	const email = useInput('', {minLength: 3, isEmpty: true, isEmail: true,})
+
+	const email = useInput('')
+	const password = useInput('')
+
 
 	async function handleSubmit(e) {
 		e.preventDefault()
 
 		try {
-			setError("")
+			setError(false)
 			setLoading(true)
-			await actions.logInUser(emailValue, passwordValue)
+			await actions.logInUser(email.value, password.value)
 			history.push("/")
 		} catch {
-			setError("Failed to log in")
+
+			setError(true)
 		}
 
 		setLoading(false)
 	}
 
 	return (
-		<section className='login user'>
-			<div className='login__body user__body'>
-				<h2 className='login__title user__title'>Войти в аккаунт</h2>
-				<CSSTransition in={error}
-											 classNames='user__error-wrap'
-											 timeout={300}
-											 mountOnEnter
-											 unmountOnExit>
-					<span className='login__error user__error'>Ошибка входа</span>
-				</CSSTransition>
-				<form className='login__form user__form'>
+		<section className='login main-form'>
+			<div className='login__body main-form__body'>
+				<h2 className='login__title main-form__title'>Войти в аккаунт</h2>
 
-					<CSSTransition in={email.isDirty}
-												 classNames='user__error-wrap'
-												 timeout={300}
-												 mountOnEnter
-												 unmountOnExit>
+				<form className='login__form main-form__form' onSubmit={handleSubmit}>
+					<div className='main-form__item'>
+						<CSSTransition in={email.isDirty}
+													 classNames='main-form__error-wrap'
+													 timeout={300}
+													 mountOnEnter
+													 unmountOnExit>
 						<span
-							className='login__error user__small-error'>
+							className='login__error main-form__small-error'>
 							{email.errors.message}
 						</span>
-					</CSSTransition>
+						</CSSTransition>
 
-					<Input placeholder='Email'
-								 type='email'
-								 name='email'
-								 value={email.value}
-								 setValue={e => email.handleChange(e)}
-								 onBlur={email.onBlur}
-								 autoFocus/>
-					<Input placeholder='Пароль' type='password' setValue={setPasswordValue} value={passwordValue}/>
+						<Input placeholder='Email'
+									 type='email'
+									 name='email'
+									 value={email.value}
+									 setValue={e => email.handleChange(e)}
+									 onBlur={e => email.handleBlur(e)}
+									 autoFocus/>
+					</div>
 
-					<button className='main-btn signup__btn'
-									disabled={loading}>
-						Зарегестрироваться
-					</button>
+					<div className='main-form__item'>
+						<CSSTransition in={password.isDirty}
+													 classNames='main-form__error-wrap'
+													 timeout={300}
+													 mountOnEnter
+													 unmountOnExit>
+						<span
+							className='login__error main-form__small-error'>
+							{password.errors.message}
+						</span>
+						</CSSTransition>
+
+						<Input placeholder='Пароль'
+									 type='password'
+									 name='password'
+									 value={password.value}
+									 setValue={e => password.handleChange(e)}
+									 onBlur={e => password.handleBlur(e)}/>
+					</div>
+
+					<div className='main-form__wrap'>
+						<button type='submit' className='main-btn signup__btn login__btn main-form__btn'
+										disabled={password.btnDisable || email.btnDisable || loading}>
+							Войти
+						</button>
+
+						<CSSTransition in={error}
+													 classNames='main-form__error-wrap'
+													 timeout={300}
+													 mountOnEnter
+													 unmountOnExit>
+							<span className='login__error main-form__error'>Ошибка авторизации</span>
+						</CSSTransition>
+					</div>
 
 				</form>
-
-				<div className="w-100 text-center mt-3">
-					<Link to="/forgot-password">Forgot Password?</Link>
+				<div className="login__forgot main-form__desc">
+					<Link to="/forgot-password">Забыли пароль?</Link>
 				</div>
 
 			</div>
 
-			<div className="w-100 text-center mt-2">
-				Need an account? <Link to="/signup">Sign Up</Link>
+			<div className="login__desc main-form__desc">
+				Нужен аккаунт? <Link to="/signup">Регистрация</Link>
 			</div>
 		</section>
 	)

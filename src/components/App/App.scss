@@ -87,7 +87,7 @@ body {
   }
 }
 
-.user {
+.main-form {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,9 +104,6 @@ body {
     border-radius: 10px;
     margin-bottom: 20px;
     transition: all 0.300s ease-in-out;
-    div {
-      margin-bottom: 20px;
-    }
 
     @media all and (max-width: 768px) {
       padding: 6px;
@@ -116,12 +113,13 @@ body {
   }
 
   &__title {
+    cursor: default;
     font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
     font-size: 32px;
     line-height: 39px;
-    margin-bottom: 8px;
+    //margin-bottom: 8px;
     color: black;
     margin-right: 15px;
     word-break: break-word;
@@ -133,35 +131,49 @@ body {
     }
   }
 
+  &__item{
+    position: relative;
+    padding-top: 24px;
+    margin-bottom: 4px;
+  }
+
   &__error{
-    font-family: Montserrat;
-    display: inline-block;
-    color: #190909;
+    cursor: default;
+    font-size: 14px;
+    color: white;
     text-align: center;
-    padding: 8px;
-    width: 100%;
-    background-color: #ffb9ad;
-    border: 1px solid tomato;
+    padding: 3px;
+    height: 40px;
+    background-color: tomato;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-    margin-bottom: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 1 48%;
+
   }
   &__small-error {
-    font-family: Montserrat;
-    display: inline-block;
+    cursor: default;
     max-height: 20px;
     height: 20px;
-    color: #190909;
     text-align: center;
-    padding: 0px;
     width: 100%;
     font-size: 14px;
     line-height: 19px;
-    background-color: #ffb9ad;
-    border: 1px solid tomato;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
     margin-bottom: 4px;
+    position: absolute;
+    top: 0;
+
+
+    color: white;
+    padding: 3px;
+    background-color: tomato;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &__error-wrap {
@@ -190,6 +202,18 @@ body {
   }
 
   &__desc {
-
+    cursor: default;
+    a{
+      color: skyblue;
+    }
+  }
+  &__wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  &__btn{
+    flex: 0 0 48%;
   }
 }

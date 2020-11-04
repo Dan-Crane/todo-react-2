@@ -23,6 +23,10 @@ export const setAuth = () => {
 	})
 }
 
+export function resetPassword(email) {
+	return apiFirebase.sendPasswordResetEmail(email)
+}
+
 // DB
 export const getColors = () => {
 	return apiFirebase.getColors()
