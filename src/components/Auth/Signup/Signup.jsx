@@ -6,6 +6,7 @@ import {Link, useHistory} from "react-router-dom"
 import './Signup.scss'
 import {useStore} from "../../../hooks/store";
 import {Input} from "../../InputComponent/Input";
+import {CSSTransition} from "react-transition-group";
 
 export function Signup() {
 	const [emailValue, setEmailValue] = useState('')
@@ -24,12 +25,12 @@ export function Signup() {
 		}
 
 		try {
-			setError("")
+			setError(false)
 			setLoading(true)
 			await actions.register(emailValue, passwordValue)
 			history.push("/")
 		} catch {
-			setError("Ошибка при создании аккаунта")
+			setError(true)
 		}
 
 		setLoading(false)
@@ -37,10 +38,18 @@ export function Signup() {
 
 
 	return (
-		<section className='signup'>
+		<section className='signup auth'>
 			<div className='signup__body'>
-				<h2 className='signup__header'>Регистрация</h2>
-				{error && <span className='signup__error'>{error}</span>}
+				<h2 className='signup__header auth-title'>Регистрация</h2>
+				<CSSTransition in={error}
+											 classNames='signup__error-wrap'
+											 timeout={300}
+											 mountOnEnter
+											 unmountOnExit>
+
+					<span className='signup__error auth-error'>Ошибка регистрации</span>
+
+				</CSSTransition>
 				<form className='signup__form' onSubmit={handleSubmit}>
 					<Input placeholder='Email' type='email' setValue={setEmailValue} value={emailValue} autoFocus/>
 					<Input placeholder='Пароль' type='password' setValue={setPasswordValue} value={passwordValue}/>

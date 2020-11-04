@@ -4,6 +4,7 @@ import './Auth.scss'
 
 import {useStore} from "../../hooks/store";
 import {Signup} from "./Signup/Signup";
+import {Login} from "./Login/Login";
 
 export const Auth = () => {
 	const {actions} = useStore()
@@ -42,7 +43,8 @@ export const Auth = () => {
 			{/*	<button onClick={handleSubmit}>Зарегистрироваться*/}
 			{/*	</button>*/}
 			{/*</form>*/}
-			<Signup/>
+			{/*<Signup/>*/}
+			<Login/>
 		</div>
 	)
 }

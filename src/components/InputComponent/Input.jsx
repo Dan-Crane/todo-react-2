@@ -2,16 +2,18 @@ import React from "react";
 
 import './Input.scss'
 
-export const Input = ({placeholder, type, value, setValue, autoFocus}) => {
+export const Input = ({placeholder, type, value, setValue, autoFocus, onBlur, name}) => {
 	return (
 		<div className='input-wrap'>
 			<label htmlFor="inp" className="inp">
 				<input type={type}
+							 name={name}
 							 id='inp'
 							 placeholder='&nbsp;'
 							 value={value}
 							 autoFocus={autoFocus || false}
-							 onChange={(event => setValue(event.target.value))}/>
+							 onChange={setValue}
+							 onBlur={onBlur || null}/>
 				<span className="label">{placeholder}</span>
 				<span className="focus-bg"/>
 			</label>
