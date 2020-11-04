@@ -27,6 +27,10 @@ export const setAuth = (onAuth) => {
 	return auth.onAuthStateChanged(onAuth)
 }
 
+export function resetPassword(email) {
+	return auth.sendPasswordResetEmail(email)
+}
+
 // db
 export const getColors = () => {
 	return db.collection('colors')

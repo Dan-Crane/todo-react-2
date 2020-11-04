@@ -1,29 +1,33 @@
 import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import {CSSTransition} from "react-transition-group";
 import { Link } from "react-router-dom"
 
 import {useStore} from "../../../hooks/store";
+import {useInput} from "../../../hooks/InputValidate";
 
 import './ForgotPassword.scss'
+
+import {Input} from "../../InputComponent/Input";
 
 export function ForgotPassword() {
 	const emailRef = useRef()
 	const { actions } = useStore()
-	const [error, setError] = useState("")
-	const [message, setMessage] = useState("")
+	const [error, setError] = useState(false)
+	const [message, setMessage] = useState(false)
 	const [loading, setLoading] = useState(false)
+	const email = useInput('')
 
 	async function handleSubmit(e) {
 		e.preventDefault()
 
 		try {
-			setMessage("")
-			setError("")
+			setMessage(false)
+			// setError("")
 			setLoading(true)
-			await resetPassword(emailRef.current.value)
-			setMessage("Check your inbox for further instructions")
+			await actions.resetPassword(emailRef.current.value)
+			setMessage(true)
 		} catch {
-			setError("Failed to reset password")
+			setError(true)
 		}
 
 		setLoading(false)
@@ -31,28 +35,58 @@ export function ForgotPassword() {
 
 	return (
 		<>
-			<Card>
-				<Card.Body>
-					<h2 className="text-center mb-4">Password Reset</h2>
-					{error && <Alert variant="danger">{error}</Alert>}
-					{message && <Alert variant="success">{message}</Alert>}
-					<Form onSubmit={handleSubmit}>
-						<Form.Group id="email">
-							<Form.Label>Email</Form.Label>
-							<Form.Control type="email" ref={emailRef} required />
-						</Form.Group>
-						<Button disabled={loading} className="w-100" type="submit">
-							Reset Password
-						</Button>
-					</Form>
-					<div className="w-100 text-center mt-3">
-						<Link to="/login">Login</Link>
+			<section className='main-form forgot-pass'>
+				<div className='main-form__body forgot-pass__body'>
+					<h2 className='main-form__title forgot-pass__title'>Востановить пароль</h2>
+
+					<form className='main-form__form forgot-pass__form' onSubmit={handleSubmit}>
+						<div className='main-form__item forgot-pass__item'>
+							<CSSTransition in={email.isDirty}
+														 classNames='main-form__error-wrap'
+														 timeout={300}
+														 mountOnEnter
+														 unmountOnExit>
+						<span
+							className='main-form__small-error forgot-pass__small-error'>
+							{email.errors.message}
+						</span>
+							</CSSTransition>
+
+							<Input placeholder='Email'
+										 type='email'
+										 name='email'
+										 value={email.value}
+										 setValue={e => email.handleChange(e)}
+										 onBlur={e => email.handleBlur(e)}
+										 autoFocus/>
+						</div>
+
+						<div className='main-form__wrap'>
+							<button type='submit' className='main-btn signup__btn login__btn main-form__btn'
+											disabled={email.btnDisable || loading}>
+								Востановить
+							</button>
+
+							<CSSTransition in={error}
+														 classNames='main-form__error-wrap'
+														 timeout={300}
+														 mountOnEnter
+														 unmountOnExit>
+								<span className='login__error main-form__error'>Ошибка</span>
+							</CSSTransition>
+						</div>
+
+					</form>
+					<div className="login__forgot main-form__desc">
+						<Link to="/login">Авторизация</Link>
 					</div>
-				</Card.Body>
-			</Card>
-			<div className="w-100 text-center mt-2">
-				Need an account? <Link to="/signup">Sign Up</Link>
-			</div>
+
+				</div>
+
+				<div className="login__desc main-form__desc">
+					Нужен аккаунт? <Link to="/signup">Регистрация</Link>
+				</div>
+			</section>
 		</>
 	)
 }

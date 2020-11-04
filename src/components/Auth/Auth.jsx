@@ -5,6 +5,7 @@ import './Auth.scss'
 import {useStore} from "../../hooks/store";
 import {Signup} from "./Signup/Signup";
 import {Login} from "./Login/Login";
+import {ForgotPassword} from "./ForgotPassword/ForgotPassword";
 
 export const Auth = () => {
 	const {actions} = useStore()
@@ -44,7 +45,8 @@ export const Auth = () => {
 			{/*	</button>*/}
 			{/*</form>*/}
 			{/*<Signup/>*/}
-			<Login/>
+			{/*<Login/>*/}
+			<ForgotPassword/>
 		</div>
 	)
 }
