@@ -24,7 +24,7 @@ export const setAuth = () => {
 }
 
 export function resetPassword(email) {
-	return apiFirebase.resetPassword(email)
+	return apiFirebase.resetPassword(email).then(() => ({}))
 }
 
 // DB

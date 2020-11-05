@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react"
+import React, {useState} from "react"
 import {CSSTransition} from "react-transition-group";
-import { Link } from "react-router-dom"
+import {Link} from "react-router-dom"
 
 import {useStore} from "../../../hooks/store";
 import {useInput} from "../../../hooks/InputValidate";
@@ -10,10 +10,9 @@ import './ForgotPassword.scss'
 import {Input} from "../../InputComponent/Input";
 
 export function ForgotPassword() {
-	const emailRef = useRef()
-	const { actions } = useStore()
-	const [error, setError] = useState(false)
+	const {actions} = useStore()
 	const [message, setMessage] = useState(false)
+	const [messageText, setMessageText] = useState('')
 	const [loading, setLoading] = useState(false)
 	const email = useInput('')
 
@@ -21,16 +20,30 @@ export function ForgotPassword() {
 		e.preventDefault()
 
 		try {
-			setMessage(false)
-			// setError("")
-			setLoading(true)
-			await actions.resetPassword(emailRef.current.value)
-			setMessage(true)
+			helperMessage.start()
+			await actions.resetPassword(email.value)
+			helperMessage.done()
 		} catch {
-			setError(true)
+			helperMessage.error()
 		}
+	}
 
-		setLoading(false)
+	const helperMessage = {
+		'error': () => {
+			setMessage(true)
+			setMessageText('Ошибка')
+			setLoading(false)
+		},
+		'done': () => {
+			setMessage(true)
+			setMessageText('Проверте почту')
+			setLoading(false)
+		},
+		'start': () => {
+			setMessage(false)
+			setMessageText('')
+			setLoading(true)
+		}
 	}
 
 	return (
@@ -67,12 +80,13 @@ export function ForgotPassword() {
 								Востановить
 							</button>
 
-							<CSSTransition in={error}
+							<CSSTransition in={message}
 														 classNames='main-form__error-wrap'
 														 timeout={300}
 														 mountOnEnter
 														 unmountOnExit>
-								<span className='login__error main-form__error'>Ошибка</span>
+								<span
+									className={`login__error main-form__error ${messageText === 'Ошибка' ? '' : 'main-form__error--done'}`}>{messageText}</span>
 							</CSSTransition>
 						</div>
 
