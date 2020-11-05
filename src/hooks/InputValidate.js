@@ -15,12 +15,12 @@ let scheme = Y.object().shape({
 
 	password: Y.string()
 		.required('Обязательное поле')
-		.min(4, 'Слишком короткий')
+		.min(6, 'Короткий пароль')
 		.max(60, 'Слишком длинный'),
 
 	passwordConfirm: Y.string()
 		.required('Обязательное поле')
-		.min(4, 'Слишком короткий')
+		.min(6, 'Короткий пароль')
 		.max(60, 'Слишком длинный'),
 })
 

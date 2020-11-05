@@ -15,9 +15,6 @@
     border-radius: 10px;
     margin-bottom: 20px;
     transition: all 0.300s ease-in-out;
-    div {
-      margin-bottom: 20px;
-    }
 
     @media all and (max-width: 768px) {
       padding: 6px;
@@ -57,5 +54,9 @@
 
   &__desc {
 
+  }
+
+  &__btn {
+    padding: 12px 6px;
   }
 }

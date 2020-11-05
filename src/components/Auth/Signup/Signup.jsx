@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useState} from "react";
 
 import {Link, useHistory} from "react-router-dom"
 
@@ -14,7 +14,7 @@ export function Signup() {
 	const password = useInput('')
 	const passwordConfirm = useInput('')
 	const {actions} = useStore()
-	const [error, setError] = useState("")
+	const [error, setError] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const history = useHistory()
 
@@ -22,7 +22,7 @@ export function Signup() {
 		e.preventDefault()
 
 		if (password.value !== passwordConfirm.value) {
-			return setError("Пароли не соответстуют")
+			return setError(true)
 		}
 
 		try {
@@ -85,7 +85,6 @@ export function Signup() {
 									 onBlur={e => password.handleBlur(e)}/>
 					</div>
 
-
 					<div className='main-form__item'>
 						<CSSTransition in={passwordConfirm.isDirty}
 													 classNames='main-form__error-wrap'
@@ -106,11 +105,21 @@ export function Signup() {
 									 onBlur={e => passwordConfirm.handleBlur(e)}/>
 					</div>
 
+					<div className='main-form__wrap'>
+						<button type='submit' className='main-btn signup__btn main-form__btn'
+										disabled={email.btnDisable || loading || password.btnDisable || passwordConfirm.btnDisable}>
+							Зарегестрироваться
+						</button>
 
-					<button className='main-btn signup__btn'
-									disabled={loading}>
-						Зарегестрироваться
-					</button>
+						<CSSTransition in={error}
+													 classNames='main-form__error-wrap'
+													 timeout={300}
+													 mountOnEnter
+													 unmountOnExit>
+								<span
+									className={`login__error main-form__error`}>Ошибка</span>
+						</CSSTransition>
+					</div>
 
 				</form>
 			</div>
