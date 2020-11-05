@@ -44,9 +44,9 @@ export const Auth = () => {
 			{/*	<button onClick={handleSubmit}>Зарегистрироваться*/}
 			{/*	</button>*/}
 			{/*</form>*/}
-			{/*<Signup/>*/}
+			<Signup/>
 			{/*<Login/>*/}
-			<ForgotPassword/>
+			{/*<ForgotPassword/>*/}
 		</div>
 	)
 }

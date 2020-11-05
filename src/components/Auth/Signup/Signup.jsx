@@ -7,11 +7,12 @@ import './Signup.scss'
 import {useStore} from "../../../hooks/store";
 import {Input} from "../../InputComponent/Input";
 import {CSSTransition} from "react-transition-group";
+import {useInput} from "../../../hooks/InputValidate";
 
 export function Signup() {
-	const [emailValue, setEmailValue] = useState('')
-	const [passwordValue, setPasswordValue] = useState('')
-	const [passwordConfirmValue, setPasswordConfirmValue] = useState('')
+	const email = useInput('')
+	const password = useInput('')
+	const passwordConfirm = useInput('')
 	const {actions} = useStore()
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
@@ -20,14 +21,14 @@ export function Signup() {
 	async function handleSubmit(e) {
 		e.preventDefault()
 
-		if (passwordValue !== passwordConfirmValue) {
+		if (password.value !== passwordConfirm.value) {
 			return setError("Пароли не соответстуют")
 		}
 
 		try {
 			setError(false)
 			setLoading(true)
-			await actions.register(emailValue, passwordValue)
+			await actions.register(email.value, password.value)
 			history.push("/")
 		} catch {
 			setError(true)
@@ -38,23 +39,74 @@ export function Signup() {
 
 
 	return (
-		<section className='signup auth'>
-			<div className='signup__body'>
-				<h2 className='signup__header auth-title'>Регистрация</h2>
-				<CSSTransition in={error}
-											 classNames='signup__error-wrap'
-											 timeout={300}
-											 mountOnEnter
-											 unmountOnExit>
+		<section className='signup main-form'>
+			<div className='signup__body main-form__body'>
+				<h2 className='signup__header main-form__title'>Регистрация</h2>
 
-					<span className='signup__error auth-error'>Ошибка регистрации</span>
-
-				</CSSTransition>
 				<form className='signup__form' onSubmit={handleSubmit}>
-					<Input placeholder='Email' type='email' setValue={setEmailValue} value={emailValue} autoFocus/>
-					<Input placeholder='Пароль' type='password' setValue={setPasswordValue} value={passwordValue}/>
-					<Input placeholder='Подтвержение пароля' type='password' setValue={setPasswordConfirmValue}
-								 value={passwordConfirmValue}/>
+					<div className='main-form__item'>
+						<CSSTransition in={email.isDirty}
+													 classNames='main-form__error-wrap'
+													 timeout={300}
+													 mountOnEnter
+													 unmountOnExit>
+						<span
+							className='login__error main-form__small-error'>
+							{email.errors.message}
+						</span>
+						</CSSTransition>
+
+						<Input placeholder='Email'
+									 type='email'
+									 name='email'
+									 value={email.value}
+									 setValue={e => email.handleChange(e)}
+									 onBlur={e => email.handleBlur(e)}
+									 autoFocus/>
+					</div>
+
+					<div className='main-form__item'>
+						<CSSTransition in={password.isDirty}
+													 classNames='main-form__error-wrap'
+													 timeout={300}
+													 mountOnEnter
+													 unmountOnExit>
+						<span
+							className='login__error main-form__small-error'>
+							{password.errors.message}
+						</span>
+						</CSSTransition>
+
+						<Input placeholder='Пароль'
+									 type='password'
+									 name='password'
+									 value={password.value}
+									 setValue={e => password.handleChange(e)}
+									 onBlur={e => password.handleBlur(e)}/>
+					</div>
+
+
+					<div className='main-form__item'>
+						<CSSTransition in={passwordConfirm.isDirty}
+													 classNames='main-form__error-wrap'
+													 timeout={300}
+													 mountOnEnter
+													 unmountOnExit>
+						<span
+							className='login__error main-form__small-error'>
+							{passwordConfirm.errors.message}
+						</span>
+						</CSSTransition>
+
+						<Input placeholder='Подтвердите пароль'
+									 type='password'
+									 name='passwordConfirm'
+									 value={passwordConfirm.value}
+									 setValue={e => passwordConfirm.handleChange(e)}
+									 onBlur={e => passwordConfirm.handleBlur(e)}/>
+					</div>
+
+
 					<button className='main-btn signup__btn'
 									disabled={loading}>
 						Зарегестрироваться
@@ -62,8 +114,8 @@ export function Signup() {
 
 				</form>
 			</div>
-			<div className="signup__desc">
-				Already have an account? <Link to="/login">Log In</Link>
+			<div className="signup__desc main-form__desc">
+				Есть аккаунт? <Link to="/login">Войти</Link>
 			</div>
 		</section>
 	)

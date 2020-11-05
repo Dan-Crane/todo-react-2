@@ -17,6 +17,11 @@ let scheme = Y.object().shape({
 		.required('Обязательное поле')
 		.min(4, 'Слишком короткий')
 		.max(60, 'Слишком длинный'),
+
+	passwordConfirm: Y.string()
+		.required('Обязательное поле')
+		.min(4, 'Слишком короткий')
+		.max(60, 'Слишком длинный'),
 })
 
 let convert = (errors) => {
