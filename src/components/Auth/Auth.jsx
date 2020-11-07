@@ -24,29 +24,9 @@ export const Auth = () => {
 
 	return (
 		<div className='auth'>
-			{/*<form>*/}
-			{/*	<h3 className='auth__title'>Войдите в React ToDo</h3>*/}
-			{/*	<input*/}
-			{/*		type="email"*/}
-			{/*		onChange={event => setEmail(event.target.value)}*/}
-			{/*		value={email}*/}
-			{/*	/>*/}
-			{/*	<input type="password"*/}
-			{/*				 onChange={event => setPassword(event.target.value)}*/}
-			{/*				 value={password}/>*/}
-
-
-			{/*	<button onClick={(e) => {*/}
-			{/*		e.preventDefault()*/}
-			{/*		actions.logInUser(email, password)*/}
-			{/*	}}>Войти*/}
-			{/*	</button>*/}
-			{/*	<button onClick={handleSubmit}>Зарегистрироваться*/}
-			{/*	</button>*/}
-			{/*</form>*/}
 			<Signup/>
-			{/*<Login/>*/}
-			{/*<ForgotPassword/>*/}
+			<Login/>
+			<ForgotPassword/>
 		</div>
 	)
 }

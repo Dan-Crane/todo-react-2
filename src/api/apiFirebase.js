@@ -3,11 +3,11 @@ import {db, auth} from '../firebase'
 // auth
 export const logInUser = (email, password) => {
 	return auth.signInWithEmailAndPassword(email, password)
-		// .catch(error => {
-		// 	console.log(error.code, error.message)
-		// 	const errorCode = error.code;
-		// 	const errorMessage = error.message;
-		// });
+	// .catch(error => {
+	// 	console.log(error.code, error.message)
+	// 	const errorCode = error.code;
+	// 	const errorMessage = error.message;
+	// });
 }
 
 export const logOutUser = () => {
@@ -16,14 +16,14 @@ export const logOutUser = () => {
 
 export const register = (email, password) => {
 	return auth.createUserWithEmailAndPassword(email, password)
-		// // .then(obj => console.log(obj))
-		// .catch(error => {
-		// 	const errorCode = error.code;
-		// 	const errorMessage = error.message;
-		// 	return errorCode, errorMessage
-		// });
+	// // .then(obj => console.log(obj))
+	// .catch(error => {
+	// 	const errorCode = error.code;
+	// 	const errorMessage = error.message;
+	// 	return errorCode, errorMessage
+	// });
 }
-export const setAuth = (onAuth) => {
+export  function setAuth  (onAuth) {
 	return auth.onAuthStateChanged(onAuth)
 }
 

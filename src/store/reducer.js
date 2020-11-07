@@ -3,7 +3,7 @@ export const reducer = (state, action) => {
 		case 'LOGIN_USER':
 			return {
 				...state,
-				user: action.payload.user
+				user: action.payload.user,
 			}
 		case 'LOGOUT_USER':
 			return {
@@ -32,7 +32,7 @@ export const reducer = (state, action) => {
 			return {
 				...state,
 				lists: state.lists.map(list => list.id === action.payload.list.id
-					? {...list ,...action.payload.list}
+					? {...list, ...action.payload.list}
 					: list)
 			}
 		case 'DELETE_LIST':

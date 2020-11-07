@@ -10,14 +10,14 @@ export const logOutUser = () => {
 export const register = (email, password) => {
 	return apiFirebase.register(email, password).then(() => ({}))
 }
-export const setAuth = () => {
-	return dispatch => apiFirebase.setAuth(user => {
-		return user ? dispatch({
+export  const setAuth =  () => {
+	return  dispatch => apiFirebase.setAuth(user => {
+		return user ?  dispatch({
 			type: 'LOGIN_USER',
 			payload: {
-				user
+				user: user,
 			}
-		}) : dispatch({
+		}) :  dispatch({
 			type: 'LOGOUT_USER'
 		});
 	})

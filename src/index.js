@@ -4,13 +4,16 @@ import {BrowserRouter as Router} from "react-router-dom";
 
 import App from "./components/App/App";
 
-import { Provider, initialState, reducer, actions } from "./store";
+import {Provider, initialState, reducer, actions} from "./store";
+import {AuthProvider} from "./store/AuthProvider";
 
 ReactDOM.render(
-	<Provider initialState={initialState} reducer={reducer} actions={actions}>
-		<Router>
-			<App/>
-		</Router>
-	</Provider>,
+	<AuthProvider>
+		<Provider initialState={initialState} reducer={reducer} actions={actions}>
+			<Router>
+				<App/>
+			</Router>
+		</Provider>
+	</AuthProvider>,
 	document.getElementById('root')
 );
