@@ -8,12 +8,13 @@ import {Provider, initialState, reducer, actions} from "./store";
 import {AuthProvider} from "./store/AuthProvider";
 
 ReactDOM.render(
-	<AuthProvider>
+	// <AuthProvider>
 		<Provider initialState={initialState} reducer={reducer} actions={actions}>
 			<Router>
 				<App/>
 			</Router>
 		</Provider>
-	</AuthProvider>,
+	// </AuthProvider>
+	,
 	document.getElementById('root')
 );

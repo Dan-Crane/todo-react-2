@@ -4,11 +4,13 @@ export const reducer = (state, action) => {
 			return {
 				...state,
 				user: action.payload.user,
+				isLoading: action.payload.isLoading
 			}
 		case 'LOGOUT_USER':
 			return {
 				...state,
-				user: null
+				user: null,
+				isLoading: action.payload.isLoading
 			}
 		case 'GET_COLORS':
 			return {

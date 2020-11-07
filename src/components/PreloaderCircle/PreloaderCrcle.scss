@@ -9,7 +9,15 @@
   }
 }
 
-.loader-wrap{
+.loader-center {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-wrap {
   position: relative;
   width: 20px;
 }
@@ -33,14 +41,16 @@
     width: inherit;
     background: #4DD599;
     border-radius: 50%;
-    animation: animate-circle var(--duration) cubic-bezier(.9,.24,.62,.79) infinite;
+    animation: animate-circle var(--duration) cubic-bezier(.9, .24, .62, .79) infinite;
 
     &:nth-of-type(1) {
       animation-delay: 0s;
     }
+
     &:nth-of-type(2) {
       animation-delay: calc(var(--duration) / -3);
     }
+
     &:nth-of-type(3) {
       animation-delay: calc(var(--duration) / -6);
     }

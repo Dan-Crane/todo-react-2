@@ -9,7 +9,7 @@ export function AuthProvider({children}) {
 	return (
 		<AuthContext.Provider value={auth}>
 			{auth.isLoading
-				? <PreloaderCircle/>
+				? <div className='loader-center'><PreloaderCircle/></div>
 				: children}
 		</AuthContext.Provider>
 	)

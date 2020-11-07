@@ -16,9 +16,13 @@ export  const setAuth =  () => {
 			type: 'LOGIN_USER',
 			payload: {
 				user: user,
+				isLoading: false
 			}
 		}) :  dispatch({
-			type: 'LOGOUT_USER'
+			type: 'LOGOUT_USER',
+			payload: {
+				isLoading: false
+			}
 		});
 	})
 }

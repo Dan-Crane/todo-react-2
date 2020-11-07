@@ -1,32 +1,27 @@
 import React, {useState} from "react";
+import {Redirect, Route, Switch} from "react-router-dom";
 
 import './Auth.scss'
 
-import {useStore} from "../../hooks/store";
 import {Signup} from "./Signup/Signup";
 import {Login} from "./Login/Login";
 import {ForgotPassword} from "./ForgotPassword/ForgotPassword";
 
 export const Auth = () => {
-	const {actions} = useStore()
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-
-	async function handleSubmit(e) {
-		e.preventDefault()
-		
-		try {
-			await actions.register(email, password)
-		} catch {
-			console.log('test')
-		}
-	}
-
 	return (
 		<div className='auth'>
-			<Signup/>
-			<Login/>
-			<ForgotPassword/>
+			<Switch>
+				<Route
+					path='/signup'
+					component={Signup}/>
+				<Route
+					path='/login'
+					component={Login}/>
+				<Route
+					path='/forgot-password'
+					component={ForgotPassword}/>
+				<Redirect to="/login"/>
+			</Switch>
 		</div>
 	)
 }
