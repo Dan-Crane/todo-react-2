@@ -16,10 +16,14 @@ export const AddTaskItem = ({idList, onAddTask, onSubmit}) => {
 		setInputValue('')
 	}
 
+	function handleInput(e) {
+		setInputValue(e.target.value)
+	}
+
 	const handleSubmit = (e) => {
 		e.preventDefault()
 		e.stopPropagation()
-		if(inputValue.length === 0) return
+		if (inputValue.length === 0) return
 		onSubmit(inputValue)
 		setInputValue('')
 		toggleVisible()
@@ -36,10 +40,10 @@ export const AddTaskItem = ({idList, onAddTask, onSubmit}) => {
 						{visible
 							? <div className='add-task-item__form' ref={ref}>
 								<div className='add-task-item__wrap-itp'>
-									<Input placeholder='Название задачи' type='text' value={inputValue} setValue={setInputValue}/>
+									<Input placeholder='Название задачи' type='text' value={inputValue} setValue={handleInput} autoFocus/>
 								</div>
 								<button onClick={handleSubmit}
-									className='add-task-item__btn-add main-btn'>
+												className='add-task-item__btn-add main-btn'>
 									Добавить задачу
 								</button>
 								<button onClick={toggleVisible}
