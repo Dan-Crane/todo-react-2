@@ -123,7 +123,7 @@ export const createTask = (data, listId = '') => {
 		important: false,
 		completed: false,
 		notes: '',
-		dueDate: null,
+		// dueDate: null,
 		steps: []
 	})
 		.then(docRef => docRef.get())

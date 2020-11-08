@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Redirect, Route, Switch} from "react-router-dom";
+import {Switch} from "react-router-dom";
 
 import {useStore} from "../../hooks/store";
 import {PrivateRoute} from "../PrivateRoute/PrivateRoute";
@@ -9,13 +9,9 @@ import '../../assets/style/styles.css'
 
 import {Navbar} from "../Navbar/Navbar";
 import {Body} from "../Body/Body";
-import {Signup} from "../Auth/Signup/Signup";
-import {ForgotPassword} from "../Auth/ForgotPassword/ForgotPassword";
-import {Login} from "../Auth/Login/Login";
 import {Auth} from "../Auth/Auth";
 
 const App = () => {
-	const [isLoading, setIsLoading] = useState(true)
 	const {state, actions} = useStore()
 
 	useEffect(() => {
@@ -51,9 +47,7 @@ const App = () => {
 				:
 				<Auth/>
 			}
-
 		</>
-
 	)
 }
 

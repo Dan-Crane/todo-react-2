@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {CSSTransition} from "react-transition-group";
 
 import {useStore} from "../../hooks/store";
 
@@ -15,7 +16,11 @@ export const Body = ({match}) => {
 	//временно
 	const [sortBy, setSortBy] = useState('')
 	//
-	const list = state.lists.find(i => i.id === match.params.listId) || {name: 'Задачи', hardCode: true, id: Math.floor(Math.random() * Math.floor(40))}
+	const list = state.lists.find(i => i.id === match.params.listId) || {
+		name: 'Задачи',
+		hardCode: true,
+		id: Math.floor(Math.random() * Math.floor(40))
+	}
 
 	// логика фильтра
 	const path = match.path
@@ -31,7 +36,7 @@ export const Body = ({match}) => {
 		},
 		'/planned': tasks => {
 			list.name = 'Запланированные'
-			return tasks.filter(task => task.dueDate)
+			return tasks.filter(task => task.dueDate.seconds > Date.now() / 1000)
 		}
 	})
 
@@ -62,7 +67,8 @@ export const Body = ({match}) => {
 		actions.createTask({
 			text,
 			userId: state.user.uid,
-			listId: list.id || ''
+			listId: list.id || '',
+			dueDate: new Date()
 		})
 	}
 
@@ -82,7 +88,7 @@ export const Body = ({match}) => {
 		setSelectedTask(task)
 	}
 
-	if (!list || !tasks ) return <div className='preloader-wrap'><PreloaderCircle/></div>
+	if (!list || !tasks) return <div className='preloader-wrap'><PreloaderCircle/></div>
 
 	return (
 		<section className='body'>
@@ -100,6 +106,9 @@ export const Body = ({match}) => {
 				onUpdate={handleUpdate}
 				onDelete={handleDelete}
 			/>
+			<CSSTransition in={selectedTask} timeout={300} classNames="my-node">
+				<></>
+			</CSSTransition>
 			{selectedTask &&
 			<TaskDetails task={selectedTask}
 									 onClose={handleSelect}/>

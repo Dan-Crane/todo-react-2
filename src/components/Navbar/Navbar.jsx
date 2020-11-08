@@ -3,26 +3,17 @@ import {CSSTransition, SwitchTransition} from "react-transition-group";
 import {useOutsideAlerter} from "../../hooks/OutsideAlerter";
 
 import {useStore} from "../../hooks/store";
-import {useOnClickOutside} from "../../hooks/OnClickOutside";
 import {useWindowSize} from "../../hooks/windowSize";
 
 import './Navbar.scss'
 
 import {List} from "./List/List";
 import {AddList} from "./AddList/AddList";
-import {Test} from "../App/test";
-
 
 export const Navbar = () => {
 	const [burger, setBurger] = useState(false)
 	const [width] = useWindowSize()
 	const {state, actions} = useStore()
-
-	// const ref = useRef();
-	// // State for our modal
-	// const [isModalOpen, setModalOpen] = useState(false);
-	// // Call hook passing in the ref and a function to call on outside click
-	// useOnClickOutside(ref, () => setModalOpen(false));
 
 	const {visible, setVisible, ref} = useOutsideAlerter(false)
 
