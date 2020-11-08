@@ -61,7 +61,6 @@ export const Body = ({match}) => {
 		console.log(sort);
 	}
 
-
 	//body
 	const handleSubmit = (text) => {
 		actions.createTask({
@@ -106,9 +105,6 @@ export const Body = ({match}) => {
 				onUpdate={handleUpdate}
 				onDelete={handleDelete}
 			/>
-			<CSSTransition in={selectedTask} timeout={300} classNames="my-node">
-				<></>
-			</CSSTransition>
 			{selectedTask &&
 			<TaskDetails task={selectedTask}
 									 onClose={handleSelect}/>

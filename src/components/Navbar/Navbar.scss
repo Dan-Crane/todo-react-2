@@ -20,10 +20,12 @@
   }
 
   &__tog-show {
-    height: 24px;
+    width: 20px;
+    height: 20px;
     color: #4DD599;
     display: flex;
     justify-content: center;
+    align-items: center;
 
     svg {
       width: 24px;
@@ -31,7 +33,6 @@
     }
 
     &.show {
-      justify-content: flex-end;
     }
 
     @media all and (min-width: 769px) {
@@ -72,11 +73,17 @@
   @media all and (max-width: 768px) {
     transition: all 0.300s ease-in-out;
     padding: 6px;
-    opacity: 0;
   }
 
   &.show {
     opacity: 1;
+  }
+
+  &__burger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
   }
 
   &__title {
@@ -84,13 +91,21 @@
     letter-spacing: -0.5px;
     font-size: 22px;
     line-height: 24px;
-    margin-bottom: 4px;
     opacity: 1;
     transition: all 0.300s ease-in-out;
     white-space: nowrap;
     @media all and (max-width: 768px) {
       font-size: 18px;
       line-height: 18px;
+      visibility: hidden;
+      width: 0;
+      opacity: 0;
+    }
+
+    &.show {
+      visibility: visible;
+      width: 100%;
+      opacity: 1;
     }
   }
 
@@ -98,11 +113,21 @@
     display: flex;
     align-items: center;
     opacity: .4;
+    transition: opacity 0.300s ease-in-out;
     @media all and (min-width: 768px) {
-      transition: opacity 0.300s ease-in-out;
       &:hover {
         opacity: .6;
       }
+    }
+    @media all and (max-width: 768px) {
+      visibility: hidden;
+      width: 0;
+      opacity: 0;
+    }
+    &.show {
+      visibility: visible;
+      width: 100%;
+      opacity: .6;
     }
   }
 
@@ -112,9 +137,9 @@
     flex: 1 1 auto;
     cursor: default;
     opacity: 1;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
     @media all and (max-width: 768px) {
       font-size: 12px;
       line-height: 14px;

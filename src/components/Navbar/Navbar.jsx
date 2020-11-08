@@ -27,31 +27,34 @@ export const Navbar = () => {
 
 	return (
 		<nav className={`navbar ${visible && 'show'}`}  >
-			<SwitchTransition mode='out-in'>
-				<CSSTransition key={visible}
-											 in={visible}
-											 timeout={300}
-											 classNames={'burger-show'}>
-					<div className={`navbar__tog-show ${visible && 'show'}`}>
-						{
-							visible ?
-								<svg className={`icon-chevron-left ${visible && 'show'}`}
-										 onClick={()=> setVisible(v => !v)}>
-									<use xlinkHref="#icon-chevron-left"/>
-								</svg>
-								:
-								<svg className="icon-chevron-right "
-										 onClick={()=> setVisible(v => !v)}>
-									<use xlinkHref="#icon-chevron-right"/>
-								</svg>
-						}
-					</div>
-				</CSSTransition>
-			</SwitchTransition>
+
 
 			<div className={`navbar__auth auth-nav ${width > 768 ? 'show' : visible && 'show'}`}>
-				<h3 className='auth-nav__title'>React ToDo</h3>
-				<div className='auth-nav__wrap'>
+				<div className='auth-nav__burger'>
+				<h3 className={`auth-nav__title ${visible && 'show'}`}>React ToDo</h3>
+					<SwitchTransition mode='out-in'>
+						<CSSTransition key={visible}
+													 in={visible}
+													 timeout={300}
+													 classNames={'burger-show'}>
+							<div className={`navbar__tog-show ${visible && 'show'}`}>
+								{
+									visible ?
+										<svg className={`icon-chevron-left ${visible && 'show'}`}
+												 onClick={()=> setVisible(v => !v)}>
+											<use xlinkHref="#icon-chevron-left"/>
+										</svg>
+										:
+										<svg className="icon-chevron-right "
+												 onClick={()=> setVisible(v => !v)}>
+											<use xlinkHref="#icon-chevron-right"/>
+										</svg>
+								}
+							</div>
+						</CSSTransition>
+					</SwitchTransition>
+				</div>
+				<div className={`auth-nav__wrap ${visible && 'show'}`}>
 					<span className='auth-nav__email'>{state.user.email}</span>
 					<abbr data-icon="q"
 								onClick={() => actions.logOutUser()}
