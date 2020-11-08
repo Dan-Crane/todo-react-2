@@ -85,8 +85,9 @@
       height: 100%;
     }
     .badge {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
+      margin: 2px;
       position: relative;
       left: 1px;
       @media all and (max-width: 768px) {

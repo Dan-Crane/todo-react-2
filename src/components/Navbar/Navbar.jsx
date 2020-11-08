@@ -1,20 +1,28 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
+import {CSSTransition, SwitchTransition} from "react-transition-group";
 import {useOutsideAlerter} from "../../hooks/OutsideAlerter";
 
+import {useStore} from "../../hooks/store";
+import {useOnClickOutside} from "../../hooks/OnClickOutside";
 import {useWindowSize} from "../../hooks/windowSize";
 
 import './Navbar.scss'
 
 import {List} from "./List/List";
 import {AddList} from "./AddList/AddList";
+import {Test} from "../App/test";
 
-import {useStore} from "../../hooks/store";
-import {CSSTransition, SwitchTransition} from "react-transition-group";
 
 export const Navbar = () => {
 	const [burger, setBurger] = useState(false)
 	const [width] = useWindowSize()
 	const {state, actions} = useStore()
+
+	// const ref = useRef();
+	// // State for our modal
+	// const [isModalOpen, setModalOpen] = useState(false);
+	// // Call hook passing in the ref and a function to call on outside click
+	// useOnClickOutside(ref, () => setModalOpen(false));
 
 	const {visible, setVisible, ref} = useOutsideAlerter(false)
 
@@ -27,7 +35,7 @@ export const Navbar = () => {
 	}
 
 	return (
-		<nav className={`navbar ${visible && 'show'}`} ref={ref} >
+		<nav className={`navbar ${visible && 'show'}`}  >
 			<SwitchTransition mode='out-in'>
 				<CSSTransition key={visible}
 											 in={visible}
@@ -49,9 +57,6 @@ export const Navbar = () => {
 					</div>
 				</CSSTransition>
 			</SwitchTransition>
-			{/*<abbr className={`navbar__tog-show `}*/}
-			{/*			data-icon="o"*/}
-			{/*			onClick={() => setBurger((v) => !v)}/>*/}
 
 			<div className={`navbar__auth auth-nav ${width > 768 ? 'show' : visible && 'show'}`}>
 				<h3 className='auth-nav__title'>React ToDo</h3>
