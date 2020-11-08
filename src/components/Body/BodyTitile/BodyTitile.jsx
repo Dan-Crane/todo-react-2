@@ -20,6 +20,10 @@ export const TitleBody = ({list, onUpdate, onSortChange}) => {
 		setEditMode(!editMode)
 	}
 
+	function handleInput(e) {
+		setInputValue(e.target.value)
+	}
+
 	return (
 		<div className='body__title title-wrap'>
 			<SwitchTransition mode='out-in'>
@@ -34,7 +38,8 @@ export const TitleBody = ({list, onUpdate, onSortChange}) => {
 								placeholder={'Название списка'}
 								text={list.name} type='text'
 								value={inputValue}
-								setValue={setInputValue}/>
+								setValue={handleInput}
+								autoFocus/>
 						</form>
 						:
 						<h2
